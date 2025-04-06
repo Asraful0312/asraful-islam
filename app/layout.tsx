@@ -2,6 +2,9 @@ import type React from "react";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import "./globals.css";
+
+import VoiceNavigator from "@/components/voice-naviation";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -35,7 +38,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-import "./globals.css";
-import ScrollToTop from "@/components/ScrollToTop";
-import VoiceNavigator from "@/components/voice-naviation";

@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import React, { useEffect, useState } from "react";
 import SpeechRecognition, {
   useSpeechRecognition,
@@ -56,14 +58,16 @@ export default function VoiceNavigator() {
   const router = useRouter();
   const ref = useClickOutside(() => setShow(false));
 
-  const isSpeechSupported =
-    "SpeechRecognition" in window || "webkitSpeechRecognition" in window;
-
   const handleOnOff = () => {
-    if (!isSpeechSupported) {
-      alert(
-        "Your browser does not support speech recognition. Please use Google Chrome or Microsoft Edge"
-      );
+    if (typeof window !== "undefined") {
+      const isSpeechSupported =
+        "SpeechRecognition" in window || "webkitSpeechRecognition" in window;
+
+      if (!isSpeechSupported) {
+        alert(
+          "Your browser does not support speech recognition. Please use Google Chrome or Microsoft Edge"
+        );
+      }
     }
     if (listening) {
       SpeechRecognition.stopListening();
@@ -107,7 +111,7 @@ export default function VoiceNavigator() {
     const timeOut = setTimeout(() => {
       resetTranscript();
       setTranscriptText("");
-    }, 1000);
+    }, 800);
 
     return () => clearTimeout(timeOut);
   }, [transcriptText]);
