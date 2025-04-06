@@ -49,6 +49,11 @@ const commands = [
     to: "/projects/e-commerce-platform",
     label: "Project one",
   },
+  {
+    command: "back",
+    to: "back",
+    label: "Previous page",
+  },
 ];
 
 export default function VoiceNavigator() {
@@ -76,42 +81,34 @@ export default function VoiceNavigator() {
     }
   };
 
-  console.log("transcript", transcript);
+
 
   useEffect(() => {
     const command = transcript.toLowerCase();
 
-    console.log("command", command);
+
     setTranscriptText(command);
 
     const handleRedirect = (path: string) => {
-      router.push(path); // redirect
+      if (path === "back") {
+        router.back();
+      } else {
+        router.push(path); // redirect
+      }
     };
 
-    if (command.includes("contact")) {
-      handleRedirect("/#contact");
-    } else if (command.includes("project")) {
-      handleRedirect("/#projects");
-    } else if (command.includes("skill")) {
-      handleRedirect("/#skills");
-    } else if (command.includes("about")) {
-      handleRedirect("/#about");
-    } else if (command.includes("home")) {
-      handleRedirect("/");
-    } else if (command.includes("bottom")) {
-      handleRedirect("/#footer");
-    } else if (command.includes("top")) {
-      handleRedirect("/");
-    } else if (command.includes("p1")) {
-      handleRedirect("/projects/e-commerce-platform");
-    }
+    commands.forEach((c) => {
+      if (c.command.toLowerCase() === command) {
+        handleRedirect(c.to);
+      }
+    });
   }, [transcript]);
 
   useEffect(() => {
     const timeOut = setTimeout(() => {
       resetTranscript();
       setTranscriptText("");
-    }, 800);
+    }, 500);
 
     return () => clearTimeout(timeOut);
   }, [transcriptText]);
