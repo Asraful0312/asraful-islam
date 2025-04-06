@@ -5,7 +5,8 @@ export function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
             <p className="text-gray-400 text-sm">
-              &copy; {new Date().getFullYear()} John Doe. All rights reserved.
+              &copy; {new Date().getFullYear()} Asraful Islam. All rights
+              reserved.
             </p>
           </div>
           <div className="flex space-x-6">

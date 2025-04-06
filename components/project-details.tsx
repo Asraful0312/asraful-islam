@@ -1,31 +1,46 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { ArrowLeft, ArrowRight, Calendar, ExternalLink, Github, Globe, Layers } from "lucide-react"
-import type { Project } from "@/lib/types"
+import { useState } from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Calendar,
+  ExternalLink,
+  Github,
+  Globe,
+  Layers,
+} from "lucide-react";
+import type { Project } from "@/lib/types";
 
 interface ProjectDetailsProps {
-  project: Project
-  relatedProjects: Project[]
+  project: Project;
+  relatedProjects: Project[];
 }
 
-export function ProjectDetails({ project, relatedProjects }: ProjectDetailsProps) {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+export function ProjectDetails({
+  project,
+  relatedProjects,
+}: ProjectDetailsProps) {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const images = [
     "/placeholder.svg?height=600&width=1200",
     "/placeholder.svg?height=600&width=1200",
     "/placeholder.svg?height=600&width=1200",
     "/placeholder.svg?height=600&width=1200",
-  ]
+  ];
 
   return (
     <div className="section-container pt-24">
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
         <Link
           href="/#projects"
           className="inline-flex items-center text-gray-400 hover:text-white mb-8 transition-colors"
@@ -39,7 +54,11 @@ export function ProjectDetails({ project, relatedProjects }: ProjectDetailsProps
             <h1 className="text-4xl font-bold mb-6">{project.title}</h1>
             <div className="flex flex-wrap gap-2 mb-8">
               {project.tags.map((tag) => (
-                <Badge key={tag} variant="outline" className="bg-[#232323] text-gray-300 border-gray-700">
+                <Badge
+                  key={tag}
+                  variant="outline"
+                  className="bg-[#232323] text-gray-300 border-gray-700"
+                >
                   {tag}
                 </Badge>
               ))}
@@ -55,7 +74,11 @@ export function ProjectDetails({ project, relatedProjects }: ProjectDetailsProps
                 <Button
                   variant="outline"
                   size="icon"
-                  onClick={() => setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length)}
+                  onClick={() =>
+                    setCurrentImageIndex(
+                      (prev) => (prev - 1 + images.length) % images.length
+                    )
+                  }
                   className="bg-black/50 backdrop-blur-sm border-gray-700 hover:bg-black/70"
                 >
                   <ArrowLeft className="h-4 w-4" />
@@ -63,7 +86,9 @@ export function ProjectDetails({ project, relatedProjects }: ProjectDetailsProps
                 <Button
                   variant="outline"
                   size="icon"
-                  onClick={() => setCurrentImageIndex((prev) => (prev + 1) % images.length)}
+                  onClick={() =>
+                    setCurrentImageIndex((prev) => (prev + 1) % images.length)
+                  }
                   className="bg-black/50 backdrop-blur-sm border-gray-700 hover:bg-black/70"
                 >
                   <ArrowRight className="h-4 w-4" />
@@ -77,7 +102,9 @@ export function ProjectDetails({ project, relatedProjects }: ProjectDetailsProps
                   key={index}
                   onClick={() => setCurrentImageIndex(index)}
                   className={`flex-shrink-0 border-2 rounded overflow-hidden ${
-                    currentImageIndex === index ? "border-purple-500" : "border-gray-700"
+                    currentImageIndex === index
+                      ? "border-purple-500"
+                      : "border-gray-700"
                   }`}
                 >
                   <img
@@ -90,7 +117,7 @@ export function ProjectDetails({ project, relatedProjects }: ProjectDetailsProps
             </div>
 
             <Tabs defaultValue="overview" className="mb-12">
-              <TabsList className="bg-[#232323] border border-gray-800">
+              <TabsList className="bg-[#232323] border border-gray-800 flex-wrap h-auto">
                 <TabsTrigger value="overview">Overview</TabsTrigger>
                 <TabsTrigger value="features">Features</TabsTrigger>
                 <TabsTrigger value="technical">Technical Details</TabsTrigger>
@@ -100,13 +127,17 @@ export function ProjectDetails({ project, relatedProjects }: ProjectDetailsProps
                 <div className="prose prose-invert max-w-none">
                   <p>{project.description}</p>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl vel ultricies lacinia,
-                    nisl nisl aliquam nisl, eu aliquam nisl nisl sit amet nisl. Sed euismod, nisl vel ultricies lacinia,
-                    nisl nisl aliquam nisl, eu aliquam nisl nisl sit amet nisl.
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+                    euismod, nisl vel ultricies lacinia, nisl nisl aliquam nisl,
+                    eu aliquam nisl nisl sit amet nisl. Sed euismod, nisl vel
+                    ultricies lacinia, nisl nisl aliquam nisl, eu aliquam nisl
+                    nisl sit amet nisl.
                   </p>
                   <p>
-                    Sed euismod, nisl vel ultricies lacinia, nisl nisl aliquam nisl, eu aliquam nisl nisl sit amet nisl.
-                    Sed euismod, nisl vel ultricies lacinia, nisl nisl aliquam nisl, eu aliquam nisl nisl sit amet nisl.
+                    Sed euismod, nisl vel ultricies lacinia, nisl nisl aliquam
+                    nisl, eu aliquam nisl nisl sit amet nisl. Sed euismod, nisl
+                    vel ultricies lacinia, nisl nisl aliquam nisl, eu aliquam
+                    nisl nisl sit amet nisl.
                   </p>
                 </div>
               </TabsContent>
@@ -117,9 +148,12 @@ export function ProjectDetails({ project, relatedProjects }: ProjectDetailsProps
                       <div className="h-2 w-2 rounded-full bg-purple-500"></div>
                     </div>
                     <div>
-                      <h3 className="font-medium text-lg">User Authentication</h3>
+                      <h3 className="font-medium text-lg">
+                        User Authentication
+                      </h3>
                       <p className="text-gray-400">
-                        Secure login and registration system with email verification and password recovery.
+                        Secure login and registration system with email
+                        verification and password recovery.
                       </p>
                     </div>
                   </li>
@@ -130,7 +164,8 @@ export function ProjectDetails({ project, relatedProjects }: ProjectDetailsProps
                     <div>
                       <h3 className="font-medium text-lg">Real-time Updates</h3>
                       <p className="text-gray-400">
-                        Instant data synchronization across all connected clients using WebSockets.
+                        Instant data synchronization across all connected
+                        clients using WebSockets.
                       </p>
                     </div>
                   </li>
@@ -141,7 +176,8 @@ export function ProjectDetails({ project, relatedProjects }: ProjectDetailsProps
                     <div>
                       <h3 className="font-medium text-lg">Responsive Design</h3>
                       <p className="text-gray-400">
-                        Fully responsive interface that works seamlessly on desktop, tablet, and mobile devices.
+                        Fully responsive interface that works seamlessly on
+                        desktop, tablet, and mobile devices.
                       </p>
                     </div>
                   </li>
@@ -150,9 +186,12 @@ export function ProjectDetails({ project, relatedProjects }: ProjectDetailsProps
                       <div className="h-2 w-2 rounded-full bg-purple-500"></div>
                     </div>
                     <div>
-                      <h3 className="font-medium text-lg">Data Visualization</h3>
+                      <h3 className="font-medium text-lg">
+                        Data Visualization
+                      </h3>
                       <p className="text-gray-400">
-                        Interactive charts and graphs for visualizing complex data sets and analytics.
+                        Interactive charts and graphs for visualizing complex
+                        data sets and analytics.
                       </p>
                     </div>
                   </li>
@@ -163,12 +202,23 @@ export function ProjectDetails({ project, relatedProjects }: ProjectDetailsProps
                   <div>
                     <h3 className="text-lg font-medium mb-2">Frontend</h3>
                     <p className="text-gray-400 mb-2">
-                      Built with React and Next.js for server-side rendering and optimal performance. Styled with
-                      Tailwind CSS for a responsive and customizable design system.
+                      Built with React and Next.js for server-side rendering and
+                      optimal performance. Styled with Tailwind CSS for a
+                      responsive and customizable design system.
                     </p>
                     <div className="flex flex-wrap gap-2">
-                      {["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"].map((tech) => (
-                        <Badge key={tech} variant="outline" className="bg-[#232323] text-gray-300 border-gray-700">
+                      {[
+                        "React",
+                        "Next.js",
+                        "TypeScript",
+                        "Tailwind CSS",
+                        "Framer Motion",
+                      ].map((tech) => (
+                        <Badge
+                          key={tech}
+                          variant="outline"
+                          className="bg-[#232323] text-gray-300 border-gray-700"
+                        >
                           {tech}
                         </Badge>
                       ))}
@@ -177,12 +227,23 @@ export function ProjectDetails({ project, relatedProjects }: ProjectDetailsProps
                   <div>
                     <h3 className="text-lg font-medium mb-2">Backend</h3>
                     <p className="text-gray-400 mb-2">
-                      Node.js API with Express, using MongoDB for data storage. Authentication handled with JWT tokens
-                      and bcrypt for password hashing.
+                      Node.js API with Express, using MongoDB for data storage.
+                      Authentication handled with JWT tokens and bcrypt for
+                      password hashing.
                     </p>
                     <div className="flex flex-wrap gap-2">
-                      {["Node.js", "Express", "MongoDB", "JWT", "Socket.io"].map((tech) => (
-                        <Badge key={tech} variant="outline" className="bg-[#232323] text-gray-300 border-gray-700">
+                      {[
+                        "Node.js",
+                        "Express",
+                        "MongoDB",
+                        "JWT",
+                        "Socket.io",
+                      ].map((tech) => (
+                        <Badge
+                          key={tech}
+                          variant="outline"
+                          className="bg-[#232323] text-gray-300 border-gray-700"
+                        >
                           {tech}
                         </Badge>
                       ))}
@@ -191,12 +252,22 @@ export function ProjectDetails({ project, relatedProjects }: ProjectDetailsProps
                   <div>
                     <h3 className="text-lg font-medium mb-2">Deployment</h3>
                     <p className="text-gray-400 mb-2">
-                      Frontend deployed on Vercel with CI/CD pipeline. Backend hosted on AWS with containerization using
-                      Docker.
+                      Frontend deployed on Vercel with CI/CD pipeline. Backend
+                      hosted on AWS with containerization using Docker.
                     </p>
                     <div className="flex flex-wrap gap-2">
-                      {["Vercel", "AWS", "Docker", "GitHub Actions", "Cloudflare"].map((tech) => (
-                        <Badge key={tech} variant="outline" className="bg-[#232323] text-gray-300 border-gray-700">
+                      {[
+                        "Vercel",
+                        "AWS",
+                        "Docker",
+                        "GitHub Actions",
+                        "Cloudflare",
+                      ].map((tech) => (
+                        <Badge
+                          key={tech}
+                          variant="outline"
+                          className="bg-[#232323] text-gray-300 border-gray-700"
+                        >
                           {tech}
                         </Badge>
                       ))}
@@ -206,23 +277,33 @@ export function ProjectDetails({ project, relatedProjects }: ProjectDetailsProps
               </TabsContent>
               <TabsContent value="challenges" className="mt-6">
                 <div className="prose prose-invert max-w-none">
-                  <p>During the development of this project, several challenges were encountered and overcome:</p>
+                  <p>
+                    During the development of this project, several challenges
+                    were encountered and overcome:
+                  </p>
                   <ul>
                     <li>
-                      <strong>Real-time Synchronization:</strong> Implementing real-time updates across multiple clients
-                      required careful consideration of data consistency and conflict resolution.
+                      <strong>Real-time Synchronization:</strong> Implementing
+                      real-time updates across multiple clients required careful
+                      consideration of data consistency and conflict resolution.
                     </li>
                     <li>
-                      <strong>Performance Optimization:</strong> Ensuring fast load times and smooth interactions with
-                      large datasets required implementing virtualization and efficient data fetching strategies.
+                      <strong>Performance Optimization:</strong> Ensuring fast
+                      load times and smooth interactions with large datasets
+                      required implementing virtualization and efficient data
+                      fetching strategies.
                     </li>
                     <li>
-                      <strong>Responsive Design:</strong> Creating a consistent user experience across various device
-                      sizes while maintaining complex UI components presented unique design challenges.
+                      <strong>Responsive Design:</strong> Creating a consistent
+                      user experience across various device sizes while
+                      maintaining complex UI components presented unique design
+                      challenges.
                     </li>
                     <li>
-                      <strong>Authentication Security:</strong> Implementing robust security measures to protect user
-                      data and prevent common vulnerabilities required extensive testing and security audits.
+                      <strong>Authentication Security:</strong> Implementing
+                      robust security measures to protect user data and prevent
+                      common vulnerabilities required extensive testing and
+                      security audits.
                     </li>
                   </ul>
                 </div>
@@ -284,7 +365,11 @@ export function ProjectDetails({ project, relatedProjects }: ProjectDetailsProps
                 <h2 className="text-xl font-bold mb-6">Related Projects</h2>
                 <div className="space-y-4">
                   {relatedProjects.map((relatedProject) => (
-                    <Link key={relatedProject.id} href={`/projects/${relatedProject.slug}`} className="block group">
+                    <Link
+                      key={relatedProject.id}
+                      href={`/projects/${relatedProject.slug}`}
+                      className="block group"
+                    >
                       <div className="flex gap-3">
                         <div className="flex-shrink-0 w-16 h-12 overflow-hidden rounded border border-gray-800">
                           <img
@@ -311,6 +396,5 @@ export function ProjectDetails({ project, relatedProjects }: ProjectDetailsProps
         </div>
       </motion.div>
     </div>
-  )
+  );
 }
-

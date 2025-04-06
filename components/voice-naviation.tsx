@@ -142,7 +142,7 @@ export default function VoiceNavigator() {
 
       <button
         onClick={() => setShow((prev) => !prev)}
-        className="bg-primary fixed right-4  bottom-16 rounded-full flex items-center justify-center size-5"
+        className="bg-primary fixed right-4  bottom-[70px] rounded-full flex items-center justify-center size-7"
       >
         <Info className="size-4 shrink-0 text-white" />
       </button>
