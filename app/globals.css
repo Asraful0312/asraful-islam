@@ -1,0 +1,180 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 6%;
+  --foreground: 0 0% 100%;
+  --card: 0 0% 9%;
+  --card-foreground: 0 0% 100%;
+  --popover: 0 0% 9%;
+  --popover-foreground: 0 0% 100%;
+  --primary: 252 59% 48%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 0% 13%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 0 0% 15%;
+  --muted-foreground: 0 0% 70%;
+  --accent: 252 59% 48%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 0 0% 15%;
+  --input: 0 0% 15%;
+  --ring: 252 59% 48%;
+}
+
+body {
+  @apply bg-background text-foreground;
+  font-feature-settings: "rlig" 1, "calt" 1;
+  scroll-behavior: smooth;
+}
+
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-blue-500;
+}
+
+.animate-in {
+  animation: animateIn 0.5s ease-in-out forwards;
+  opacity: 0;
+}
+
+/* Text Color Animation: Creates a gradient text color animation that smoothly transitions through different colors. Ideal for headings or any text you want to highlight with dynamic color changes. */
+.text-color {
+  color: #000;
+  background-image: linear-gradient(
+    to right,
+    #60a5fa,
+    #fb923c,
+    #7e22ce,
+    #60a5fa
+  );
+  background-size: 200% auto;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  animation: TextColor 5s linear infinite;
+}
+@keyframes TextColor {
+  to {
+    background-position: -200% center;
+  }
+}
+
+@keyframes animateIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stagger-1 {
+  animation-delay: 0.1s;
+}
+
+.stagger-2 {
+  animation-delay: 0.2s;
+}
+
+.stagger-3 {
+  animation-delay: 0.3s;
+}
+
+.stagger-4 {
+  animation-delay: 0.4s;
+}
+
+.stagger-5 {
+  animation-delay: 0.5s;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.5s ease-in-out forwards;
+  opacity: 0;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.5s ease-in-out forwards;
+  opacity: 0;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.5s ease-in-out forwards;
+  opacity: 0;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out forwards;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.project-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px -15px rgba(138, 75, 255, 0.2);
+}
+
+.skill-icon {
+  transition: all 0.3s ease;
+}
+
+.skill-icon:hover {
+  transform: scale(1.1);
+  filter: brightness(1.2);
+}
+
+.section-heading {
+  @apply text-3xl md:text-4xl font-bold mb-8 gradient-text;
+}
+
+.section-container {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24;
+}
