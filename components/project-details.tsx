@@ -27,12 +27,7 @@ export function ProjectDetails({
   relatedProjects,
 }: ProjectDetailsProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const images = [
-    "/placeholder.svg?height=600&width=1200",
-    "/placeholder.svg?height=600&width=1200",
-    "/placeholder.svg?height=600&width=1200",
-    "/placeholder.svg?height=600&width=1200",
-  ];
+  const images = project?.images;
 
   return (
     <div className="section-container pt-24">
@@ -126,153 +121,48 @@ export function ProjectDetails({
               <TabsContent value="overview" className="mt-6">
                 <div className="prose prose-invert max-w-none">
                   <p>{project.description}</p>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                    euismod, nisl vel ultricies lacinia, nisl nisl aliquam nisl,
-                    eu aliquam nisl nisl sit amet nisl. Sed euismod, nisl vel
-                    ultricies lacinia, nisl nisl aliquam nisl, eu aliquam nisl
-                    nisl sit amet nisl.
-                  </p>
-                  <p>
-                    Sed euismod, nisl vel ultricies lacinia, nisl nisl aliquam
-                    nisl, eu aliquam nisl nisl sit amet nisl. Sed euismod, nisl
-                    vel ultricies lacinia, nisl nisl aliquam nisl, eu aliquam
-                    nisl nisl sit amet nisl.
-                  </p>
                 </div>
               </TabsContent>
               <TabsContent value="features" className="mt-6">
                 <ul className="space-y-4">
-                  <li className="flex items-start">
-                    <div className="bg-purple-500/10 p-2 rounded-full mr-3 mt-0.5">
-                      <div className="h-2 w-2 rounded-full bg-purple-500"></div>
-                    </div>
-                    <div>
-                      <h3 className="font-medium text-lg">
-                        User Authentication
-                      </h3>
-                      <p className="text-gray-400">
-                        Secure login and registration system with email
-                        verification and password recovery.
-                      </p>
-                    </div>
-                  </li>
-                  <li className="flex items-start">
-                    <div className="bg-purple-500/10 p-2 rounded-full mr-3 mt-0.5">
-                      <div className="h-2 w-2 rounded-full bg-purple-500"></div>
-                    </div>
-                    <div>
-                      <h3 className="font-medium text-lg">Real-time Updates</h3>
-                      <p className="text-gray-400">
-                        Instant data synchronization across all connected
-                        clients using WebSockets.
-                      </p>
-                    </div>
-                  </li>
-                  <li className="flex items-start">
-                    <div className="bg-purple-500/10 p-2 rounded-full mr-3 mt-0.5">
-                      <div className="h-2 w-2 rounded-full bg-purple-500"></div>
-                    </div>
-                    <div>
-                      <h3 className="font-medium text-lg">Responsive Design</h3>
-                      <p className="text-gray-400">
-                        Fully responsive interface that works seamlessly on
-                        desktop, tablet, and mobile devices.
-                      </p>
-                    </div>
-                  </li>
-                  <li className="flex items-start">
-                    <div className="bg-purple-500/10 p-2 rounded-full mr-3 mt-0.5">
-                      <div className="h-2 w-2 rounded-full bg-purple-500"></div>
-                    </div>
-                    <div>
-                      <h3 className="font-medium text-lg">
-                        Data Visualization
-                      </h3>
-                      <p className="text-gray-400">
-                        Interactive charts and graphs for visualizing complex
-                        data sets and analytics.
-                      </p>
-                    </div>
-                  </li>
+                  {project.features.map((feature) => (
+                    <li key={feature.title} className="flex items-start">
+                      <div className="bg-purple-500/10 p-2 rounded-full mr-3 mt-0.5">
+                        <div className="h-2 w-2 rounded-full bg-purple-500"></div>
+                      </div>
+                      <div>
+                        <h3 className="font-medium text-lg">{feature.title}</h3>
+                        <p className="text-gray-400">{feature.description}</p>
+                      </div>
+                    </li>
+                  ))}
                 </ul>
               </TabsContent>
               <TabsContent value="technical" className="mt-6">
                 <div className="space-y-6">
-                  <div>
-                    <h3 className="text-lg font-medium mb-2">Frontend</h3>
-                    <p className="text-gray-400 mb-2">
-                      Built with React and Next.js for server-side rendering and
-                      optimal performance. Styled with Tailwind CSS for a
-                      responsive and customizable design system.
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {[
-                        "React",
-                        "Next.js",
-                        "TypeScript",
-                        "Tailwind CSS",
-                        "Framer Motion",
-                      ].map((tech) => (
-                        <Badge
-                          key={tech}
-                          variant="outline"
-                          className="bg-[#232323] text-gray-300 border-gray-700"
-                        >
-                          {tech}
-                        </Badge>
-                      ))}
+                  {project.technicalDetails.map((td) => (
+                    <div key={td.title}>
+                      <h3 className="text-lg font-medium mb-2">{td.title}</h3>
+                      <p className="text-gray-400 mb-2">{td.description}</p>
+                      {/* <div className="flex flex-wrap gap-2">
+                        {[
+                          "React",
+                          "Next.js",
+                          "TypeScript",
+                          "Tailwind CSS",
+                          "Framer Motion",
+                        ].map((tech) => (
+                          <Badge
+                            key={tech}
+                            variant="outline"
+                            className="bg-[#232323] text-gray-300 border-gray-700"
+                          >
+                            {tech}
+                          </Badge>
+                        ))}
+                      </div> */}
                     </div>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-medium mb-2">Backend</h3>
-                    <p className="text-gray-400 mb-2">
-                      Node.js API with Express, using MongoDB for data storage.
-                      Authentication handled with JWT tokens and bcrypt for
-                      password hashing.
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {[
-                        "Node.js",
-                        "Express",
-                        "MongoDB",
-                        "JWT",
-                        "Socket.io",
-                      ].map((tech) => (
-                        <Badge
-                          key={tech}
-                          variant="outline"
-                          className="bg-[#232323] text-gray-300 border-gray-700"
-                        >
-                          {tech}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-medium mb-2">Deployment</h3>
-                    <p className="text-gray-400 mb-2">
-                      Frontend deployed on Vercel with CI/CD pipeline. Backend
-                      hosted on AWS with containerization using Docker.
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {[
-                        "Vercel",
-                        "AWS",
-                        "Docker",
-                        "GitHub Actions",
-                        "Cloudflare",
-                      ].map((tech) => (
-                        <Badge
-                          key={tech}
-                          variant="outline"
-                          className="bg-[#232323] text-gray-300 border-gray-700"
-                        >
-                          {tech}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </TabsContent>
               <TabsContent value="challenges" className="mt-6">
@@ -281,30 +171,13 @@ export function ProjectDetails({
                     During the development of this project, several challenges
                     were encountered and overcome:
                   </p>
-                  <ul>
-                    <li>
-                      <strong>Real-time Synchronization:</strong> Implementing
-                      real-time updates across multiple clients required careful
-                      consideration of data consistency and conflict resolution.
-                    </li>
-                    <li>
-                      <strong>Performance Optimization:</strong> Ensuring fast
-                      load times and smooth interactions with large datasets
-                      required implementing virtualization and efficient data
-                      fetching strategies.
-                    </li>
-                    <li>
-                      <strong>Responsive Design:</strong> Creating a consistent
-                      user experience across various device sizes while
-                      maintaining complex UI components presented unique design
-                      challenges.
-                    </li>
-                    <li>
-                      <strong>Authentication Security:</strong> Implementing
-                      robust security measures to protect user data and prevent
-                      common vulnerabilities required extensive testing and
-                      security audits.
-                    </li>
+                  <ul className="space-y-5">
+                    {project.challenges.map((challenge) => (
+                      <li>
+                        <strong>{challenge.title}: </strong>
+                        {challenge.description}
+                      </li>
+                    ))}
                   </ul>
                 </div>
               </TabsContent>

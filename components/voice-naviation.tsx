@@ -2,7 +2,7 @@
 
 export const dynamic = "force-dynamic";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
@@ -46,13 +46,18 @@ const commands = [
   },
   {
     command: "p1",
-    to: "/projects/e-commerce-platform",
+    to: "/projects/image-to-text-converter",
     label: "Project one",
+  },
+  {
+    command: "p2",
+    to: "/projects/games-finding-website",
+    label: "Project two",
   },
   {
     command: "back",
     to: "back",
-    label: "Previous page",
+    label: "Previous",
   },
 ];
 
@@ -62,6 +67,7 @@ export default function VoiceNavigator() {
   const [transcriptText, setTranscriptText] = useState("");
   const router = useRouter();
   const ref = useClickOutside(() => setShow(false));
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
 
   const handleOnOff = () => {
     if (typeof window !== "undefined") {
@@ -81,11 +87,8 @@ export default function VoiceNavigator() {
     }
   };
 
-
-
   useEffect(() => {
     const command = transcript.toLowerCase();
-
 
     setTranscriptText(command);
 
@@ -98,10 +101,14 @@ export default function VoiceNavigator() {
     };
 
     commands.forEach((c) => {
-      if (c.command.toLowerCase() === command) {
+      if (command.includes(c.command.toLowerCase())) {
         handleRedirect(c.to);
       }
     });
+
+    if (command.includes("stop")) {
+      buttonRef.current?.click();
+    }
   }, [transcript]);
 
   useEffect(() => {
@@ -118,6 +125,7 @@ export default function VoiceNavigator() {
       <Button
         size="icon"
         onClick={handleOnOff}
+        ref={buttonRef}
         className="rounded right-6 bottom-5 z-50 fixed bg-purple-600"
       >
         {listening ? (
@@ -139,7 +147,7 @@ export default function VoiceNavigator() {
 
       <button
         onClick={() => setShow((prev) => !prev)}
-        className="bg-primary fixed right-4  bottom-[70px] rounded-full flex items-center justify-center size-7"
+        className="bg-primary fixed right-4  bottom-[70px] rounded-full flex items-center justify-center size-7 z-50"
       >
         <Info className="size-4 shrink-0 text-white" />
       </button>
@@ -164,9 +172,18 @@ export default function VoiceNavigator() {
               Say <span className="font-bold text-purple-500">{c.command}</span>{" "}
               to navigate to{" "}
               <span className="text-primary font-bold">{c.label}</span>{" "}
-              {c.command === "p1" ? "page" : "section"}
+              {c.command === "p1" || "p2"
+                ? "page"
+                : c.command === "back"
+                ? "section/page"
+                : "section"}
             </li>
           ))}
+          <li>
+            {" "}
+            Say <span className="font-bold text-purple-500">Stop</span> to stop
+            voice navigation.
+          </li>
         </ul>
       </div>
     </>
