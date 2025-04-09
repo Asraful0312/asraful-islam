@@ -1,7 +1,6 @@
 "use client";
 
 import type React from "react";
-
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
@@ -25,6 +24,20 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Smooth scroll function
+  const scrollToSection = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
+    e.preventDefault();
+    const sectionId = href.split("#")[1];
+    const element = document.getElementById(sectionId);
+
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -41,10 +54,21 @@ export function Navbar() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <NavLink href="/#about">About</NavLink>
-            <NavLink href="/#skills">Skills</NavLink>
-            <NavLink href="/#projects">Projects</NavLink>
-            <NavLink href="/#contact">Contact</NavLink>
+            <NavLink href="/#about" onClick={scrollToSection}>
+              About
+            </NavLink>
+            <NavLink href="/#skills" onClick={scrollToSection}>
+              Skills
+            </NavLink>
+            <NavLink href="/#projects" onClick={scrollToSection}>
+              Projects
+            </NavLink>
+            <NavLink href="/#reviews" onClick={scrollToSection}>
+              Reviews
+            </NavLink>
+            <NavLink href="/#contact" onClick={scrollToSection}>
+              Contact
+            </NavLink>
             <Button className="bg-purple-600 hover:bg-purple-700">
               Resume
             </Button>
@@ -74,25 +98,36 @@ export function Navbar() {
             <div className="px-4 py-5 space-y-4">
               <MobileNavLink
                 href="/#about"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={scrollToSection}
+                closeMenu={() => setIsMobileMenuOpen(false)}
               >
                 About
               </MobileNavLink>
               <MobileNavLink
                 href="/#skills"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={scrollToSection}
+                closeMenu={() => setIsMobileMenuOpen(false)}
               >
                 Skills
               </MobileNavLink>
               <MobileNavLink
                 href="/#projects"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={scrollToSection}
+                closeMenu={() => setIsMobileMenuOpen(false)}
               >
                 Projects
               </MobileNavLink>
               <MobileNavLink
+                href="/#reviews"
+                onClick={scrollToSection}
+                closeMenu={() => setIsMobileMenuOpen(false)}
+              >
+                Reviews
+              </MobileNavLink>
+              <MobileNavLink
                 href="/#contact"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={scrollToSection}
+                closeMenu={() => setIsMobileMenuOpen(false)}
               >
                 Contact
               </MobileNavLink>
@@ -110,13 +145,16 @@ export function Navbar() {
 function NavLink({
   href,
   children,
+  onClick,
 }: {
   href: string;
   children: React.ReactNode;
+  onClick: (e: React.MouseEvent<HTMLAnchorElement>, href: string) => void;
 }) {
   return (
     <Link
       href={href}
+      onClick={(e) => onClick(e, href)}
       className="text-gray-300 hover:text-white transition-colors relative group"
     >
       {children}
@@ -128,16 +166,21 @@ function NavLink({
 function MobileNavLink({
   href,
   onClick,
+  closeMenu,
   children,
 }: {
   href: string;
-  onClick: () => void;
+  onClick: (e: React.MouseEvent<HTMLAnchorElement>, href: string) => void;
+  closeMenu: () => void;
   children: React.ReactNode;
 }) {
   return (
     <Link
       href={href}
-      onClick={onClick}
+      onClick={(e) => {
+        onClick(e, href);
+        closeMenu();
+      }}
       className="block py-2 text-gray-300 hover:text-white transition-colors"
     >
       {children}
