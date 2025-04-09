@@ -94,7 +94,7 @@ export default function VoiceNavigator() {
     };
 
     // Check stop command first
-    if (command.includes("stop listening")) {
+    if (command.includes("stop")) {
       SpeechRecognition.stopListening();
       resetTranscript(); // Clear the transcript to avoid re-processing
       return; // Exit the effect to prevent navigation
@@ -172,9 +172,8 @@ export default function VoiceNavigator() {
             </li>
           ))}
           <li>
-            Say{" "}
-            <span className="font-bold text-purple-500">stop listening</span> to
-            stop voice navigation.
+            Say <span className="font-bold text-purple-500">stop</span> to stop
+            voice navigation.
           </li>
         </ul>
       </div>
