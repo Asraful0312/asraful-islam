@@ -15,7 +15,7 @@ export const projects: Project[] = [
       "NeonDB",
       "Prisma",
     ],
-    demoLink: "https://image-wizard-jade.vercel.app/",
+    demoLink: "https://imagetotextnow.xyz/",
     githubLink: "https://github.com/Asraful0312/image-wizard",
     slug: "image-to-text-converter",
     images: ["/project/p1-2.png", "/project/p1-3.png", "/project/p1-4.png"],

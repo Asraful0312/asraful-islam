@@ -17,8 +17,8 @@ const commands = [
   { command: "project", to: "/#projects", label: "Project" },
   { command: "review", to: "/#reviews", label: "Reviews" },
   { command: "skill", to: "/#skills", label: "Skills" },
-  { command: "home", to: "/", label: "Home" },
-  { command: "top", to: "/", label: "Top" },
+  { command: "home", to: "/#hero", label: "Home" },
+  { command: "top", to: "/#hero", label: "Top" },
   { command: "bottom", to: "/#footer", label: "Bottom" },
   {
     command: "p1",

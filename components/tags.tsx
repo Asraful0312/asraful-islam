@@ -1,45 +1,58 @@
 "use client";
 
 import { useId, useState } from "react";
-import { Tag, TagInput } from "emblor";
 
 import { Label } from "@/components/ui/label";
+import { X } from "lucide-react";
 
-const tags = [
-  {
-    id: "1",
-    text: "React",
-  },
-];
+type Tag = string;
+
+const tags = ["React"];
 
 export default function Tags() {
   const id = useId();
   const [exampleTags, setExampleTags] = useState<Tag[]>(tags);
   const [activeTagIndex, setActiveTagIndex] = useState<number | null>(null);
+  const [tag, setTag] = useState("");
+
+  const handleAddTag = (value: string) => {
+    setExampleTags((prv) => [...prv, value]);
+    setTag("");
+  };
+
+  const handleDeleteTag = (value: string) => {
+    if (exampleTags.includes(value)) {
+      const newTags = exampleTags.filter((t) => t !== value);
+      setExampleTags(newTags);
+    }
+  };
 
   return (
     <div className="*:not-first:mt-2">
       <Label htmlFor={id}>Tags</Label>
-      <TagInput
-        id={id}
-        tags={exampleTags}
-        setTags={(newTags) => {
-          setExampleTags(newTags);
-        }}
-        placeholder="Add a tag"
-        styleClasses={{
-          inlineTagsContainer:
-            "border-input rounded-md bg-background shadow-xs transition-[color,box-shadow] focus-within:border-ring outline-none focus-within:ring-[3px] focus-within:ring-ring/50 p-1 gap-1",
-          input: "w-full min-w-[80px] shadow-none px-2 h-7",
-          tag: {
-            body: "h-7 relative bg-background border border-input hover:bg-background rounded-md font-medium text-xs ps-2 pe-7",
-            closeButton:
-              "absolute -inset-y-px -end-px p-0 rounded-e-md flex size-7 transition-[color,box-shadow] outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] text-muted-foreground/80 hover:text-foreground",
-          },
-        }}
-        activeTagIndex={activeTagIndex}
-        setActiveTagIndex={setActiveTagIndex}
-      />
+      <div className={"flex items-center border px-2 py-1"}>
+        {exampleTags.map((t) => (
+          <button
+            type="button"
+            onClick={() => handleDeleteTag(t)}
+            className="flex items-center gap-1 bg-transparent border py-1 px-2 mr-1"
+          >
+            {t} <X className="shrink-0 size-4 text-white" />
+          </button>
+        ))}
+        <input
+          className="w-full border-none outline-none bg-transparent mx-3"
+          onChange={(e) => setTag(e.target.value)}
+          type="text"
+        />
+        <button
+          onClick={() => handleAddTag(tag)}
+          type="button"
+          className="bg-primary py-1 px-2"
+        >
+          Add
+        </button>
+      </div>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import AppShell from "@/components/app-shell";
+import Tags from "@/components/tags";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -127,7 +128,9 @@ const CreateProject = () => {
             placeholder="http://exmple.com"
           />
         </div>
-        <div className="w-full space-y-1">tags</div>
+        <div className="w-full space-y-1">
+          <Tags />
+        </div>
 
         <div className="w-full space-y-1">
           <Label htmlFor="timeline">Timeline</Label>

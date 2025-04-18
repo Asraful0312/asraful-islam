@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -48,9 +49,13 @@ export function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
-          <Link href="/" className="text-xl font-bold">
+          <NavLink
+            href="/#hero"
+            onClick={scrollToSection}
+            className="text-xl font-bold"
+          >
             <span className="gradient-text">Asraful</span>
-          </Link>
+          </NavLink>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
@@ -146,16 +151,21 @@ function NavLink({
   href,
   children,
   onClick,
+  className = "",
 }: {
   href: string;
   children: React.ReactNode;
   onClick: (e: React.MouseEvent<HTMLAnchorElement>, href: string) => void;
+  className?: string;
 }) {
   return (
     <Link
       href={href}
       onClick={(e) => onClick(e, href)}
-      className="text-gray-300 hover:text-white transition-colors relative group"
+      className={cn(
+        "text-gray-300 hover:text-white transition-colors relative group",
+        className
+      )}
     >
       {children}
       <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 transition-all group-hover:w-full"></span>
