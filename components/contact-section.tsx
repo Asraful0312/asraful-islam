@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, MapPin, Phone, Send } from "lucide-react";
+import { sendEMail } from "@/actions";
+import { toast } from "sonner";
 
 export function ContactSection() {
   const ref = useRef(null);
@@ -52,14 +54,18 @@ export function ContactSection() {
     setIsSubmitting(true);
 
     // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    const response = await sendEMail(
+      formState.email,
+      formState.subject,
+      formState.message
+    );
 
+    if (response?.error) {
+      return toast.error(response?.error);
+    }
     setIsSubmitting(false);
     setSubmitSuccess(true);
     setFormState({ name: "", email: "", subject: "", message: "" });
-
-    // Reset success message after 5 seconds
-    setTimeout(() => setSubmitSuccess(false), 5000);
   };
 
   return (
@@ -230,6 +236,7 @@ export function ContactSection() {
                     className="bg-[#232323] border-gray-700 focus:border-purple-500"
                   />
                 </div>
+
                 <div>
                   <label
                     htmlFor="email"

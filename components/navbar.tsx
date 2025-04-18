@@ -49,13 +49,9 @@ export function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
-          <NavLink
-            href="/#hero"
-            onClick={scrollToSection}
-            className="text-xl font-bold"
-          >
+          <Link href="#" className="text-xl font-bold">
             <span className="gradient-text">Asraful</span>
-          </NavLink>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">

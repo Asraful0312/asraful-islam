@@ -68,7 +68,12 @@ export function ProjectsSection() {
                 />
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-bold mb-2">{project.title}</h3>
+                <Link
+                  href={`/projects/${project.slug}`}
+                  className="text-xl font-bold mb-2"
+                >
+                  {project.title}
+                </Link>
                 <p className="text-gray-400 mb-4 line-clamp-3">
                   {project.description}
                 </p>
