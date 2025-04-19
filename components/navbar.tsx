@@ -28,14 +28,19 @@ export function Navbar() {
   // Smooth scroll function
   const scrollToSection = (
     e: React.MouseEvent<HTMLAnchorElement>,
-    href: string
+    href: string,
+    closeMenu?: () => void
   ) => {
     e.preventDefault();
-    const sectionId = href.split("#")[1];
+    const sectionId = href.startsWith("#") ? href.slice(1) : href.split("#")[1];
     const element = document.getElementById(sectionId);
 
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
+      // Close mobile menu after scrolling
+      if (closeMenu) {
+        setTimeout(() => closeMenu(), 300); // Delay to allow smooth scroll
+      }
     }
   };
 
@@ -55,19 +60,19 @@ export function Navbar() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <NavLink href="/#about" onClick={scrollToSection}>
+            <NavLink href="#about" onClick={scrollToSection}>
               About
             </NavLink>
-            <NavLink href="/#skills" onClick={scrollToSection}>
+            <NavLink href="#skills" onClick={scrollToSection}>
               Skills
             </NavLink>
-            <NavLink href="/#projects" onClick={scrollToSection}>
+            <NavLink href="#projects" onClick={scrollToSection}>
               Projects
             </NavLink>
-            <NavLink href="/#reviews" onClick={scrollToSection}>
+            <NavLink href="#reviews" onClick={scrollToSection}>
               Reviews
             </NavLink>
-            <NavLink href="/#contact" onClick={scrollToSection}>
+            <NavLink href="#contact" onClick={scrollToSection}>
               Contact
             </NavLink>
             <Button className="bg-purple-600 hover:bg-purple-700">
@@ -98,35 +103,35 @@ export function Navbar() {
           >
             <div className="px-4 py-5 space-y-4">
               <MobileNavLink
-                href="/#about"
+                href="#about"
                 onClick={scrollToSection}
                 closeMenu={() => setIsMobileMenuOpen(false)}
               >
                 About
               </MobileNavLink>
               <MobileNavLink
-                href="/#skills"
+                href="#skills"
                 onClick={scrollToSection}
                 closeMenu={() => setIsMobileMenuOpen(false)}
               >
                 Skills
               </MobileNavLink>
               <MobileNavLink
-                href="/#projects"
+                href="#projects"
                 onClick={scrollToSection}
                 closeMenu={() => setIsMobileMenuOpen(false)}
               >
                 Projects
               </MobileNavLink>
               <MobileNavLink
-                href="/#reviews"
+                href="#reviews"
                 onClick={scrollToSection}
                 closeMenu={() => setIsMobileMenuOpen(false)}
               >
                 Reviews
               </MobileNavLink>
               <MobileNavLink
-                href="/#contact"
+                href="#contact"
                 onClick={scrollToSection}
                 closeMenu={() => setIsMobileMenuOpen(false)}
               >
@@ -176,17 +181,18 @@ function MobileNavLink({
   children,
 }: {
   href: string;
-  onClick: (e: React.MouseEvent<HTMLAnchorElement>, href: string) => void;
+  onClick: (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string,
+    closeMenu?: () => void
+  ) => void;
   closeMenu: () => void;
   children: React.ReactNode;
 }) {
   return (
     <Link
       href={href}
-      onClick={(e) => {
-        onClick(e, href);
-        closeMenu();
-      }}
+      onClick={(e) => onClick(e, href, closeMenu)}
       className="block py-2 text-gray-300 hover:text-white transition-colors"
     >
       {children}

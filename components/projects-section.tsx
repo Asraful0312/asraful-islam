@@ -60,11 +60,11 @@ export function ProjectsSection() {
               className="bg-[#1a1a1a] rounded-lg overflow-hidden border border-gray-800 project-card"
               whileHover={{ y: -10 }}
             >
-              <div className="relative overflow-hidden aspect-video">
+              <div className="relative overflow-hidden aspect-[15/7]">
                 <img
                   src={project.image || "/placeholder.svg"}
                   alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                  className="w-full h-full object-contain transition-transform duration-500 hover:scale-110"
                 />
               </div>
               <div className="p-6">

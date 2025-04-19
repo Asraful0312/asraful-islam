@@ -210,134 +210,88 @@ export const projects: Project[] = [
   },
   {
     id: "project-3",
-    title: "Social Media Dashboard",
+    title: "E-commerce website using Nextjs + Woocommerce",
     description:
-      "A comprehensive dashboard for social media analytics with data visualization, reporting tools, and scheduling capabilities.",
-    image: "/placeholder.svg?height=600&width=800",
-    tags: ["Next.js", "Chart.js", "TypeScript", "Prisma", "PostgreSQL"],
-    demoLink: "#",
-    githubLink: "#",
-    slug: "social-media-dashboard",
-    images: ["/project/p1-2.png", "/project/p1-3.png", "/project/p1-4.png"],
+      "A E-commerce website website that use nextjs for frontend and Wordpress, Woocommerce for backend CMS for fast and performant website.",
+    image: "/p3.gif",
+    tags: ["Next.js", "Wordpress", "TypeScript", "Woocommerce", "Tailwindcss"],
+    demoLink: "https://ajhar-rashed.com/",
+    githubLink: "https://github.com/Asraful0312/woocommerce-nextjs-restapi",
+    slug: "ecommerce-website-using-nextjs-woocommerce",
+    images: [
+      "/project/p3-2.png",
+      "/project/p3-3.png",
+      "/project/p3-4.png",
+      "/project/p3-5.png",
+      "/project/p3-5.png",
+    ],
     features: [
-      {
-        title: "Image-to-Text and Image-to-Code Conversion",
-        description:
-          "Users can upload images or PDFs and convert them into plain text or code snippets. Supports basic OCR and AI-enhanced conversion via Gemini.",
-      },
       {
         title: "User Authentication and Authorization",
         description:
-          "Integrated with Clerk for secure user authentication. Only logged-in users can access certain features like coupon redemption and unlimited conversions, while guest users are limited to a set number of free conversions.",
+          "Integrated Authentication using JWT Authentication for WP-API Plugin and custom Google Authentication.",
       },
       {
-        title: "Credit System",
-        description:
-          "Implements a credit-based system where users spend credits to perform conversions. Different conversion types cost varying amounts of credits (e.g., 1 credit for basic OCR, 3 credits for code extraction). Users receive 10 free credits upon registration and can purchase more via Lemon Squeezy.",
+        title: "Custom UI",
+        description: "Custom UI made using Shadcn ui and tailwindcss.",
       },
       {
-        title: "Coupon Redemption",
+        title: "Payment Methods",
         description:
-          "Logged-in users can redeem coupon codes to earn additional credits. Ensures each user can redeem a specific coupon only once, with validation for coupon validity and expiration.",
-      },
-      {
-        title: "Responsive History Page",
-        description:
-          "Displays a user’s conversion history in a responsive table (for desktop) or card layout (for mobile). Includes details like conversion type, date, input preview, and output, with a dialog to view full details.",
-      },
-      {
-        title: "Syntax Highlighting and Markdown Rendering",
-        description:
-          "Code outputs are rendered with syntax highlighting using react-syntax-highlighter. Text outputs are formatted as Markdown and rendered using react-markdown with remark-gfm and rehype-raw for enhanced formatting (e.g., tables, lists).",
-      },
-      {
-        title: "Toast Notifications",
-        description:
-          "Uses sonner for toast notifications to provide feedback on actions like successful conversions, coupon redemptions, or errors.",
+          "Added Multiple Custom Payment Methods like Stripe, PayPal, SSLCommerce, Ugdoktta Pay.",
       },
       {
         title: "Responsive Design",
-        description:
-          "Built with Tailwind CSS and Radix UI components for a fully responsive and accessible UI. Ensures a seamless experience across devices, with mobile-specific layouts for the history page.",
+        description: "Responsive Design for multiple devices.",
       },
     ],
     technicalDetails: [
       {
         title: "Framework and Language",
         description:
-          "Built with Next.js 15.2.3 (App Router) and React 19. Written in TypeScript for type safety and better developer experience.",
+          "Built with Next.js (App Router) and React 18. Written in TypeScript for type safety and better developer experience.",
       },
       {
         title: "Backend and Database",
-        description:
-          "Uses Prisma 6.5.0 as the ORM with NeonDB (PostgreSQL) for data storage. Schema includes models for User, Conversion, Purchase, Coupon, and CouponRedemption. Webhook integration with Clerk to sync user data (e.g., storing user email on user.created event).",
+        description: "Uses Wordpress as a CMS Backend.",
       },
       {
         title: "Authentication",
         description:
-          "Clerk (`@clerk/nextjs`) for user authentication and session management. Middleware (`authMiddleware`) ensures protected routes (e.g., `/coupon`, `/api/coupon/redeem`) are accessible only to logged-in users.",
+          "Uses JWT Authentication for WP-API plugin for Authentication.",
       },
-      {
-        title: "Image Processing and AI",
-        description:
-          "OCR.Space API for basic image-to-text and PDF-to-text conversions. Google Gemini 1.5 Flash (`@google/generative-ai`) for AI-enhanced text and code extraction. Uses custom prompts and post-processing (`stripCodeBlockMarkers`) to refine Gemini output.",
-      },
+
       {
         title: "Payment Integration",
         description:
-          "Lemon Squeezy (`@lemonsqueezy/lemonsqueezy.js`) for handling credit purchases. Stores purchase details in the `Purchase` model, including credits bought and amount paid.",
+          "Stripe and PayPal for international users and SSLCommerce and Ugdoktta Pay for Bangladeshi Users.",
       },
       {
         title: "Frontend Libraries",
         description:
-          "Tailwind CSS with @tailwindcss/typography for styling. Radix UI components (@radix-ui/react-*) for accessible UI elements. react-markdown with remark-gfm and rehype-raw for rendering Markdown. react-syntax-highlighter for code highlighting. sonner for toast notifications.",
+          "Tailwind CSS with @tailwindcss/typography for styling. Radix UI components (@radix-ui/react-*) for accessible UI elements.sonner for toast notifications.",
       },
       {
         title: "API Routes",
         description:
-          "Server Actions (app/actions.ts) for handling conversions. API routes include /api/webhook, /api/coupon/redeem, and /api/user/credits.",
+          "Server Actions (app/actions.ts) for handling getting data from wordpress. API routes include /api/webhook, /api/auth, and /api/payments.",
       },
       {
         title: "Deployment",
         description:
-          "Deployed on Vercel for seamless CI/CD. Uses environment vriables like DTABASE_URL, CLERK_EBOOK_SECRET, EMINI_API_KEY for configuration.",
+          "Deployed on Cpanel Wordpress on subdomain and Nextjs frontend on main Domain.",
       },
     ],
     challenges: [
       {
-        title: "Formatting Gemini Output",
+        title: "Integrating Payment Methods",
         description:
-          "Gemini often returned code with unwanted Markdown code block markers (e.g., typescript). Solved by refining prompts and adding a stripCodeBlockMarkers post-processing step.",
+          "Faced many problem Integrating custom payment methods like Stripe, Paypal.",
       },
       {
-        title: "Responsive History Page",
+        title: "Google Authentication",
         description:
-          "The history table overflowed on mobile. Fixed by using Tailwind’s dual layout (hidden md:block, md:hidden) and applying break-words and min-w-0.",
-      },
-      {
-        title: "Markdown List Rendering",
-        description:
-          "Gemini formatted lists with extra spaces that react-markdown couldn't parse properly. Fixed using a fixMarkdownLists function and remark-gfm.",
-      },
-      {
-        title: "Seeding the Database",
-        description:
-          "Faced issues with ts-node and ESM/CommonJS during seeding. Resolved by updating package.json, adding fallback JS seed file, and refining TypeScript config.",
-      },
-      {
-        title: "Coupon Redemption Logic",
-        description:
-          "Needed to enforce one-time redemption per user. Added CouponRedemption model with a unique constraint and used a Prisma transaction for atomic updates.",
-      },
-      {
-        title: "API Rate Limits and Costs",
-        description:
-          "To control external API usage, implemented a credit system, cached conversions in the database, and cleaned OCR.Space output locally before calling Gemini.",
-      },
-      {
-        title: "Next.js 15 and React 19 Compatibility",
-        description:
-          "Some libraries had issues with the latest versions. Fixed by upgrading dependencies and ensuring compatibility across ecosystem.",
+          "Email and password Signin and Signup was easy since i was using JWT Authentication for WP-API plugin with restApi but faced challenge adding google authentication with the JWT Authentication for WP-API plugin.",
       },
     ],
   },

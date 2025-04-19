@@ -60,12 +60,15 @@ export function ContactSection() {
       formState.message
     );
 
+    console.log(response);
+
     if (response?.error) {
       return toast.error(response?.error);
     }
     setIsSubmitting(false);
     setSubmitSuccess(true);
     setFormState({ name: "", email: "", subject: "", message: "" });
+    toast.success("Mail sent successfully");
   };
 
   return (

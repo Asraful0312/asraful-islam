@@ -1,4 +1,5 @@
 "use server";
+
 import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
@@ -15,27 +16,22 @@ export const sendEMail = async (
   message: string
 ) => {
   if (!email || !subject || !message) {
-    return {
-      error: "Please fill all the fields",
-    };
+    return { error: "Please fill all the fields" };
   }
+
   const mailOptions = {
-    from: email,
-    to: "asrafulislam0312@gmail.com",
-    subject: subject,
-    text: message,
+    from: process.env.NODE_MAILER_EMAIL, // ✅ use a trusted sender
+    to: process.env.NODE_MAILER_EMAIL, // sending to yourself
+    subject,
+    text: `From: ${email}\n\n${message}`,
   };
-  transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-      console.log(error);
-      return {
-        error: error,
-      };
-    } else {
-      console.log("Email sent: " + info.response);
-      return {
-        success: "Email sent successfully",
-      };
-    }
-  });
+
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log("Email sent:", info);
+    return { success: true };
+  } catch (error) {
+    console.error("Error sending email:", error);
+    return { error: "Failed to send email" };
+  }
 };
