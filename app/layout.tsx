@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
 import VoiceNavigator from "@/components/voice-naviation";
+import LightBulb from "@/components/light-bulb";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,6 +35,7 @@ export default function RootLayout({
         </ThemeProvider>
         {/* <ScrollToTop /> */}
         <VoiceNavigator />
+        <LightBulb />
       </body>
     </html>
   );
