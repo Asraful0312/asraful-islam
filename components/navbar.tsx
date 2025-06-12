@@ -4,7 +4,7 @@ import type React from "react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -115,7 +115,13 @@ export function Navbar() {
               </Button>
             </Authenticated>
             <Unauthenticated>
-              <Link href="/signin" onClick={signOut} className="">
+              <Link
+                href="/signin"
+                onClick={signOut}
+                className={buttonVariants({
+                  variant: "secondary",
+                })}
+              >
                 Login
               </Link>
             </Unauthenticated>
@@ -188,6 +194,18 @@ export function Navbar() {
               <Button className="w-full bg-purple-600 hover:bg-purple-700">
                 Resume
               </Button>
+              <Unauthenticated>
+              <Link
+                href="/signin"
+                onClick={signOut}
+                className={buttonVariants({
+                  variant: "secondary",
+                  className: "w-full"
+                })}
+              >
+                Login
+              </Link>
+            </Unauthenticated>
               <Authenticated>
                 <Button
                   onClick={signOut}

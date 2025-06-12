@@ -20,16 +20,6 @@ const commands = [
   { command: "home", to: "/#hero", label: "Home" },
   { command: "top", to: "/#hero", label: "Top" },
   { command: "bottom", to: "/#footer", label: "Bottom" },
-  {
-    command: "p1",
-    to: "/projects/image-to-text-converter",
-    label: "Project one",
-  },
-  {
-    command: "p2",
-    to: "/projects/games-finding-website",
-    label: "Project two",
-  },
   { command: "back", to: "back", label: "Previous" },
 ];
 
@@ -167,8 +157,8 @@ export default function VoiceNavigator() {
               {c.command === "p1" || c.command === "p2"
                 ? "page"
                 : c.command === "back"
-                ? "section/page"
-                : "section"}
+                  ? "section/page"
+                  : "section"}
             </li>
           ))}
           <li>
