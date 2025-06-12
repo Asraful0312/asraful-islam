@@ -176,7 +176,13 @@ export default function SignInForm() {
           <span className="mx-4 text-white">or</span>
           <hr className="my-4 grow border-gray-200" />
         </div>
-        <Button className="w-full" onClick={() => void signIn("anonymous")}>
+        <Button
+          className="w-full"
+          onClick={() => {
+            void signIn("anonymous");
+            router.push("/");
+          }}
+        >
           Sign in anonymously
         </Button>
       </motion.div>

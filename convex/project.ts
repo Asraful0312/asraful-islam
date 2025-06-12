@@ -215,15 +215,7 @@ export const getProject = query({
 export const getUserProjects = query({
   args: {},
   handler: async (ctx) => {
-    const userId = await getAuthUserId(ctx);
-    if (!userId) {
-      return [];
-    }
-
-    const projects = await ctx.db
-      .query("projects")
-      .withIndex("by_userId", (q) => q.eq("userId", userId))
-      .collect();
+    const projects = await ctx.db.query("projects").collect();
 
     // Get URLs for thumbnails and gallery images
     return await Promise.all(

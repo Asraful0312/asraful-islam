@@ -44,9 +44,23 @@ export const getComments = query({
           .collect()
           .then((replies) => replies.length);
 
+        let displayAuthor = "Anonymous";
+        if (author?.name) {
+          displayAuthor = author.name;
+        } else if (author?.email) {
+          const [localPart] = author.email.split("@");
+          if (localPart.length > 4) {
+            // Show first two and last two characters, with *** in the middle
+            displayAuthor = `${localPart.slice(0, 3)}***${localPart.slice(-3)}`;
+          } else {
+            // For short emails, just show first character and ***
+            displayAuthor = `${localPart.slice(0, 2)}***`;
+          }
+        }
+
         return {
           ...comment,
-          author: author?.name || author?.email || "Anonymous",
+          author: displayAuthor,
           likesCount: comment.likesCount || 0,
           isLiked,
           replyCount,
@@ -90,10 +104,23 @@ export const getReplies = query({
             .unique();
           isLiked = !!like;
         }
+        let displayAuthor = "Anonymous";
+        if (author?.name) {
+          displayAuthor = author.name;
+        } else if (author?.email) {
+          const [localPart] = author.email.split("@");
+          if (localPart.length > 4) {
+            // Show first two and last two characters, with *** in the middle
+            displayAuthor = `${localPart.slice(0, 3)}***${localPart.slice(-3)}`;
+          } else {
+            // For short emails, just show first character and ***
+            displayAuthor = `${localPart.slice(0, 2)}***`;
+          }
+        }
 
         return {
           ...reply,
-          author: author?.name || author?.email || "Anonymous",
+          author: displayAuthor,
           likesCount: reply.likesCount || 0,
           isLiked,
         };
