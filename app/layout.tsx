@@ -2,10 +2,11 @@ import type React from "react";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import "./globals.css";
 
 import VoiceNavigator from "@/components/voice-naviation";
 import LightBulb from "@/components/light-bulb";
+import { ConvexClientProvider } from "./ConvexClientProvider";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,17 +26,20 @@ export default function RootLayout({
       <body
         className={`${inter.className} bg-[#0f0f0f] text-white antialiased`}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem={false}
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
-        {/* <ScrollToTop /> */}
-        <VoiceNavigator />
-        <LightBulb />
+        <ConvexClientProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem={false}
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+          {/* <ScrollToTop /> */}
+          <VoiceNavigator />
+          <LightBulb />
+        </ConvexClientProvider>
+        <Toaster />
       </body>
     </html>
   );

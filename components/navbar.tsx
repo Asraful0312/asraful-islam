@@ -3,14 +3,20 @@
 import type React from "react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter, usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { Authenticated, Unauthenticated } from "convex/react";
+import { useAuthActions } from "@convex-dev/auth/react";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
+  const { signOut } = useAuthActions();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,15 +38,29 @@ export function Navbar() {
     closeMenu?: () => void
   ) => {
     e.preventDefault();
-    const sectionId = href.startsWith("#") ? href.slice(1) : href.split("#")[1];
-    const element = document.getElementById(sectionId);
+    const isFragment = href.startsWith("#");
+    const sectionId = isFragment ? href.slice(1) : href.split("#")[1];
 
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      // Close mobile menu after scrolling
-      if (closeMenu) {
-        setTimeout(() => closeMenu(), 300); // Delay to allow smooth scroll
+    // If on a different page (not homepage), navigate to homepage with fragment
+    if (isFragment && pathname !== "/") {
+      router.push(`/#${sectionId}`);
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 100);
+    } else {
+      // If already on homepage, just scroll
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
       }
+    }
+
+    // Close mobile menu if provided
+    if (closeMenu) {
+      setTimeout(() => closeMenu(), 300);
     }
   };
 
@@ -54,7 +74,7 @@ export function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
-          <Link href="#" className="text-xl font-bold">
+          <Link href="/" className="text-xl font-bold">
             <span className="gradient-text">Asraful</span>
           </Link>
 
@@ -75,9 +95,30 @@ export function Navbar() {
             <NavLink href="#contact" onClick={scrollToSection}>
               Contact
             </NavLink>
+
+            <Link
+              href="/blog"
+              className={cn(
+                "text-gray-300 hover:text-white transition-colors relative group"
+              )}
+            >
+              Blog
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 transition-all group-hover:w-full"></span>
+            </Link>
+
             <Button className="bg-purple-600 hover:bg-purple-700">
               Resume
             </Button>
+            <Authenticated>
+              <Button onClick={signOut} variant="secondary" className="">
+                Logout
+              </Button>
+            </Authenticated>
+            <Unauthenticated>
+              <Link href="/signin" onClick={signOut} className="">
+                Login
+              </Link>
+            </Unauthenticated>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -137,9 +178,25 @@ export function Navbar() {
               >
                 Contact
               </MobileNavLink>
+              <Link
+                href="/blog"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block py-2 text-gray-300 hover:text-white transition-colors"
+              >
+                Blog
+              </Link>
               <Button className="w-full bg-purple-600 hover:bg-purple-700">
                 Resume
               </Button>
+              <Authenticated>
+                <Button
+                  onClick={signOut}
+                  variant="secondary"
+                  className="w-full"
+                >
+                  Logout
+                </Button>
+              </Authenticated>
             </div>
           </motion.div>
         )}

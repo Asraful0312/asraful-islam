@@ -1,8 +1,9 @@
+"use client";
 import {
+  BookText,
   Calendar,
   FolderKanban,
   Home,
-  Inbox,
   Search,
   Settings,
 } from "lucide-react";
@@ -18,23 +19,25 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
+import { Button } from "./ui/button";
+import { useAuthActions } from "@convex-dev/auth/react";
 
 // Menu items.
 const items = [
   {
     title: "Home",
-    url: "#",
+    url: "/",
     icon: Home,
   },
   {
-    title: "Create Project",
-    url: "/create-project",
+    title: "My projects",
+    url: "/projects",
     icon: FolderKanban,
   },
   {
-    title: "Calendar",
-    url: "#",
-    icon: Calendar,
+    title: "My blogs",
+    url: "/blogs",
+    icon: BookText,
   },
   {
     title: "Search",
@@ -49,6 +52,7 @@ const items = [
 ];
 
 export function AppSidebar() {
+  const { signOut } = useAuthActions();
   return (
     <Sidebar>
       <SidebarContent>
@@ -66,6 +70,24 @@ export function AppSidebar() {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+        <SidebarGroup>
+          <SidebarGroupLabel>User</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Button
+                    onClick={signOut}
+                    variant="secondary"
+                    className="text-red-400 w-full font-normal"
+                  >
+                    Logout
+                  </Button>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

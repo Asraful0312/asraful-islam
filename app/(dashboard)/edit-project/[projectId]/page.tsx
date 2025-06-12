@@ -16,24 +16,57 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { useMutation } from "convex/react";
+import { useMutation, useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { useRouter } from "next/navigation";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { Id } from "@/convex/_generated/dataModel";
 import SearchRelatedProjects from "@/components/search-related-projects";
 
-const CreateProject = () => {
-  const insertProject = useMutation(api.project.insertProject);
+interface EditProjectProps {
+  params: { projectId: Id<"projects"> };
+}
+
+const EditProject = ({ params }: EditProjectProps) => {
+  const project = useQuery(api.project.getProject, {
+    projectId: params.projectId,
+  });
+  const updateProject = useMutation(api.project.updateProject);
   const generateUploadUrl = useMutation(api.project.generateUploadUrl);
   const router = useRouter();
   const [submitting, setSubmitting] = useState(false);
   const [thumbnailFile, setThumbnailFile] = useState<File | null>(null);
   const [galleryFiles, setGalleryFiles] = useState<File[]>([]);
+  const [existingGalleryUrls, setExistingGalleryUrls] = useState<string[]>([]);
+  const [deletedImageIds, setDeletedImageIds] = useState<Id<"_storage">[]>([]);
   const thumbnailInputRef = useRef<HTMLInputElement>(null);
   const galleryInputRef = useRef<HTMLInputElement>(null);
   const [relatedProjects, setRelatedProjects] = useState<Id<"projects">[]>([]);
+
+  // Initialize existingGalleryUrls with project.imageGalleryUrls
+  useEffect(() => {
+    if (project?.galleryImageUrls) {
+      setExistingGalleryUrls(
+        project.galleryImageUrls.filter((url): url is string => url !== null)
+      );
+    }
+  }, [project]);
+
+  if (project instanceof Error) {
+    return (
+      <div className="flex justify-center items-center min-h-96">
+        <p className="text-center text-red-500">{project?.message}</p>
+      </div>
+    );
+  }
+
+  if (!project)
+    return (
+      <div className="flex justify-center items-center min-h-96">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+      </div>
+    );
 
   const handleThumbnailSelection = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -42,16 +75,20 @@ const CreateProject = () => {
       return;
     }
     setThumbnailFile(file || null);
+    if (file && project.thumbnail) {
+      setDeletedImageIds((prev) => [...prev, project.thumbnail]);
+    }
   };
 
   const handleGallerySelection = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files) {
       const fileArray = Array.from(files);
-      const newTotal = galleryFiles.length + fileArray.length;
+      const newTotal =
+        galleryFiles.length + existingGalleryUrls.length + fileArray.length;
       if (newTotal > 10) {
         toast.error(
-          `Cannot add ${fileArray.length} images. Maximum 10 images allowed (currently have ${galleryFiles.length}).`
+          `Cannot add ${fileArray.length} images. Maximum 10 images allowed (currently have ${galleryFiles.length + existingGalleryUrls.length}).`
         );
         return;
       }
@@ -63,8 +100,14 @@ const CreateProject = () => {
     }
   };
 
-  const removeGalleryImage = (index: number) => {
-    setGalleryFiles((prev) => prev.filter((_, i) => i !== index));
+  const removeGalleryImage = (index: number, isExisting: boolean) => {
+    if (isExisting) {
+      setExistingGalleryUrls((prev) => prev.filter((_, i) => i !== index));
+      const storageId = project.imageGallery[index];
+      setDeletedImageIds((prev) => [...prev, storageId]);
+    } else {
+      setGalleryFiles((prev) => prev.filter((_, i) => i !== index));
+    }
   };
 
   const uploadFile = async (file: File): Promise<Id<"_storage">> => {
@@ -127,19 +170,23 @@ const CreateProject = () => {
       // Collect tags
       const tags = formData.getAll("tags") as string[];
 
-      // Validate thumbnail
-      if (!thumbnailFile || !thumbnailFile.type.startsWith("image/")) {
-        throw new Error("A valid thumbnail image or GIF is required");
+      // Upload new thumbnail if provided, else keep existing
+      let thumbnailId = project.thumbnail;
+      if (thumbnailFile && thumbnailFile.type.startsWith("image/")) {
+        thumbnailId = await uploadFile(thumbnailFile);
       }
 
-      // Upload thumbnail
-      const thumbnailId = await uploadFile(thumbnailFile);
-
-      // Upload gallery images
-      const galleryIds = await Promise.all(galleryFiles.map(uploadFile));
+      // Upload new gallery images
+      const newGalleryIds = await Promise.all(galleryFiles.map(uploadFile));
+      // Combine existing and new gallery IDs
+      const existingGalleryIds = project.imageGallery.filter(
+        (_, i) => existingGalleryUrls[i]
+      );
+      const galleryIds = [...existingGalleryIds, ...newGalleryIds];
 
       // Prepare project data
       const projectData = {
+        projectId: params.projectId as Id<"projects">,
         name: formData.get("name") as string,
         slug: formData.get("slug") as string,
         description: formData.get("description") as string,
@@ -151,22 +198,28 @@ const CreateProject = () => {
         demoLink: (formData.get("demo") as string) || undefined,
         tags,
         timeline: formData.get("timeline") as string,
+
         features,
         technicalDetails,
         challenges,
+        deletedImageIds,
         relatedId: relatedProjects,
       };
 
       // Call Convex mutation
-      const projectId = await insertProject(projectData);
-      toast.success("Project created successfully!");
-      router.push(`/projects/${projectId}`);
+      await updateProject(projectData);
+      toast.success("Project updated successfully!");
+      router.push(`/projects/${params.projectId}`);
       setThumbnailFile(null);
       setGalleryFiles([]);
+      setDeletedImageIds([]);
+      setExistingGalleryUrls(
+        project.galleryImageUrls.filter((url): url is string => url !== null)
+      );
       if (thumbnailInputRef.current) thumbnailInputRef.current.value = "";
       if (galleryInputRef.current) galleryInputRef.current.value = "";
     } catch (error: any) {
-      toast.error(error.message || "Failed to create project");
+      toast.error(error.message || "Failed to update project");
       console.error(error);
     } finally {
       setSubmitting(false);
@@ -183,7 +236,7 @@ const CreateProject = () => {
               className="w-full"
               name="name"
               id="name"
-              placeholder="Project name"
+              defaultValue={project.name}
               required
             />
           </div>
@@ -193,7 +246,7 @@ const CreateProject = () => {
               className="w-full"
               name="slug"
               id="slug"
-              placeholder="Project slug"
+              defaultValue={project.slug}
               required
             />
           </div>
@@ -205,12 +258,19 @@ const CreateProject = () => {
             name="description"
             id="description"
             rows={5}
-            placeholder="Project description"
+            defaultValue={project.description}
             required
           />
         </div>
         <div className="w-full space-y-1">
-          <Label htmlFor="thumbnail">Thumbnail (Image or GIF, Required)</Label>
+          <Label htmlFor="thumbnail">Thumbnail (Image or GIF)</Label>
+          {project.thumbnailUrl && !thumbnailFile && (
+            <img
+              src={project.thumbnailUrl}
+              alt="Current thumbnail"
+              className="w-32 h-32 object-cover rounded mb-2"
+            />
+          )}
           <Input
             type="file"
             className="w-full"
@@ -219,17 +279,14 @@ const CreateProject = () => {
             accept="image/*,.gif"
             onChange={handleThumbnailSelection}
             ref={thumbnailInputRef}
-            required
             disabled={submitting}
           />
           {thumbnailFile && (
-            <div className="mt-2">
-              <img
-                src={URL.createObjectURL(thumbnailFile)}
-                alt="Thumbnail preview"
-                className="w-32 h-32 object-cover rounded"
-              />
-            </div>
+            <img
+              src={URL.createObjectURL(thumbnailFile)}
+              alt="Thumbnail preview"
+              className="w-32 h-32 object-cover rounded mt-2"
+            />
           )}
         </div>
         <div className="w-full space-y-1">
@@ -250,13 +307,14 @@ const CreateProject = () => {
             ref={galleryInputRef}
             disabled={submitting}
           />
-          {galleryFiles.length > 0 && (
+          {(existingGalleryUrls.length > 0 || galleryFiles.length > 0) && (
             <div className="mt-3 space-y-2">
               <div className="flex items-center justify-between">
                 <p className="text-sm text-gray-600">
-                  Selected images ({galleryFiles.length}/10):
+                  Selected images (
+                  {existingGalleryUrls.length + galleryFiles.length}/10):
                 </p>
-                {galleryFiles.length < 10 && (
+                {existingGalleryUrls.length + galleryFiles.length < 10 && (
                   <button
                     type="button"
                     onClick={() => galleryInputRef.current?.click()}
@@ -268,9 +326,34 @@ const CreateProject = () => {
                 )}
               </div>
               <div className="grid grid-cols-2 gap-2 max-h-40 overflow-y-auto">
+                {existingGalleryUrls.map((url, index) => (
+                  <div
+                    key={`existing-${index}`}
+                    className="relative bg-gray-900 p-2 rounded-md"
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs text-gray-600 truncate flex-1">
+                        Existing Image {index + 1}
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => removeGalleryImage(index, true)}
+                        className="ml-2 text-red-500 hover:text-red-700 text-sm font-bold"
+                        disabled={submitting}
+                      >
+                        ×
+                      </button>
+                    </div>
+                    <img
+                      src={url}
+                      alt={`Existing gallery image ${index + 1}`}
+                      className="w-16 h-16 object-cover rounded mt-2"
+                    />
+                  </div>
+                ))}
                 {galleryFiles.map((file, index) => (
                   <div
-                    key={index}
+                    key={`new-${index}`}
                     className="relative bg-gray-100 p-2 rounded-md"
                   >
                     <div className="flex items-center justify-between">
@@ -279,7 +362,7 @@ const CreateProject = () => {
                       </span>
                       <button
                         type="button"
-                        onClick={() => removeGalleryImage(index)}
+                        onClick={() => removeGalleryImage(index, false)}
                         className="ml-2 text-red-500 hover:text-red-700 text-sm font-bold"
                         disabled={submitting}
                       >
@@ -288,7 +371,7 @@ const CreateProject = () => {
                     </div>
                     <img
                       src={URL.createObjectURL(file)}
-                      alt={`Gallery preview ${index + 1}`}
+                      alt={`New gallery image ${index + 1}`}
                       className="w-16 h-16 object-cover rounded mt-2"
                     />
                   </div>
@@ -299,9 +382,13 @@ const CreateProject = () => {
         </div>
         <div className="w-full space-y-1">
           <Label htmlFor="project-type">Project Type</Label>
-          <Select name="project-type" required>
+          <Select
+            name="project-type"
+            defaultValue={project.projectType}
+            required
+          >
             <SelectTrigger className="w-full">
-              <SelectValue placeholder="Select project type" />
+              <SelectValue />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
@@ -318,9 +405,9 @@ const CreateProject = () => {
         </div>
         <div className="w-full space-y-1">
           <Label htmlFor="role">Role</Label>
-          <Select name="role" required>
+          <Select name="role" defaultValue={project.role} required>
             <SelectTrigger className="w-full">
-              <SelectValue placeholder="Select role" />
+              <SelectValue />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
@@ -345,7 +432,7 @@ const CreateProject = () => {
             className="w-full"
             name="source-code"
             id="source-code"
-            placeholder="http://github.com"
+            defaultValue={project.sourceCode || ""}
           />
         </div>
         <div className="w-full space-y-1">
@@ -354,11 +441,11 @@ const CreateProject = () => {
             className="w-full"
             name="demo"
             id="demo"
-            placeholder="http://example.com"
+            defaultValue={project.demoLink || ""}
           />
         </div>
         <div className="w-full space-y-1">
-          <Tags />
+          <Tags initialTags={project.tags} />
         </div>
         <div className="w-full space-y-1">
           <Label htmlFor="timeline">Timeline</Label>
@@ -366,34 +453,37 @@ const CreateProject = () => {
             className="w-full"
             name="timeline"
             id="timeline"
-            placeholder="3 months (Jan - Mar 2023)"
+            defaultValue={project.timeline}
             required
           />
         </div>
-       
+
         <SearchRelatedProjects
           relatedProjects={relatedProjects}
           setRelatedProjects={setRelatedProjects}
         />
-        <DynamicSection sectionName="Features" namePrefix="title" />
+
+        <DynamicSection
+          sectionName="Features"
+          namePrefix="title"
+          initialItems={project.features}
+        />
         <DynamicSection
           sectionName="Technical Details"
           namePrefix="tech-title"
+          initialItems={project.technicalDetails}
         />
         <DynamicSection
           sectionName="Challenges"
           namePrefix="challenges-title"
+          initialItems={project.challenges}
         />
-        <Button
-          className="w-full"
-          type="submit"
-          disabled={submitting || !thumbnailFile}
-        >
-          {submitting ? "Creating..." : "Create"}
+        <Button className="w-full" type="submit" disabled={submitting}>
+          {submitting ? "Updating..." : "Update"}
         </Button>
       </form>
     </AppShell>
   );
 };
 
-export default CreateProject;
+export default EditProject;

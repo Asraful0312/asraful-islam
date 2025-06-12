@@ -18,8 +18,8 @@ import {
 import type { Project } from "@/lib/types";
 
 interface ProjectDetailsProps {
-  project: Project;
-  relatedProjects: Project[];
+  project?: Project;
+  relatedProjects?: Project[];
 }
 
 export function ProjectDetails({
@@ -27,7 +27,7 @@ export function ProjectDetails({
   relatedProjects,
 }: ProjectDetailsProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const images = project?.images;
+  const images = project?.galleryImageUrls;
 
   return (
     <div className="section-container pt-24">
@@ -46,9 +46,9 @@ export function ProjectDetails({
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           <div className="lg:col-span-2">
-            <h1 className="text-4xl font-bold mb-6">{project.title}</h1>
+            <h1 className="text-4xl font-bold mb-6">{project?.name}</h1>
             <div className="flex flex-wrap gap-2 mb-8">
-              {project.tags.map((tag) => (
+              {project?.tags.map((tag) => (
                 <Badge
                   key={tag}
                   variant="outline"
@@ -61,19 +61,23 @@ export function ProjectDetails({
 
             <div className="mb-8 relative overflow-hidden rounded-lg border border-gray-800">
               <img
-                src={images[currentImageIndex] || "/placeholder.svg"}
-                alt={`${project.title} screenshot ${currentImageIndex + 1}`}
+                src={
+                  (images && images[currentImageIndex]) || "/placeholder.svg"
+                }
+                alt={`${project?.name} screenshot ${currentImageIndex + 1}`}
                 className="w-full h-auto"
               />
               <div className="absolute bottom-4 right-4 flex gap-2">
                 <Button
                   variant="outline"
                   size="icon"
-                  onClick={() =>
-                    setCurrentImageIndex(
-                      (prev) => (prev - 1 + images.length) % images.length
-                    )
-                  }
+                  onClick={() => {
+                    if (images) {
+                      setCurrentImageIndex(
+                        (prev) => (prev - 1 + images?.length) % images?.length
+                      );
+                    }
+                  }}
                   className="bg-black/50 backdrop-blur-sm border-gray-700 hover:bg-black/70"
                 >
                   <ArrowLeft className="h-4 w-4" />
@@ -81,9 +85,13 @@ export function ProjectDetails({
                 <Button
                   variant="outline"
                   size="icon"
-                  onClick={() =>
-                    setCurrentImageIndex((prev) => (prev + 1) % images.length)
-                  }
+                  onClick={() => {
+                    if (images) {
+                      setCurrentImageIndex(
+                        (prev) => (prev + 1) % images.length
+                      );
+                    }
+                  }}
                   className="bg-black/50 backdrop-blur-sm border-gray-700 hover:bg-black/70"
                 >
                   <ArrowRight className="h-4 w-4" />
@@ -92,23 +100,24 @@ export function ProjectDetails({
             </div>
 
             <div className="flex overflow-x-auto gap-4 pb-4 mb-8 scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-transparent">
-              {images.map((image, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentImageIndex(index)}
-                  className={`flex-shrink-0 border-2 rounded overflow-hidden ${
-                    currentImageIndex === index
-                      ? "border-purple-500"
-                      : "border-gray-700"
-                  }`}
-                >
-                  <img
-                    src={image || "/placeholder.svg"}
-                    alt={`Thumbnail ${index + 1}`}
-                    className="w-24 h-16 object-cover"
-                  />
-                </button>
-              ))}
+              {images &&
+                images?.map((image, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentImageIndex(index)}
+                    className={`flex-shrink-0 border-2 rounded overflow-hidden ${
+                      currentImageIndex === index
+                        ? "border-purple-500"
+                        : "border-gray-700"
+                    }`}
+                  >
+                    <img
+                      src={image || "/placeholder.svg"}
+                      alt={`Thumbnail ${index + 1}`}
+                      className="w-24 h-16 object-cover"
+                    />
+                  </button>
+                ))}
             </div>
 
             <Tabs defaultValue="overview" className="mb-12">
@@ -120,12 +129,12 @@ export function ProjectDetails({
               </TabsList>
               <TabsContent value="overview" className="mt-6">
                 <div className="prose prose-invert max-w-none">
-                  <p>{project.description}</p>
+                  <p>{project?.description}</p>
                 </div>
               </TabsContent>
               <TabsContent value="features" className="mt-6">
                 <ul className="space-y-4">
-                  {project.features.map((feature) => (
+                  {project?.features.map((feature) => (
                     <li key={feature.title} className="flex items-start">
                       <div className="bg-purple-500/10 p-2 rounded-full mr-3 mt-0.5">
                         <div className="h-2 w-2 rounded-full bg-purple-500"></div>
@@ -140,7 +149,7 @@ export function ProjectDetails({
               </TabsContent>
               <TabsContent value="technical" className="mt-6">
                 <div className="space-y-6">
-                  {project.technicalDetails.map((td) => (
+                  {project?.technicalDetails.map((td) => (
                     <div key={td.title}>
                       <h3 className="text-lg font-medium mb-2">{td.title}</h3>
                       <p className="text-gray-400 mb-2">{td.description}</p>
@@ -172,7 +181,7 @@ export function ProjectDetails({
                     were encountered and overcome:
                   </p>
                   <ul className="space-y-5">
-                    {project.challenges.map((challenge) => (
+                    {project?.challenges.map((challenge) => (
                       <li>
                         <strong>{challenge.title}: </strong>
                         {challenge.description}
@@ -213,7 +222,7 @@ export function ProjectDetails({
                   <h3 className="text-sm text-gray-400 mb-2">Links</h3>
                   <div className="space-y-2">
                     <a
-                      href={project.demoLink}
+                      href={project?.demoLink}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center text-purple-400 hover:text-purple-300 transition-colors"
@@ -222,7 +231,7 @@ export function ProjectDetails({
                       Live Demo
                     </a>
                     <a
-                      href={project.githubLink}
+                      href={project?.sourceCode}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center text-purple-400 hover:text-purple-300 transition-colors"
@@ -236,33 +245,50 @@ export function ProjectDetails({
 
               <div className="mt-8 pt-8 border-t border-gray-800">
                 <h2 className="text-xl font-bold mb-6">Related Projects</h2>
-                <div className="space-y-4">
-                  {relatedProjects.map((relatedProject) => (
-                    <Link
-                      key={relatedProject.id}
-                      href={`/projects/${relatedProject.slug}`}
-                      className="block group"
-                    >
-                      <div className="flex gap-3">
-                        <div className="flex-shrink-0 w-16 h-12 overflow-hidden rounded border border-gray-800">
-                          <img
-                            src={relatedProject.image || "/placeholder.svg"}
-                            alt={relatedProject.title}
-                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                          />
+                {relatedProjects instanceof Error ? (
+                  <p className="text-sm text-center text-red-500">
+                    {relatedProjects.message}
+                  </p>
+                ) : relatedProjects === undefined ? (
+                  <div className="flex justify-center items-center min-h-10">
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+                  </div>
+                ) : relatedProjects.length === 0 ? (
+                  <p className="text-center text-sm text-gray-500">
+                    No related projects added
+                  </p>
+                ) : (
+                  <div className="space-y-4">
+                    {relatedProjects.map((relatedProject) => (
+                      <Link
+                        key={relatedProject._id}
+                        href={`/projects-details/${relatedProject._id}`}
+                        className="block group"
+                      >
+                        <div className="flex gap-3">
+                          <div className="flex-shrink-0 w-16 h-12 overflow-hidden rounded border border-gray-800">
+                            <img
+                              src={
+                                relatedProject?.thumbnailUrl ||
+                                "/placeholder.svg"
+                              }
+                              alt={relatedProject?.name}
+                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                            />
+                          </div>
+                          <div>
+                            <h3 className="font-medium group-hover:text-purple-400 transition-colors">
+                              {relatedProject?.name}
+                            </h3>
+                            <p className="text-sm text-gray-400 line-clamp-1">
+                              {relatedProject.description.substring(0, 60)}...
+                            </p>
+                          </div>
                         </div>
-                        <div>
-                          <h3 className="font-medium group-hover:text-purple-400 transition-colors">
-                            {relatedProject.title}
-                          </h3>
-                          <p className="text-sm text-gray-400 line-clamp-1">
-                            {relatedProject.description.substring(0, 60)}...
-                          </p>
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
+                      </Link>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           </div>
