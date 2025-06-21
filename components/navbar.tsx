@@ -208,13 +208,13 @@ export function Navbar() {
                 className="block py-2 text-gray-300 hover:text-white transition-colors"
               >
                 Codes
-              </Link>
+              </Link> */}
               <div className="flex items-center justify-between pt-2">
-                <CartIcon />
+                {/* <CartIcon /> */}
                 <Button className="bg-purple-600 hover:bg-purple-700">
                   Resume
                 </Button>
-              </div> */}
+              </div>
 
               <Unauthenticated>
                 <Link

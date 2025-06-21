@@ -117,7 +117,7 @@ export function BlogDetails({ blog }: BlogDetailsProps) {
                   </Badge>
                 ))}
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
+              <h1 className="text-2xl md:text-5xl font-bold mb-6 leading-tight">
                 {blog.title}
               </h1>
               <div className="flex flex-wrap items-center gap-6 text-gray-400 mb-6">

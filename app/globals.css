@@ -25,7 +25,7 @@
 }
 
 .ql-code-block-container {
-  @apply bg-[#1a1a1a] py-3 px-4 rounded-lg selection:bg-purple-500/40;
+  @apply bg-[#1a1a1a] py-3 px-4 rounded-lg selection:bg-purple-500/40 overflow-scroll;
 }
 
 body {
