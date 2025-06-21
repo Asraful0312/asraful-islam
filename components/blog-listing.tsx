@@ -178,26 +178,24 @@ export function BlogListing() {
                   <p className="text-gray-400 mb-4 line-clamp-3">
                     {blog.excerpt}
                   </p>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center">
-                        <User className="h-4 w-4" />
-                      </div>
-                      <span className="text-sm text-gray-400">
-                        {blog.author}
-                      </span>
+
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center">
+                      <User className="h-4 w-4" />
                     </div>
-                    <div className="flex flex-wrap gap-1">
-                      {blog?.tags?.slice(0, 2).map((tag) => (
-                        <Badge
-                          key={tag}
-                          variant="outline"
-                          className="text-xs bg-[#232323] border-gray-700"
-                        >
-                          {tag}
-                        </Badge>
-                      ))}
-                    </div>
+                    <span className="text-sm text-gray-400">{blog.author}</span>
+                  </div>
+
+                  <div className="flex flex-wrap gap-1 mt-4">
+                    {blog?.tags?.slice(0, 2).map((tag) => (
+                      <Badge
+                        key={tag}
+                        variant="outline"
+                        className="text-xs bg-[#232323] border-gray-700"
+                      >
+                        {tag}
+                      </Badge>
+                    ))}
                   </div>
                 </div>
               </Link>

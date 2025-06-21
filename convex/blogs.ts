@@ -5,12 +5,22 @@ import { paginationOptsValidator } from "convex/server";
 
 // Get paginated blogs
 export const getBlogs = query({
-  args: { paginationOpts: paginationOptsValidator },
+  args: {
+    paginationOpts: paginationOptsValidator,
+    isAdmin: v.optional(v.boolean()),
+  },
   handler: async (ctx, args) => {
-    const result = await ctx.db
-      .query("blogs")
-      .order("desc")
-      .paginate(args.paginationOpts);
+    const result = args.isAdmin
+      ? await ctx.db
+          .query("blogs")
+        
+          .order("desc")
+          .paginate(args.paginationOpts)
+      : await ctx.db
+          .query("blogs")
+          .withIndex("by_published", (q) => q.eq("published", true))
+          .order("desc")
+          .paginate(args.paginationOpts);
 
     const blogsWithDetails = await Promise.all(
       result.page.map(async (blog) => {

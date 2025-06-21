@@ -20,7 +20,10 @@ const BlogsPage = () => {
   });
   const deleteBlog = useMutation(api.blogs.deleteBlog);
 
-  const result = useQuery(api.blogs.getBlogs, { paginationOpts });
+  const result = useQuery(api.blogs.getBlogs, {
+    paginationOpts,
+    isAdmin: true,
+  });
 
   if (result instanceof Error) {
     return (

@@ -11,7 +11,6 @@ import { cn } from "@/lib/utils";
 import { Authenticated, Unauthenticated } from "convex/react";
 import { useAuthActions } from "@convex-dev/auth/react";
 
-
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -103,7 +102,7 @@ export function Navbar() {
                 "text-gray-300 hover:text-white transition-colors relative group"
               )}
             >
-              Blog
+              Blogs
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 transition-all group-hover:w-full"></span>
             </Link>
             {/* <Link
@@ -201,7 +200,7 @@ export function Navbar() {
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="block py-2 text-gray-300 hover:text-white transition-colors"
               >
-                Blog
+                Blogs
               </Link>
               {/* <Link
                 href="/codes"
@@ -216,9 +215,7 @@ export function Navbar() {
                   Resume
                 </Button>
               </div> */}
-              <Button className="w-full bg-purple-600 hover:bg-purple-700">
-                Resume
-              </Button>
+
               <Unauthenticated>
                 <Link
                   href="/signin"
