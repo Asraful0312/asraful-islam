@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 import { Authenticated, Unauthenticated } from "convex/react";
 import { useAuthActions } from "@convex-dev/auth/react";
 
+
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -105,6 +106,17 @@ export function Navbar() {
               Blog
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 transition-all group-hover:w-full"></span>
             </Link>
+            {/* <Link
+              href="/codes"
+              className={cn(
+                "text-gray-300 hover:text-white transition-colors relative group"
+              )}
+            >
+              Codes
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 transition-all group-hover:w-full"></span>
+            </Link>
+
+            <CartIcon /> */}
 
             <Button className="bg-purple-600 hover:bg-purple-700">
               Resume
@@ -191,21 +203,34 @@ export function Navbar() {
               >
                 Blog
               </Link>
+              {/* <Link
+                href="/codes"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block py-2 text-gray-300 hover:text-white transition-colors"
+              >
+                Codes
+              </Link>
+              <div className="flex items-center justify-between pt-2">
+                <CartIcon />
+                <Button className="bg-purple-600 hover:bg-purple-700">
+                  Resume
+                </Button>
+              </div> */}
               <Button className="w-full bg-purple-600 hover:bg-purple-700">
                 Resume
               </Button>
               <Unauthenticated>
-              <Link
-                href="/signin"
-                onClick={signOut}
-                className={buttonVariants({
-                  variant: "secondary",
-                  className: "w-full"
-                })}
-              >
-                Login
-              </Link>
-            </Unauthenticated>
+                <Link
+                  href="/signin"
+                  onClick={signOut}
+                  className={buttonVariants({
+                    variant: "secondary",
+                    className: "w-full",
+                  })}
+                >
+                  Login
+                </Link>
+              </Unauthenticated>
               <Authenticated>
                 <Button
                   onClick={signOut}

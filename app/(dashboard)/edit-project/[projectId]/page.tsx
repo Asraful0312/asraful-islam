@@ -43,6 +43,7 @@ const EditProject = ({ params }: EditProjectProps) => {
   const thumbnailInputRef = useRef<HTMLInputElement>(null);
   const galleryInputRef = useRef<HTMLInputElement>(null);
   const [relatedProjects, setRelatedProjects] = useState<Id<"projects">[]>([]);
+  const deleteImage = useMutation(api.image.deleteImage);
 
   // Initialize existingGalleryUrls with project.imageGalleryUrls
   useEffect(() => {
@@ -352,10 +353,7 @@ const EditProject = ({ params }: EditProjectProps) => {
                   </div>
                 ))}
                 {galleryFiles.map((file, index) => (
-                  <div
-                    key={`new-${index}`}
-                    className="relative bg-gray-100 p-2 rounded-md"
-                  >
+                  <div key={`new-${index}`} className="relative p-2 rounded-md">
                     <div className="flex items-center justify-between">
                       <span className="text-xs text-gray-600 truncate flex-1">
                         {file.name}

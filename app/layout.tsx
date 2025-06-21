@@ -7,6 +7,7 @@ import VoiceNavigator from "@/components/voice-naviation";
 import LightBulb from "@/components/light-bulb";
 import { ConvexClientProvider } from "./ConvexClientProvider";
 import { Toaster } from "sonner";
+import { CartProvider } from "@/contexts/use-context";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,7 +34,7 @@ export default function RootLayout({
             enableSystem={false}
             disableTransitionOnChange
           >
-            {children}
+            <CartProvider>{children}</CartProvider>
           </ThemeProvider>
           {/* <ScrollToTop /> */}
           <VoiceNavigator />

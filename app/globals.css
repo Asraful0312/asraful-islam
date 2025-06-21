@@ -24,6 +24,10 @@
   --ring: 252 59% 48%;
 }
 
+.ql-code-block-container {
+  @apply bg-[#1a1a1a] py-3 px-4 rounded-lg selection:bg-purple-500/40;
+}
+
 body {
   @apply bg-background text-foreground;
   font-feature-settings:

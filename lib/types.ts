@@ -52,3 +52,21 @@ export interface Blog {
   title: string;
   relatedBlogs?: Id<"blogs">[];
 }
+
+export interface CodeProduct {
+  id: string;
+  title: string;
+  slug: string;
+  description: string;
+  preview: string;
+  price: number;
+  language: string;
+  categories: string[];
+  tags: string[];
+  rating: number;
+  reviews: number;
+  downloads: number;
+  createdAt: string;
+  updatedAt: string;
+  version: string;
+}

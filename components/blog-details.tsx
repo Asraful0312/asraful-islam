@@ -201,7 +201,10 @@ export function BlogDetails({ blog }: BlogDetailsProps) {
 
             {/* Content */}
             <div className="prose prose-invert prose-lg max-w-none mb-12">
-              <div dangerouslySetInnerHTML={{ __html: blog?.content }} />
+              <div
+                className="prose prose-invert prose-lg"
+                dangerouslySetInnerHTML={{ __html: blog?.content }}
+              />
             </div>
 
             {/* Tags */}
