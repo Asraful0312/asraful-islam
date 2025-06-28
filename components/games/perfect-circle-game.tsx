@@ -290,7 +290,7 @@ export default function DrawPerfectCircle() {
     <div className="relative w-screen h-screen overflow-hidden bg-white">
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 cursor-crosshair"
+        className="absolute inset-0 cursor-crosshair overflow-hidden"
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
@@ -301,7 +301,7 @@ export default function DrawPerfectCircle() {
       />
 
       {/* Controls */}
-      <div className="absolute top-4 left-4 flex gap-2">
+      <div className="absolute top-4 left-4 flex gap-2 overflow-hidden">
         <button
           onClick={clearCanvas}
           className="px-4 py-2 bg-purple-500 border border-gray-300 rounded-lg shadow-sm  transition-colors"

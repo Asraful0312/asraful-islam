@@ -81,13 +81,10 @@ export function GamePlayer({ game }: GamePlayerProps) {
             {/* Game Canvas */}
             <Card className="bg-[#1a1a1a] border-gray-800 mb-6">
               <CardHeader>
-               
-                  <CardTitle className="flex items-center gap-2">
-                    <Play className="h-5 w-5" />
-                    {game.title}
-                  </CardTitle>
-              
-              
+                <CardTitle className="flex items-center gap-2">
+                  <Play className="h-5 w-5" />
+                  {game.title}
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <div className="aspect-auto bg-[#0f0f0f] rounded-lg border border-gray-700 overflow-hidden">
@@ -99,12 +96,14 @@ export function GamePlayer({ game }: GamePlayerProps) {
                       className="aspect-video w-full brightness-50"
                       alt={game.title}
                     />
-                    <Link
-                      className="bg-purple-600 rounded-full p-2 size-24  flex items-center justify flex-col absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-                      href={`/games/play/${generateGmaeLink()}`}
-                    >
-                      <Play className="size-10 shrink-0 text-white" />
-                      <p className="text-center text-lg font-semibold">Play</p>
+                    <Link href={`/games/play/${game.slug}`}>
+                      <Button
+                        size="lg"
+                        className="bg-purple-600 hover:bg-purple-700 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                      >
+                        <Play className="h-5 w-5 mr-2" />
+                        Play Now
+                      </Button>
                     </Link>
                   </figure>
                 </div>
