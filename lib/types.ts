@@ -70,3 +70,20 @@ export interface CodeProduct {
   updatedAt: string;
   version: string;
 }
+
+export interface Game {
+  id: string;
+  title: string;
+  slug: string;
+  description: string;
+  thumbnail: string;
+  category: string;
+  difficulty: string;
+  rating: number;
+  plays: number;
+  avgPlayTime: string;
+  players: string;
+  tags: string[];
+  instructions: string[];
+  controls: { key: string; action: string }[];
+}

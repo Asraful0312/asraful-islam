@@ -113,13 +113,19 @@ export function Navbar() {
             >
               Codes
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 transition-all group-hover:w-full"></span>
+            </Link> */}
+            <Link
+              href="/games"
+              className={cn(
+                "text-gray-300 hover:text-white transition-colors relative group"
+              )}
+            >
+              Games
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 transition-all group-hover:w-full"></span>
             </Link>
 
-            <CartIcon /> */}
+            {/* <CartIcon /> */}
 
-            <Button className="bg-purple-600 hover:bg-purple-700">
-              Resume
-            </Button>
             <Authenticated>
               <Button onClick={signOut} variant="secondary" className="">
                 Logout
@@ -209,12 +215,15 @@ export function Navbar() {
               >
                 Codes
               </Link> */}
-              <div className="flex items-center justify-between pt-2">
-                {/* <CartIcon /> */}
-                <Button className="bg-purple-600 hover:bg-purple-700">
-                  Resume
-                </Button>
-              </div>
+              <Link
+                href="/games"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block py-2 text-gray-300 hover:text-white transition-colors"
+              >
+                Games
+              </Link>
+
+              {/* <CartIcon /> */}
 
               <Unauthenticated>
                 <Link

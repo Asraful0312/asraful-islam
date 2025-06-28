@@ -24,7 +24,6 @@ import React, { use, useRef, useState } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import SearchRelated from "@/components/search-related";
-import { Blog } from "@/lib/types";
 
 interface EditBlogProps {
   params: { blogId: Id<"blogs"> };
