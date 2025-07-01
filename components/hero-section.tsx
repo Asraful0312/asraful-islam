@@ -10,9 +10,30 @@ import {
   Twitter,
 } from "lucide-react";
 import Link from "next/link";
+import { SparklesText } from "./ui/spark-text";
+import { useRouter } from "next/navigation";
+import { useMutation, useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
 
 export function HeroSection() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const router = useRouter();
+  const updateUserName = useMutation(api.auth.updateUserName);
+  const user = useQuery(api.auth.loggedInUser);
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const name = urlParams.get("name");
+    const isNewUser = urlParams.get("newUser");
+
+    if (name && isNewUser && user) {
+      // Update the name after the component mounts (auth should be ready)
+      updateUserName({ name }).catch(console.error);
+
+      // Clean up the URL
+      router.replace("/");
+    }
+  }, [updateUserName, router, user]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -134,7 +155,8 @@ export function HeroSection() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4"
             >
-              <span className="text-color">Asraful Islam</span>
+              {/* <span className="text-color">Asraful Islam</span> */}
+              <SparklesText className="text-color" text="Asraful Islam" />
             </motion.h1>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}

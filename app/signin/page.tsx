@@ -24,36 +24,35 @@ export default function SignInForm() {
   const [error, setError] = useState("");
   const router = useRouter();
 
+  // In your form component - remove the updateUserName call
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
     const formData = new FormData(e.target as HTMLFormElement);
+    const name = formData.get("name") as string;
     formData.set("flow", flow);
-    toast.success(
-      flow === "signIn" ? "Login successful" : "account created successfully"
-    );
+
     try {
       setError("");
-      await signIn("password", formData); // Wait for signIn to complete
-      router.push("/"); // Redirect only on success
-    } catch (error: any) {
-      let toastTitle = "";
-      if (error.message.includes("Invalid password")) {
-        toastTitle = "Invalid password. Please try again.";
+      await signIn("password", formData);
+
+      toast.success(
+        flow === "signIn" ? "Login successful" : "Account created successfully"
+      );
+
+      // Pass the name as a query parameter if it's a signup
+      if (flow === "signUp" && name) {
+        router.push(`/?name=${encodeURIComponent(name)}&newUser=true`);
       } else {
-        toastTitle =
-          flow === "signIn"
-            ? "Could not sign in, did you mean to sign up?"
-            : "Could not sign up, did you mean to sign in?";
+        router.push("/");
       }
-      setError(error?.message);
-      toast.error(toastTitle);
+    } catch (error: any) {
+      // ... error handling
     } finally {
       setError("");
-      setSubmitting(false); // Always reset submitting state
+      setSubmitting(false);
     }
   };
-
   return (
     <div className="w-full max-w-lg mx-auto my-20">
       <motion.div variants={itemVariants}>

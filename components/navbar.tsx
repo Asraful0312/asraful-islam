@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, Terminal, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Authenticated, Unauthenticated } from "convex/react";
@@ -75,7 +75,12 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           <Link href="/" className="text-xl font-bold">
-            <span className="gradient-text">Asraful</span>
+            {/* <span className="gradient-text">Asraful</span> */}
+            <img
+              className="size-9 shrink-0 object-cover rounded-full"
+              src="/me.png"
+              alt="me"
+            />
           </Link>
 
           {/* Desktop Navigation */}
@@ -122,6 +127,15 @@ export function Navbar() {
             >
               Games
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 transition-all group-hover:w-full"></span>
+            </Link>
+
+            <Link
+              href="/terminal"
+              className={cn(
+                "text-gray-300 hover:text-white transition-colors relative group"
+              )}
+            >
+              <Terminal className="shrink-0" />
             </Link>
 
             {/* <CartIcon /> */}

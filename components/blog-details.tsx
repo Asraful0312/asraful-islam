@@ -27,6 +27,7 @@ import { Id } from "@/convex/_generated/dataModel";
 import { toast } from "sonner";
 import CommentSection from "./comments-section";
 import { useQuery } from "convex-helpers/react/cache";
+import { useFullscreen } from "@mantine/hooks";
 
 interface BlogDetailsProps {
   blog: Blog;
@@ -41,6 +42,7 @@ export function BlogDetails({ blog }: BlogDetailsProps) {
   const relatedBlogs = useQuery(api.blogs.getRelatedBlogs, {
     ids: blog?.relatedBlogs || [],
   });
+  const { ref, toggle } = useFullscreen();
 
   const handleLike = useCallback(async () => {
     if (isLiking || !blog) return;
@@ -122,9 +124,20 @@ export function BlogDetails({ blog }: BlogDetailsProps) {
               </h1>
               <div className="flex flex-wrap items-center gap-6 text-gray-400 mb-6">
                 <div className="flex items-center gap-2">
-                  <div className="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center">
-                    <User className="h-5 w-5" />
-                  </div>
+                  {blog.authorImage ? (
+                  <button className="size-10 rounded-full shrink-0 overflow-hidden" onClick={toggle} title="view profile picture">
+                      <img
+                      ref={ref}
+                      className="size-10 shrink-0 object-cover"
+                      src={blog.authorImage}
+                      alt={blog.author}
+                    />
+                  </button>
+                  ) : (
+                    <div className="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center">
+                      <User className="h-5 w-5" />
+                    </div>
+                  )}
                   <span>{blog?.author}</span>
                 </div>
                 <div className="flex items-center gap-1">

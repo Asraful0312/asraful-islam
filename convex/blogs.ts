@@ -13,7 +13,7 @@ export const getBlogs = query({
     const result = args.isAdmin
       ? await ctx.db
           .query("blogs")
-        
+
           .order("desc")
           .paginate(args.paginationOpts)
       : await ctx.db
@@ -43,6 +43,7 @@ export const getBlogs = query({
           likesCount: blog.likesCount || 0, // Use cached count from blog document
           commentsCount,
           featureImageUrl, // Single URL or null
+          authorImage: author?.image,
         };
       })
     );
@@ -86,6 +87,7 @@ export const getBlog = query({
       likesCount: blog.likesCount || 0, // Use cached count
       isLiked,
       featureImageUrl,
+      authorImage: author?.image,
     };
   },
 });

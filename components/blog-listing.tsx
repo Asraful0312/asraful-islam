@@ -180,9 +180,17 @@ export function BlogListing() {
                   </p>
 
                   <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center">
-                      <User className="h-4 w-4" />
-                    </div>
+                    {blog.authorImage ? (
+                      <img
+                        className="size-10 shrink-0 rounded-full object-cover"
+                        src={blog.authorImage}
+                        alt={blog.author}
+                      />
+                    ) : (
+                      <div className="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center">
+                        <User className="h-5 w-5" />
+                      </div>
+                    )}
                     <span className="text-sm text-gray-400">{blog.author}</span>
                   </div>
 

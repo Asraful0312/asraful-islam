@@ -51,6 +51,7 @@ export interface Blog {
   tags: string[];
   title: string;
   relatedBlogs?: Id<"blogs">[];
+  authorImage?: string;
 }
 
 export interface CodeProduct {
