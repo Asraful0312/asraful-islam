@@ -33,8 +33,7 @@ const games: Game[] = [
     id: "perfect-circle",
     title: "Draw a perfect circle",
     slug: "draw-a-perfect-circle",
-    description:
-      "Snake game where AI will play the game with Another AI or AI will play with the user. you eat food to grow longer while avoiding walls and your own tail.",
+    description: "Use your mouse to draw a perfect circle.",
     thumbnail: "/games/circle.png",
     category: "Arcade",
     difficulty: "Hard",
@@ -43,13 +42,7 @@ const games: Game[] = [
     avgPlayTime: "5 min",
     players: "Single Player",
     tags: ["classic", "arcade", "retro"],
-    instructions: [
-      "Choose Snake vs Snake or Player vs Snake in Snake vs Snake the Snake will play automatically",
-      "Use arrow keys to control the snake",
-      "Eat the red food to grow longer",
-      "Avoid hitting walls or your own tail",
-      "Try to get the highest score possible",
-    ],
+    instructions: ["Use your mouse to draw"],
     controls: [
       { key: "↑", action: "Move Up" },
       { key: "↓", action: "Move Down" },

@@ -52,7 +52,7 @@ export function CheckoutPage() {
               email address.
             </p>
             <div className="flex gap-4 justify-center">
-              <Button asChild className="bg-purple-600 hover:bg-purple-700">
+              <Button asChild className="bg-jordy_blue hover:bg-purple-700">
                 <Link href="/codes">Browse More Codes</Link>
               </Button>
               <Button asChild variant="outline">
@@ -74,7 +74,7 @@ export function CheckoutPage() {
           <p className="text-gray-400 mb-8">
             Add some amazing code products to get started!
           </p>
-          <Button asChild className="bg-purple-600 hover:bg-purple-700">
+          <Button asChild className="bg-jordy_blue hover:bg-purple-700">
             <Link href="/codes">Browse Codes</Link>
           </Button>
         </div>
@@ -242,7 +242,7 @@ export function CheckoutPage() {
 
                   <Button
                     type="submit"
-                    className="w-full bg-purple-600 hover:bg-purple-700"
+                    className="w-full bg-jordy_blue hover:bg-purple-700"
                     disabled={isProcessing}
                   >
                     {isProcessing ? (

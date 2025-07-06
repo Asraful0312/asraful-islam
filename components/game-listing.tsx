@@ -90,8 +90,8 @@ export function GamesListing({ games }: GamesListingProps) {
         transition={{ duration: 0.5 }}
       >
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">
-            Game Arcade
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
+            Game <span className="text-jordy_blue">Arcade</span>
           </h1>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
             Fun interactive games that i vibe coded. Challenge yourself and have
@@ -108,7 +108,7 @@ export function GamesListing({ games }: GamesListingProps) {
                 placeholder="Search games..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 bg-[#1a1a1a] border-gray-700 focus:border-purple-500"
+                className="pl-10 bg-[#1a1a1a] border-gray-700 focus:border-jordy_blue"
               />
             </div>
           </div>
@@ -126,8 +126,8 @@ export function GamesListing({ games }: GamesListingProps) {
                   onClick={() => setSelectedCategory(category)}
                   className={
                     selectedCategory === category
-                      ? "bg-purple-600 hover:bg-purple-700"
-                      : "border-gray-700 hover:bg-purple-600/10"
+                      ? "bg-jordy_blue-400 hover:bg-jordy_blue-400 rounded-3xl"
+                      : "border text-indigo_dye-10 hover:bg-jordy_blue/10 rounded-3xl"
                   }
                 >
                   {category}
@@ -145,8 +145,8 @@ export function GamesListing({ games }: GamesListingProps) {
                   onClick={() => setSelectedDifficulty(difficulty)}
                   className={
                     selectedDifficulty === difficulty
-                      ? "bg-blue-600 hover:bg-blue-700"
-                      : "border-gray-700 hover:bg-blue-600/10"
+                      ? "bg-jordy_blue-400 hover:bg-jordy_blue-400 rounded-3xl"
+                      : "border text-indigo_dye-10 hover:bg-jordy_blue/10 rounded-3xl"
                   }
                 >
                   {difficulty}
@@ -158,26 +158,26 @@ export function GamesListing({ games }: GamesListingProps) {
 
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-          <div className="bg-[#1a1a1a] rounded-lg border border-gray-800 p-4 text-center">
+          <div className="bg-[#1a1a1a] rounded-3xl border border-gray-800 p-4 text-center">
             <Gamepad2 className="h-8 w-8 text-purple-500 mx-auto mb-2" />
             <div className="text-2xl font-bold">{games.length}</div>
             <div className="text-sm text-gray-400">Total Games</div>
           </div>
-          <div className="bg-[#1a1a1a] rounded-lg border border-gray-800 p-4 text-center">
+          <div className="bg-[#1a1a1a] rounded-3xl border border-gray-800 p-4 text-center">
             <Users className="h-8 w-8 text-blue-500 mx-auto mb-2" />
             <div className="text-2xl font-bold">
               {Math.floor(Math.random() * 10000) + 5000}
             </div>
             <div className="text-sm text-gray-400">Players</div>
           </div>
-          <div className="bg-[#1a1a1a] rounded-lg border border-gray-800 p-4 text-center">
+          <div className="bg-[#1a1a1a] rounded-3xl border border-gray-800 p-4 text-center">
             <Trophy className="h-8 w-8 text-yellow-500 mx-auto mb-2" />
             <div className="text-2xl font-bold">
               {Math.floor(Math.random() * 1000) + 500}
             </div>
             <div className="text-sm text-gray-400">High Scores</div>
           </div>
-          <div className="bg-[#1a1a1a] rounded-lg border border-gray-800 p-4 text-center">
+          <div className="bg-[#1a1a1a] rounded-3xl border border-gray-800 p-4 text-center">
             <Clock className="h-8 w-8 text-green-500 mx-auto mb-2" />
             <div className="text-2xl font-bold">
               {Math.floor(Math.random() * 100) + 50}h
@@ -195,7 +195,7 @@ export function GamesListing({ games }: GamesListingProps) {
         >
           {filteredGames.map((game) => (
             <motion.div key={game.id} variants={itemVariants}>
-              <Card className="bg-[#1a1a1a] border-gray-800 hover:border-purple-500/50 transition-all duration-300 group h-full flex flex-col">
+              <Card className="bg-[#1a1a1a] border-gray-800 hover:border-jordy_blue-400/50 transition-all duration-300 group h-full flex flex-col rounded-3xl overflow-hidden">
                 <CardHeader className="p-0">
                   <div className="relative overflow-hidden aspect-video rounded-t-lg">
                     <img
@@ -204,7 +204,7 @@ export function GamesListing({ games }: GamesListingProps) {
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                     <div className="absolute top-3 left-3">
-                      <Badge className="bg-purple-600 hover:bg-purple-700">
+                      <Badge className="bg-jordy_blue-400 hover:bg-pjordy_blue-400 text-indigo_dye-100">
                         {game.category}
                       </Badge>
                     </div>
@@ -217,7 +217,7 @@ export function GamesListing({ games }: GamesListingProps) {
                       <Link href={`/games/play/${game.slug}`}>
                         <Button
                           size="lg"
-                          className="bg-purple-600 hover:bg-purple-700"
+                          className="bg-jordy_blue-400 hover:bg-jordy_blue-400 text-indigo_dye-100 rounded-3xl"
                         >
                           <Play className="h-5 w-5 mr-2" />
                           Play Now
@@ -248,7 +248,7 @@ export function GamesListing({ games }: GamesListingProps) {
                       {game.avgPlayTime}
                     </div>
                   </div>
-                  <h3 className="text-lg font-bold mb-2 group-hover:text-purple-400 transition-colors">
+                  <h3 className="text-lg font-bold mb-2 group-hover:text-jordy_blue transition-colors">
                     {game.title}
                   </h3>
                   <p className="text-gray-400 text-sm mb-3 line-clamp-2">
@@ -273,7 +273,10 @@ export function GamesListing({ games }: GamesListingProps) {
                       {game.players}
                     </span>
                   </div>
-                  <Button asChild className="bg-purple-600 hover:bg-purple-700">
+                  <Button
+                    asChild
+                    className="bg-jordy_blue-400 hover:bg-pjordy_blue-400 text-indigo_dye-100"
+                  >
                     <Link href={`/games/${game.slug}`}>
                       <Play className="h-4 w-4 mr-2" />
                       Play

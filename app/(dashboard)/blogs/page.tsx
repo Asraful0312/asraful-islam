@@ -108,7 +108,7 @@ const BlogsPage = () => {
                           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                         />
                         <div className="absolute top-4 left-4">
-                          <Badge className="bg-purple-600 hover:bg-purple-700">
+                          <Badge className="bg-jordy_blue hover:bg-jordy_blue-700 text-indigo_dye">
                             {blog.categories[0]}
                           </Badge>
                         </div>
@@ -133,7 +133,7 @@ const BlogsPage = () => {
                         </p>
 
                         <div className="flex items-center gap-2">
-                          <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center">
+                          <div className="w-8 h-8 rounded-full bg-jordy_blue flex items-center justify-center">
                             <User className="h-4 w-4" />
                           </div>
                           <span className="text-sm text-gray-400">

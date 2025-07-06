@@ -45,7 +45,7 @@ export function ProjectsSection() {
           variants={itemVariants}
           className="section-heading text-center"
         >
-          Featured Projects
+          <span className="text-jordy_blue">Featured</span> Projects
         </motion.h2>
         <motion.p
           variants={itemVariants}
@@ -66,14 +66,14 @@ export function ProjectsSection() {
                 <motion.div
                   key={project._id}
                   variants={itemVariants}
-                  className="bg-[#1a1a1a] rounded-lg overflow-hidden border border-gray-800 project-card"
+                  className="bg-[#1a1a1a] rounded-3xl overflow-hidden border border-gray-800 project-card"
                   whileHover={{ y: -10 }}
                 >
                   <div className="relative overflow-hidden aspect-[15/7]">
                     <img
                       src={project.thumbnailUrl || "/placeholder.svg"}
                       alt={project.name}
-                      className="w-full h-full object-contain transition-transform duration-500 hover:scale-110"
+                      className="w-full h-full object-contain transition-transform duration-500 hover:scale-110 oveflow-hidden"
                     />
                   </div>
                   <div className="p-6">
@@ -101,7 +101,7 @@ export function ProjectsSection() {
                       <Button
                         asChild
                         variant="ghost"
-                        className="text-purple-500 hover:text-purple-400 hover:bg-purple-500/10 px-2"
+                        className="text-jordy_blue-400 hover:text-jordy_blue-400 hover:bg-jordy_blue-500/10 px-2"
                       >
                         <Link href={`/projects-details/${project._id}`}>
                           View Details <ArrowUpRight className="ml-1 h-4 w-4" />
@@ -154,7 +154,7 @@ export function ProjectsSection() {
             <Button
               asChild
               size="lg"
-              className="bg-purple-600 hover:bg-purple-700"
+              className="bg-jordy_blue hover:bg-purple-700"
             >
               <Link href="/">View All Projects</Link>
             </Button>

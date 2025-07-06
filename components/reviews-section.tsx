@@ -107,7 +107,7 @@ export function ReviewsSection() {
           variants={itemVariants}
           className="section-heading text-center"
         >
-          Client Testimonials
+          Client <span className="text-jordy_blue">Testimonials</span>
         </motion.h2>
         <motion.p
           variants={itemVariants}
@@ -119,11 +119,11 @@ export function ReviewsSection() {
 
         <motion.div
           variants={itemVariants}
-          className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-[#1a1a1a] rounded-xl border border-gray-800"
+          className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-[#1a1a1a] rounded-3xl border border-gray-800"
         >
           <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <div className="bg-purple-600 p-3 rounded-full">
-              <Quote className="h-6 w-6 text-white" />
+            <div className="bg-jordy_blue p-3 rounded-full">
+              <Quote className="h-6 w-6 text-uranian_blue-100" />
             </div>
           </div>
 
@@ -150,7 +150,7 @@ export function ReviewsSection() {
                     <p className="text-gray-300 text-lg italic mb-8">
                       {review.text}
                     </p>
-                    <Avatar className="h-16 w-16 mb-4 border-2 border-purple-500">
+                    <Avatar className="h-16 w-16 mb-4 border-2 border-jordy_blue-400">
                       <AvatarImage src={review.avatar} alt={review.name} />
                       <AvatarFallback>{review.name.charAt(0)}</AvatarFallback>
                     </Avatar>
@@ -171,7 +171,7 @@ export function ReviewsSection() {
               onClick={handlePrev}
               variant="outline"
               size="icon"
-              className="rounded-full border-gray-700 hover:bg-purple-500/10 hover:border-purple-500"
+              className="rounded-full border-gray-700 hover:bg-purple-500/10 hover:border-jordy_blue-500"
             >
               <ChevronLeft className="h-5 w-5" />
               <span className="sr-only">Previous testimonial</span>
@@ -183,7 +183,7 @@ export function ReviewsSection() {
                   onClick={() => setActiveIndex(index)}
                   className={`h-2.5 rounded-full transition-all ${
                     activeIndex === index
-                      ? "w-8 bg-purple-500"
+                      ? "w-8 bg-jordy_blue-400"
                       : "w-2.5 bg-gray-700"
                   }`}
                   aria-label={`Go to testimonial ${index + 1}`}
@@ -194,7 +194,7 @@ export function ReviewsSection() {
               onClick={handleNext}
               variant="outline"
               size="icon"
-              className="rounded-full border-gray-700 hover:bg-purple-500/10 hover:border-purple-500"
+              className="rounded-full border-gray-700 hover:bg-purple-500/10 hover:border-jordy_blue-400"
             >
               <ChevronRight className="h-5 w-5" />
               <span className="sr-only">Next testimonial</span>
@@ -206,11 +206,11 @@ export function ReviewsSection() {
           variants={itemVariants}
           className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8"
         >
-          <div className="bg-[#1a1a1a] rounded-lg p-6 border border-gray-800 flex flex-col items-center text-center">
-            <div className="bg-purple-500/10 p-4 rounded-full mb-4">
+          <div className="bg-[#1a1a1a] rounded-3xl p-6 border border-gray-800 flex flex-col items-center text-center">
+            <div className="bg-indigo_dye-500/10 p-4 rounded-full mb-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-8 w-8 text-purple-500"
+                className="h-8 w-8 text-jordy_blue-400"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -229,11 +229,11 @@ export function ReviewsSection() {
             </p>
           </div>
 
-          <div className="bg-[#1a1a1a] rounded-lg p-6 border border-gray-800 flex flex-col items-center text-center">
-            <div className="bg-purple-500/10 p-4 rounded-full mb-4">
+          <div className="bg-[#1a1a1a] rounded-3xl p-6 border border-gray-800 flex flex-col items-center text-center">
+            <div className="bg-indigo_dye-500/10 p-4 rounded-full mb-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-8 w-8 text-purple-500"
+                className="h-8 w-8 text-jordy_blue-400"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -252,11 +252,11 @@ export function ReviewsSection() {
             </p>
           </div>
 
-          <div className="bg-[#1a1a1a] rounded-lg p-6 border border-gray-800 flex flex-col items-center text-center">
-            <div className="bg-purple-500/10 p-4 rounded-full mb-4">
+          <div className="bg-[#1a1a1a] rounded-3xl p-6 border border-gray-800 flex flex-col items-center text-center">
+            <div className="bg-indigo_dye-500/10 p-4 rounded-full mb-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-8 w-8 text-purple-500"
+                className="h-8 w-8 text-jordy_blue-400"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"

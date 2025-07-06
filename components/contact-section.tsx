@@ -82,7 +82,7 @@ export function ContactSection() {
           variants={itemVariants}
           className="section-heading text-center"
         >
-          Get In Touch
+          Get In <span className="text-jordy_blue">Touch</span>
         </motion.h2>
         <motion.p
           variants={itemVariants}
@@ -95,14 +95,14 @@ export function ContactSection() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <motion.div variants={itemVariants}>
-            <div className="bg-[#1a1a1a] rounded-lg p-8 border border-gray-800 h-full">
-              <h3 className="text-2xl font-bold mb-6 gradient-text">
-                Contact Information
+            <div className="bg-[#1a1a1a] rounded-3xl p-8 border border-gray-800 h-full">
+              <h3 className="text-2xl font-bold mb-6 text-white">
+                <span className="text-jordy_blue">Contact</span> Information
               </h3>
               <div className="space-y-6">
                 <div className="flex items-start">
-                  <div className="bg-purple-500/10 p-3 rounded-lg mr-4">
-                    <Mail className="h-6 w-6 text-purple-500" />
+                  <div className="bg-jordy_blue-500/10 p-3 rounded-lg mr-4">
+                    <Mail className="h-6 w-6 text-jordy_blue-500" />
                   </div>
                   <div>
                     <h4 className="text-lg font-medium mb-1">Email</h4>
@@ -115,8 +115,8 @@ export function ContactSection() {
                   </div>
                 </div>
                 <div className="flex items-start">
-                  <div className="bg-purple-500/10 p-3 rounded-lg mr-4">
-                    <Phone className="h-6 w-6 text-purple-500" />
+                  <div className="bg-jordy_blue-500/10 p-3 rounded-lg mr-4">
+                    <Phone className="h-6 w-6 text-jordy_blue-500" />
                   </div>
                   <div>
                     <h4 className="text-lg font-medium mb-1">Phone</h4>
@@ -129,8 +129,8 @@ export function ContactSection() {
                   </div>
                 </div>
                 <div className="flex items-start">
-                  <div className="bg-purple-500/10 p-3 rounded-lg mr-4">
-                    <MapPin className="h-6 w-6 text-purple-500" />
+                  <div className="bg-jordy_blue-500/10 p-3 rounded-lg mr-4">
+                    <MapPin className="h-6 w-6 text-jordy_blue-500" />
                   </div>
                   <div>
                     <h4 className="text-lg font-medium mb-1">Location</h4>
@@ -140,13 +140,13 @@ export function ContactSection() {
               </div>
 
               <div className="mt-12">
-                <h3 className="text-2xl font-bold mb-6 gradient-text">
-                  Follow Me
+                <h3 className="text-2xl font-bold mb-6 text-white">
+                  <span className="text-jordy_blue">Follow</span> Me
                 </h3>
                 <div className="flex gap-4">
                   <a
                     href="https://github.com/Asraful0312"
-                    className="bg-[#232323] hover:bg-purple-500/20 p-3 rounded-full transition-colors"
+                    className="bg-[#232323] hover:bg-jordy_blue-500/20 p-3 rounded-full transition-colors"
                     aria-label="GitHub"
                   >
                     <svg
@@ -164,7 +164,7 @@ export function ContactSection() {
                   </a>
                   <a
                     href="#"
-                    className="bg-[#232323] hover:bg-purple-500/20 p-3 rounded-full transition-colors"
+                    className="bg-[#232323] hover:bg-jordy_blue-500/20 p-3 rounded-full transition-colors"
                     aria-label="LinkedIn"
                   >
                     <svg
@@ -178,7 +178,7 @@ export function ContactSection() {
                   </a>
                   <a
                     href="#"
-                    className="bg-[#232323] hover:bg-purple-500/20 p-3 rounded-full transition-colors"
+                    className="bg-[#232323] hover:bg-jordy_blue-500/20 p-3 rounded-full transition-colors"
                     aria-label="Twitter"
                   >
                     <svg
@@ -192,7 +192,7 @@ export function ContactSection() {
                   </a>
                   <a
                     href="#"
-                    className="bg-[#232323] hover:bg-purple-500/20 p-3 rounded-full transition-colors"
+                    className="bg-[#232323] hover:bg-jordy_blue-500/20 p-3 rounded-full transition-colors"
                     aria-label="Instagram"
                   >
                     <svg
@@ -216,10 +216,10 @@ export function ContactSection() {
           <motion.div variants={itemVariants}>
             <form
               onSubmit={handleSubmit}
-              className="bg-[#1a1a1a] rounded-lg p-8 border border-gray-800"
+              className="bg-[#1a1a1a] rounded-3xl p-8 border border-gray-800"
             >
-              <h3 className="text-2xl font-bold mb-6 gradient-text">
-                Send Me a Message
+              <h3 className="text-2xl font-bold mb-6">
+                Send Me a <span className="text-jordy_blue">Message</span>
               </h3>
               <div className="space-y-4">
                 <div>
@@ -236,7 +236,7 @@ export function ContactSection() {
                     onChange={handleChange}
                     placeholder="John Doe"
                     required
-                    className="bg-[#232323] border-gray-700 focus:border-purple-500"
+                    className="bg-[#232323] border-gray-700 focus:border-jordy_blue"
                   />
                 </div>
 
@@ -255,7 +255,7 @@ export function ContactSection() {
                     onChange={handleChange}
                     placeholder="john@example.com"
                     required
-                    className="bg-[#232323] border-gray-700 focus:border-purple-500"
+                    className="bg-[#232323] border-gray-700 focus:border-jordy_blue-500"
                   />
                 </div>
                 <div>
@@ -272,7 +272,7 @@ export function ContactSection() {
                     onChange={handleChange}
                     placeholder="Project Inquiry"
                     required
-                    className="bg-[#232323] border-gray-700 focus:border-purple-500"
+                    className="bg-[#232323] border-gray-700 focus:border-jordy_blue-500"
                   />
                 </div>
                 <div>
@@ -290,13 +290,14 @@ export function ContactSection() {
                     placeholder="Tell me about your project..."
                     rows={5}
                     required
-                    className="bg-[#232323] border-gray-700 focus:border-purple-500"
+                    className="bg-[#232323] border-gray-700 focus:border-jordy_blue-500 rounded-3xl
+                    "
                   />
                 </div>
                 <Button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-purple-600 hover:bg-purple-700 text-white"
+                  className="w-full bg-jordy_blue-400 hover:bg-jordy_blue-500 text-indigo-950 rounded-full"
                 >
                   {isSubmitting ? (
                     <span className="flex items-center">

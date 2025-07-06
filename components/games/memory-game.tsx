@@ -114,7 +114,7 @@ export function MemoryGame() {
             onClick={() => handleCardClick(card.id)}
             className={`w-16 h-16 rounded text-2xl font-bold transition-all duration-300 ${
               card.isFlipped || card.isMatched
-                ? "bg-purple-600 text-white"
+                ? "bg-jordy_blue text-white"
                 : "bg-[#1a1a1a] border border-gray-700 hover:bg-[#232323]"
             } ${card.isMatched ? "opacity-75" : ""}`}
             disabled={
@@ -128,7 +128,7 @@ export function MemoryGame() {
 
       <button
         onClick={initializeGame}
-        className="px-6 py-2 bg-purple-600 hover:bg-purple-700 rounded text-white"
+        className="px-6 py-2 bg-jordy_blue hover:bg-purple-700 rounded text-white"
       >
         New Game
       </button>

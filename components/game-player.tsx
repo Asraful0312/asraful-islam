@@ -61,7 +61,7 @@ export function GamePlayer({ game }: GamePlayerProps) {
           <div className="lg:col-span-3">
             <div className="mb-6">
               <div className="flex flex-wrap gap-2 mb-4">
-                <Badge className="bg-purple-600">{game.category}</Badge>
+                <Badge className="bg-jordy_blue">{game.category}</Badge>
                 <Badge
                   className={`${
                     game.difficulty === "Easy"
@@ -99,7 +99,7 @@ export function GamePlayer({ game }: GamePlayerProps) {
                     <Link href={`/games/play/${game.slug}`}>
                       <Button
                         size="lg"
-                        className="bg-purple-600 hover:bg-purple-700 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                        className="bg-jordy_blue-400 text-indigo_dye-100 hover:bg-jordy_blue-400 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
                       >
                         <Play className="h-5 w-5 mr-2" />
                         Play Now
@@ -209,7 +209,7 @@ export function GamePlayer({ game }: GamePlayerProps) {
                           className="p-4 bg-[#232323] rounded-lg"
                         >
                           <div className="flex items-center gap-2 mb-2">
-                            <div className="w-8 h-8 rounded-full bg-purple-600 flex items-center justify-center text-sm font-bold">
+                            <div className="w-8 h-8 rounded-full bg-jordy_blue flex items-center justify-center text-sm font-bold">
                               P{comment}
                             </div>
                             <span className="font-medium">

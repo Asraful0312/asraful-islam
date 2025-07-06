@@ -96,7 +96,7 @@ export function BlogListing() {
         transition={{ duration: 0.5 }}
       >
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
             Blog
           </h1>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
@@ -116,8 +116,8 @@ export function BlogListing() {
                 onClick={() => setSelectedCategory(category)}
                 className={
                   selectedCategory === category
-                    ? "bg-purple-600 hover:bg-purple-700"
-                    : "border-gray-700 hover:bg-purple-600/10"
+                    ? "bg-jordy_blue-400 hover:bg-jordy_blue-500 text-indigo_dye rounded-3xl"
+                    : "border-gray-700 hover:bg-jordy_blue/10 rounded-3xl"
                 }
               >
                 {category}
@@ -130,7 +130,7 @@ export function BlogListing() {
               placeholder="Search articles..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 bg-[#1a1a1a] border-gray-700 focus:border-purple-500"
+              className="pl-10 bg-[#1a1a1a] border-gray-700 focus:border-jordy_blue-500"
             />
           </div>
         </div>
@@ -146,7 +146,7 @@ export function BlogListing() {
             <motion.article
               key={blog._id}
               variants={itemVariants}
-              className="bg-[#1a1a1a] rounded-lg overflow-hidden border border-gray-800 hover:border-purple-500/50 transition-all duration-300 group"
+              className="bg-[#1a1a1a] rounded-3xl overflow-hidden border border-gray-800 hover:border-jor-500/50 transition-all duration-300 group"
             >
               <Link href={`/blog/${blog._id}`}>
                 <div className="relative overflow-hidden aspect-video">
@@ -156,7 +156,7 @@ export function BlogListing() {
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute top-4 left-4">
-                    <Badge className="bg-purple-600 hover:bg-purple-700">
+                    <Badge className="bg-jordy_blue text-indigo_dye hover:bg-jordy_blue">
                       {blog.categories[0]}
                     </Badge>
                   </div>
@@ -172,7 +172,7 @@ export function BlogListing() {
                       {blog.readingTime} min read
                     </div>
                   </div>
-                  <h2 className="text-xl font-bold mb-3 group-hover:text-purple-400 transition-colors line-clamp-2">
+                  <h2 className="text-xl font-bold mb-3 group-hover:text-jordy_blue-500 transition-colors line-clamp-2">
                     {blog.title}
                   </h2>
                   <p className="text-gray-400 mb-4 line-clamp-3">
@@ -187,7 +187,7 @@ export function BlogListing() {
                         alt={blog.author}
                       />
                     ) : (
-                      <div className="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center">
+                      <div className="w-10 h-10 rounded-full bg-jordy_blue flex items-center justify-center">
                         <User className="h-5 w-5" />
                       </div>
                     )}

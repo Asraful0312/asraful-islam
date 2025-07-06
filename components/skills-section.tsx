@@ -1,12 +1,21 @@
-"use client"
+"use client";
 
-import { useRef } from "react"
-import { motion, useInView } from "framer-motion"
-import { Code, Database, Layout, Server, Smartphone, Layers, Palette, GitBranch } from "lucide-react"
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import {
+  Code,
+  Database,
+  Layout,
+  Server,
+  Smartphone,
+  Layers,
+  Palette,
+  GitBranch,
+} from "lucide-react";
 
 export function SkillsSection() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, amount: 0.2 })
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.2 });
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -16,7 +25,7 @@ export function SkillsSection() {
         staggerChildren: 0.1,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -25,13 +34,19 @@ export function SkillsSection() {
       y: 0,
       transition: { duration: 0.5 },
     },
-  }
+  };
 
   const skills = [
     {
       category: "Frontend",
       icon: <Layout className="h-6 w-6 text-purple-500" />,
-      items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+      items: [
+        "React",
+        "Next.js",
+        "TypeScript",
+        "Tailwind CSS",
+        "Framer Motion",
+      ],
     },
     {
       category: "Backend",
@@ -68,17 +83,28 @@ export function SkillsSection() {
       icon: <Layers className="h-6 w-6 text-orange-500" />,
       items: ["Microservices", "Serverless", "MVC", "Clean Architecture"],
     },
-  ]
+  ];
 
   return (
     <section id="skills" className="section-container bg-[#121212]" ref={ref}>
-      <motion.div variants={containerVariants} initial="hidden" animate={isInView ? "visible" : "hidden"}>
-        <motion.h2 variants={itemVariants} className="section-heading text-center">
-          My Skills
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+      >
+        <motion.h2
+          variants={itemVariants}
+          className="section-heading text-center"
+        >
+          My <span className="text-jordy_blue">Skills</span>
         </motion.h2>
-        <motion.p variants={itemVariants} className="text-gray-400 text-center max-w-3xl mx-auto mb-12 text-lg">
-          I've worked with a variety of technologies in the web development world. Here's a quick overview of my
-          technical skillset and areas of expertise.
+        <motion.p
+          variants={itemVariants}
+          className="text-gray-400 text-center max-w-3xl mx-auto mb-12 text-lg"
+        >
+          I've worked with a variety of technologies in the web development
+          world. Here's a quick overview of my technical skillset and areas of
+          expertise.
         </motion.p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -86,7 +112,7 @@ export function SkillsSection() {
             <motion.div
               key={skill.category}
               variants={itemVariants}
-              className="bg-[#1a1a1a] rounded-lg p-6 border border-gray-800 hover:border-purple-500/50 transition-all duration-300 skill-card"
+              className="bg-[#1a1a1a] rounded-3xl p-6 border border-gray-800 hover:border-jordy_blue-400/50 hover:shadow-sm hover:shadow-jordy_blue-400 transition-all duration-300 skill-card"
               whileHover={{ y: -5 }}
             >
               <div className="flex items-center mb-4">
@@ -96,7 +122,7 @@ export function SkillsSection() {
               <ul className="space-y-2">
                 {skill.items.map((item) => (
                   <li key={item} className="text-gray-400 flex items-center">
-                    <span className="h-1.5 w-1.5 rounded-full bg-purple-500 mr-2"></span>
+                    <span className="h-1.5 w-1.5 rounded-full bg-jordy_blue-400 mr-2"></span>
                     {item}
                   </li>
                 ))}
@@ -106,6 +132,5 @@ export function SkillsSection() {
         </div>
       </motion.div>
     </section>
-  )
+  );
 }
-

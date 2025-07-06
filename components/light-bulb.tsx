@@ -1,11 +1,14 @@
 "use client";
 import React, { useState } from "react";
 import SpotlightCursor from "./spot-light-cursor";
+import FloatingGhostsCanvas from "./ghosts";
 
 const LightBulb = () => {
   const [checked, setChecked] = useState(true);
+  const [ghostOff, setGhostOff] = useState(false);
   return (
     <>
+      {!checked && !ghostOff && <FloatingGhostsCanvas />}
       <div className="fixed top-20 right-8 z-50 hidden lg:block">
         <input
           checked={checked}
@@ -35,6 +38,17 @@ const LightBulb = () => {
           </svg>
         </label>
       </div>
+
+      {!checked && (
+        <div className="fixed top-36 right-8 z-50 hidden lg:block">
+          <button
+            onClick={() => setGhostOff((prev) => !prev)}
+            className={` size-10 rounded-full relative ${ghostOff ? "bg-[#a7a79b]" : "bg-[#1a1a1a]"}`}
+          >
+            👻
+          </button>
+        </div>
+      )}
       {!checked && <SpotlightCursor />}
     </>
   );

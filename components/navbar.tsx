@@ -75,12 +75,12 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           <Link href="/" className="text-xl font-bold">
-            {/* <span className="gradient-text">Asraful</span> */}
-            <img
+            <span className="text-white">Asraful</span>
+            {/* <img
               className="size-9 shrink-0 object-cover rounded-full"
               src="/me.png"
               alt="me"
-            />
+            /> */}
           </Link>
 
           {/* Desktop Navigation */}
@@ -108,7 +108,7 @@ export function Navbar() {
               )}
             >
               Blogs
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 transition-all group-hover:w-full"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-jordy_blue-400 transition-all group-hover:w-full"></span>
             </Link>
             {/* <Link
               href="/codes"
@@ -117,7 +117,7 @@ export function Navbar() {
               )}
             >
               Codes
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 transition-all group-hover:w-full"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-jordy_blue-400 transition-all group-hover:w-full"></span>
             </Link> */}
             <Link
               href="/games"
@@ -126,7 +126,16 @@ export function Navbar() {
               )}
             >
               Games
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 transition-all group-hover:w-full"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-jordy_blue-400 transition-all group-hover:w-full"></span>
+            </Link>
+            <Link
+              href="/notes"
+              className={cn(
+                "text-gray-300 hover:text-white transition-colors relative group"
+              )}
+            >
+              Notes
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-jordy_blue-400 transition-all group-hover:w-full"></span>
             </Link>
 
             <Link
@@ -236,6 +245,13 @@ export function Navbar() {
               >
                 Games
               </Link>
+              <Link
+                href="/notes"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="block py-2 text-gray-300 hover:text-white transition-colors"
+              >
+                Notes
+              </Link>
 
               {/* <CartIcon /> */}
 
@@ -289,7 +305,7 @@ function NavLink({
       )}
     >
       {children}
-      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-purple-500 transition-all group-hover:w-full"></span>
+      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-jordy_blue-400 transition-all group-hover:w-full"></span>
     </Link>
   );
 }

@@ -194,7 +194,7 @@ export function PongGame() {
       <div className="mt-4 flex gap-2">
         <button
           onClick={() => setIsPlaying(!isPlaying)}
-          className="px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded text-white"
+          className="px-4 py-2 bg-jordy_blue hover:bg-purple-700 rounded text-white"
         >
           {isPlaying ? "Pause" : "Start"}
         </button>

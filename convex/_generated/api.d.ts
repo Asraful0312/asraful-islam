@@ -18,6 +18,7 @@ import type * as blogs from "../blogs.js";
 import type * as comments from "../comments.js";
 import type * as http from "../http.js";
 import type * as image from "../image.js";
+import type * as notes from "../notes.js";
 import type * as project from "../project.js";
 
 /**
@@ -34,6 +35,7 @@ declare const fullApi: ApiFromModules<{
   comments: typeof comments;
   http: typeof http;
   image: typeof image;
+  notes: typeof notes;
   project: typeof project;
 }>;
 export declare const api: FilterApi<

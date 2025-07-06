@@ -61,7 +61,7 @@ export function CodeDetails({ code, relatedCodes }: CodeDetailsProps) {
                 {code.categories.map((category) => (
                   <Badge
                     key={category}
-                    className="bg-purple-600 hover:bg-purple-700"
+                    className="bg-jordy_blue hover:bg-purple-700"
                   >
                     {category}
                   </Badge>
@@ -211,7 +211,7 @@ export default ${code.title.replace(/\s+/g, "")};`}
                       className="bg-[#1a1a1a] rounded-lg border border-gray-800 p-6"
                     >
                       <div className="flex items-start gap-4">
-                        <div className="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center">
+                        <div className="w-10 h-10 rounded-full bg-jordy_blue flex items-center justify-center">
                           <span className="text-sm font-bold">U{review}</span>
                         </div>
                         <div className="flex-1">
@@ -281,7 +281,7 @@ export default ${code.title.replace(/\s+/g, "")};`}
                 <div className="space-y-3 mb-6">
                   <Button
                     onClick={handleAddToCart}
-                    className="w-full bg-purple-600 hover:bg-purple-700"
+                    className="w-full bg-jordy_blue hover:bg-purple-700"
                     disabled={isInCart(code.id)}
                   >
                     <ShoppingCart className="h-4 w-4 mr-2" />

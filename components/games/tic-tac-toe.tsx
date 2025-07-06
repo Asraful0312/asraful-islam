@@ -84,7 +84,7 @@ export function TicTacToeGame() {
 
       <button
         onClick={resetGame}
-        className="px-6 py-2 bg-purple-600 hover:bg-purple-700 rounded text-white"
+        className="px-6 py-2 bg-jordy_blue hover:bg-purple-700 rounded text-white"
       >
         New Game
       </button>

@@ -88,3 +88,12 @@ export interface Game {
   instructions: string[];
   controls: { key: string; action: string }[];
 }
+
+export interface Note {
+  id: string;
+  content: string;
+  color: string;
+  position: { x: number; y: number };
+  createdAt: string;
+  author: string;
+}

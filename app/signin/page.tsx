@@ -118,7 +118,7 @@ export default function SignInForm() {
             <Button
               type="submit"
               disabled={submitting}
-              className="w-full bg-purple-600 hover:bg-purple-700 text-white"
+              className="w-full bg-jordy_blue hover:bg-purple-700 text-indigo_dye"
             >
               {submitting ? (
                 <span className="flex items-center">

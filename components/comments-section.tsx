@@ -301,7 +301,7 @@ export default function CommentSection({ blogId }: BlogDetailProps) {
           />
           <Button
             type="submit"
-            className="bg-purple-600 hover:bg-purple-700"
+            className="bg-jordy_blue-400 hover:bg-jordy_blue-400 text-indigo_dye-100"
             disabled={isSubmittingComment || !newComment.trim()}
           >
             {isSubmittingComment ? (
@@ -340,7 +340,7 @@ export default function CommentSection({ blogId }: BlogDetailProps) {
               <Button
                 onClick={handleAddReply}
                 size="sm"
-                className="bg-purple-600 hover:bg-purple-700"
+                className="bg-jordy_blue-400 hover:bg-jordy_blue-400 text-indigo_dye-100"
                 disabled={isSubmittingReply || !replyContent.trim()}
               >
                 {isSubmittingReply ? (

@@ -107,7 +107,7 @@ export function ProjectDetails({
                     onClick={() => setCurrentImageIndex(index)}
                     className={`flex-shrink-0 border-2 rounded overflow-hidden ${
                       currentImageIndex === index
-                        ? "border-purple-500"
+                        ? "border-jordy_blue-400"
                         : "border-gray-700"
                     }`}
                   >
@@ -136,8 +136,8 @@ export function ProjectDetails({
                 <ul className="space-y-4">
                   {project?.features.map((feature) => (
                     <li key={feature.title} className="flex items-start">
-                      <div className="bg-purple-500/10 p-2 rounded-full mr-3 mt-0.5">
-                        <div className="h-2 w-2 rounded-full bg-purple-500"></div>
+                      <div className="bg-jordy_blue-500/10 p-2 rounded-full mr-3 mt-0.5">
+                        <div className="h-2 w-2 rounded-full bg-jordy_blue-500"></div>
                       </div>
                       <div>
                         <h3 className="font-medium text-lg">{feature.title}</h3>
@@ -200,21 +200,21 @@ export function ProjectDetails({
                 <div>
                   <h3 className="text-sm text-gray-400 mb-2">Project Type</h3>
                   <div className="flex items-center">
-                    <Globe className="h-5 w-5 text-purple-500 mr-2" />
+                    <Globe className="h-5 w-5 text-jordy_blue-500 mr-2" />
                     <span>Web Application</span>
                   </div>
                 </div>
                 <div>
                   <h3 className="text-sm text-gray-400 mb-2">Timeline</h3>
                   <div className="flex items-center">
-                    <Calendar className="h-5 w-5 text-purple-500 mr-2" />
+                    <Calendar className="h-5 w-5 text-jordy_blue-500 mr-2" />
                     <span>3 months (Jan - Mar 2023)</span>
                   </div>
                 </div>
                 <div>
                   <h3 className="text-sm text-gray-400 mb-2">Role</h3>
                   <div className="flex items-center">
-                    <Layers className="h-5 w-5 text-purple-500 mr-2" />
+                    <Layers className="h-5 w-5 text-jordy_blue-500 mr-2" />
                     <span>Full-stack Developer</span>
                   </div>
                 </div>
@@ -225,7 +225,7 @@ export function ProjectDetails({
                       href={project?.demoLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center text-purple-400 hover:text-purple-300 transition-colors"
+                      className="flex items-center text-jordy_blue-400 hover:text-jordy_blue-300 transition-colors"
                     >
                       <ExternalLink className="h-5 w-5 mr-2" />
                       Live Demo
@@ -234,7 +234,7 @@ export function ProjectDetails({
                       href={project?.sourceCode}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center text-purple-400 hover:text-purple-300 transition-colors"
+                      className="flex items-center text-jordy_blue-400 hover:text-jordy_blue-300 transition-colors"
                     >
                       <Github className="h-5 w-5 mr-2" />
                       Source Code
@@ -277,7 +277,7 @@ export function ProjectDetails({
                             />
                           </div>
                           <div>
-                            <h3 className="font-medium group-hover:text-purple-400 transition-colors">
+                            <h3 className="font-medium group-hover:text-jordy_blue-400 transition-colors">
                               {relatedProject?.name}
                             </h3>
                             <p className="text-sm text-gray-400 line-clamp-1">

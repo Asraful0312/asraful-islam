@@ -15,7 +15,7 @@ export function CartIcon() {
       <Link href="/checkout">
         <ShoppingCart className="h-5 w-5" />
         {items.length > 0 && (
-          <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 flex items-center justify-center bg-purple-600 text-xs">
+          <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 flex items-center justify-center bg-jordy_blue text-xs">
             {items.length}
           </Badge>
         )}

@@ -113,7 +113,7 @@ export function BlogDetails({ blog }: BlogDetailsProps) {
                 {blog.categories.map((category) => (
                   <Badge
                     key={category}
-                    className="bg-purple-600 hover:bg-purple-700"
+                    className="bg-jordy_blue text-indigo_dye hover:bg-jordy_blue-700 "
                   >
                     {category}
                   </Badge>
@@ -125,16 +125,20 @@ export function BlogDetails({ blog }: BlogDetailsProps) {
               <div className="flex flex-wrap items-center gap-6 text-gray-400 mb-6">
                 <div className="flex items-center gap-2">
                   {blog.authorImage ? (
-                  <button className="size-10 rounded-full shrink-0 overflow-hidden" onClick={toggle} title="view profile picture">
+                    <button
+                      className="size-10 rounded-full shrink-0 overflow-hidden"
+                      onClick={toggle}
+                      title="view profile picture"
+                    >
                       <img
-                      ref={ref}
-                      className="size-10 shrink-0 object-cover"
-                      src={blog.authorImage}
-                      alt={blog.author}
-                    />
-                  </button>
+                        ref={ref}
+                        className="size-10 shrink-0 object-cover"
+                        src={blog.authorImage}
+                        alt={blog.author}
+                      />
+                    </button>
                   ) : (
-                    <div className="w-10 h-10 rounded-full bg-purple-600 flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-full bg-jordy_blue flex items-center justify-center">
                       <User className="h-5 w-5" />
                     </div>
                   )}
@@ -376,7 +380,7 @@ export function BlogDetails({ blog }: BlogDetailsProps) {
                             />
                           </div>
                           <div>
-                            <h4 className="font-medium group-hover:text-purple-400 transition-colors line-clamp-2 text-sm">
+                            <h4 className="font-medium group-hover:text-jordy_blue-500 transition-colors line-clamp-2 text-sm">
                               {relatedBlog.title}
                             </h4>
                             <p className="text-xs text-gray-400 mt-1">
@@ -399,7 +403,7 @@ export function BlogDetails({ blog }: BlogDetailsProps) {
                   Get notified when I publish new articles about web development
                   and technology.
                 </p>
-                <Button className="w-full bg-purple-600 hover:bg-purple-700">
+                <Button className="w-full bg-jordy_blue-400 text-indigo_dye-100 hover:bg-jordy_blue-400 rounded-full">
                   Subscribe to Newsletter
                 </Button>
               </div>

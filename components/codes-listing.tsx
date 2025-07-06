@@ -164,8 +164,8 @@ export function CodesListing({ codes }: CodesListingProps) {
                   onClick={() => setSelectedCategory(category)}
                   className={
                     selectedCategory === category
-                      ? "bg-purple-600 hover:bg-purple-700"
-                      : "border-gray-700 hover:bg-purple-600/10"
+                      ? "bg-jordy_blue hover:bg-purple-700"
+                      : "border-gray-700 hover:bg-jordy_blue/10"
                   }
                 >
                   {category}
@@ -217,7 +217,7 @@ export function CodesListing({ codes }: CodesListingProps) {
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                     <div className="absolute top-3 left-3">
-                      <Badge className="bg-purple-600 hover:bg-purple-700">
+                      <Badge className="bg-jordy_blue hover:bg-purple-700">
                         {code.categories[0]}
                       </Badge>
                     </div>
@@ -299,7 +299,7 @@ export function CodesListing({ codes }: CodesListingProps) {
                     <Button
                       onClick={() => addToCart(code)}
                       size="sm"
-                      className="bg-purple-600 hover:bg-purple-700"
+                      className="bg-jordy_blue hover:bg-purple-700"
                     >
                       <ShoppingCart className="h-4 w-4 mr-1" />
                       {code.price === 0 ? "Get Free" : `$${code.price}`}

@@ -108,7 +108,7 @@ export default function VoiceNavigator() {
       <Button
         size="icon"
         onClick={handleOnOff}
-        className="rounded right-6 bottom-5 z-50 fixed bg-purple-600"
+        className="rounded right-6 bottom-5 z-50 fixed bg-indigo_dye-200 text-jordy_blue"
       >
         {listening ? (
           <AudioLines className="size-4 shrink-0" />
@@ -118,7 +118,7 @@ export default function VoiceNavigator() {
       </Button>
 
       <div
-        className={`bg-purple-500/55 py-1 px-4 text-center text-white fixed bottom-5 right-[70px] h-8 z-50 transition-all duration-200 ${
+        className={`bg-jordy_blue/55 py-1 px-4 text-center text-white fixed bottom-5 right-[70px] h-8 z-50 transition-all duration-200 ${
           transcript !== ""
             ? "opacity-100 visible translate-x-0"
             : "opacity-0 translate-x-5 invisible"
@@ -151,9 +151,9 @@ export default function VoiceNavigator() {
         <ul className="list-disc ml-5 space-y-2">
           {commands.map((c) => (
             <li key={c.label} className="text-sm">
-              Say <span className="font-bold text-purple-500">{c.command}</span>{" "}
+              Say <span className="font-bold text-jordy_blue">{c.command}</span>{" "}
               to navigate to{" "}
-              <span className="text-primary font-bold">{c.label}</span>{" "}
+              <span className="text-indigo_dye-600 font-bold">{c.label}</span>{" "}
               {c.command === "p1" || c.command === "p2"
                 ? "page"
                 : c.command === "back"
@@ -162,7 +162,7 @@ export default function VoiceNavigator() {
             </li>
           ))}
           <li>
-            Say <span className="font-bold text-purple-500">stop</span> to stop
+            Say <span className="font-bold text-jordy_blue">stop</span> to stop
             voice navigation.
           </li>
         </ul>

@@ -93,4 +93,13 @@ export default defineSchema({
     .index("by_blog", ["blogId"])
     .index("by_user", ["userId"])
     .index("by_blog_and_user", ["blogId", "userId"]),
+
+  notes: defineTable({
+    userId: v.id("users"),
+    content: v.string(),
+    color: v.string(),
+    position: v.object({ x: v.number(), y: v.number() }),
+    createdAt: v.string(),
+    author: v.string(),
+  }),
 });

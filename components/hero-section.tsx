@@ -145,7 +145,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-purple-500 font-medium mb-4"
+              className="text-white font-medium mb-3"
             >
               Hello, my name is
             </motion.p>
@@ -153,16 +153,16 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-5xl md:text-6xl lg:text-7xl font-bold mb-4"
+              className="text-5xl md:text-6xl lg:text-7xl font-bold mb-3"
             >
               {/* <span className="text-color">Asraful Islam</span> */}
-              <SparklesText className="text-color" text="Asraful Islam" />
+              <SparklesText className="text-jordy_blue" text="Asraful Islam" />
             </motion.h1>
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-400 mb-6"
+              className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-400 mb-4"
             >
               I build things for the web
             </motion.h2>
@@ -170,7 +170,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="text-gray-400 text-lg mb-8 max-w-lg"
+              className="text-gray-400 text-lg mb-5 max-w-lg"
             >
               I'm a full-stack developer specializing in building exceptional
               digital experiences. Currently, I'm focused on building
@@ -185,7 +185,7 @@ export function HeroSection() {
               <Button
                 asChild
                 size="lg"
-                className="bg-purple-600 hover:bg-purple-700"
+                className="bg-jordy_blue-400 hover:bg-jordy_blue-700 text-indigo_dye-200 rounded-full"
               >
                 <Link href="/#projects">
                   View My Work <ArrowRight className="ml-2 h-4 w-4" />
@@ -195,7 +195,7 @@ export function HeroSection() {
                 asChild
                 size="lg"
                 variant="outline"
-                className="border-purple-600 text-purple-500 hover:bg-purple-600/10"
+                className="border-jordy_blue-400 text-jordy_blue-600 hover:bg-jordy_blue/10 rounded-full"
               >
                 <Link href="/#contact">Contact Me</Link>
               </Button>

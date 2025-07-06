@@ -38,10 +38,10 @@ export function AboutSection() {
           variants={itemVariants}
           className="section-heading text-center"
         >
-          About Me
+          About <span className="text-jordy_blue">Me</span>
         </motion.h2>
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 items-center">
-          <motion.div variants={itemVariants} className="md:col-span-3">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 items-center ">
+          <motion.div variants={itemVariants} className="md:col-span-3 ">
             <p className="text-gray-300 mb-4 text-lg">
               Hello! I'm Asraful, a passionate full-stack developer with a love
               for creating beautiful, functional, and user-friendly websites and
@@ -62,8 +62,8 @@ export function AboutSection() {
           </motion.div>
           <motion.div variants={itemVariants} className="md:col-span-2">
             <div className="relative">
-              <div className="absolute -inset-1 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 opacity-75 blur"></div>
-              <div className="relative aspect-square rounded-lg overflow-hidden border-2 border-gray-800">
+              <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-purple-600 to-blue-600 opacity-75 blur"></div>
+              <div className="relative aspect-square rounded-3xl overflow-hidden border-2 border-gray-800">
                 <img
                   src="/man.jpg"
                   alt="John Doe"
