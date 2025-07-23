@@ -355,7 +355,7 @@ export function NotesCanvas() {
       </div>
 
       {/* Mini Map */}
-      <div className="absolute bottom-4 right-4 bg-black/40 rounded p-2 text-xs text-white z-50">
+      <div className="absolute bottom-4 right-24 bg-black/40 rounded p-2 text-xs text-white z-50">
         <div className="w-32 h-20 bg-gray-800 relative overflow-hidden">
           {notes.map((note) => (
             <div

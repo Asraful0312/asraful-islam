@@ -19,18 +19,20 @@ import { Textarea } from "@/components/ui/textarea";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useRef, useState } from "react";
+import React, { use, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { Id } from "@/convex/_generated/dataModel";
 import SearchRelatedProjects from "@/components/search-related-projects";
+import { Switch } from "@/components/ui/switch";
 
 interface EditProjectProps {
   params: { projectId: Id<"projects"> };
 }
 
 const EditProject = ({ params }: EditProjectProps) => {
+  const { projectId } = use<any>(params as any);
   const project = useQuery(api.project.getProject, {
-    projectId: params.projectId,
+    projectId: projectId,
   });
   const updateProject = useMutation(api.project.updateProject);
   const generateUploadUrl = useMutation(api.project.generateUploadUrl);
@@ -44,6 +46,7 @@ const EditProject = ({ params }: EditProjectProps) => {
   const galleryInputRef = useRef<HTMLInputElement>(null);
   const [relatedProjects, setRelatedProjects] = useState<Id<"projects">[]>([]);
   const deleteImage = useMutation(api.image.deleteImage);
+  const [isFeatured, setIsFeatured] = useState(false);
 
   // Initialize existingGalleryUrls with project.imageGalleryUrls
   useEffect(() => {
@@ -205,6 +208,8 @@ const EditProject = ({ params }: EditProjectProps) => {
         challenges,
         deletedImageIds,
         relatedId: relatedProjects,
+
+        isFeatured,
       };
 
       // Call Convex mutation
@@ -377,6 +382,15 @@ const EditProject = ({ params }: EditProjectProps) => {
               </div>
             </div>
           )}
+        </div>
+
+        <div className="w-full flex flex-col space-y-1">
+          <Label htmlFor="featured-project">Featured Project</Label>
+          <Switch
+            checked={project.isFeatured}
+            onClick={() => setIsFeatured((prev) => !prev)}
+            id="featured-project"
+          />
         </div>
         <div className="w-full space-y-1">
           <Label htmlFor="project-type">Project Type</Label>

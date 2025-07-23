@@ -23,6 +23,7 @@ import React, { useRef, useState } from "react";
 import { toast } from "sonner";
 import { Id } from "@/convex/_generated/dataModel";
 import SearchRelatedProjects from "@/components/search-related-projects";
+import { Switch } from "@/components/ui/switch";
 
 const CreateProject = () => {
   const insertProject = useMutation(api.project.insertProject);
@@ -34,6 +35,8 @@ const CreateProject = () => {
   const thumbnailInputRef = useRef<HTMLInputElement>(null);
   const galleryInputRef = useRef<HTMLInputElement>(null);
   const [relatedProjects, setRelatedProjects] = useState<Id<"projects">[]>([]);
+  const [projectName, setProjectName] = useState("");
+  const [isFeatured, setIsFeatured] = useState(false);
 
   const handleThumbnailSelection = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -155,6 +158,7 @@ const CreateProject = () => {
         technicalDetails,
         challenges,
         relatedId: relatedProjects,
+        isFeatured,
       };
 
       // Call Convex mutation
@@ -178,28 +182,30 @@ const CreateProject = () => {
       <form className="space-y-4 w-full" onSubmit={handleSubmit}>
         <div className="flex flex-col md:flex-row items-center gap-5">
           <div className="w-full md:basis-1/2 space-y-1">
-            <Label htmlFor="name">Name</Label>
+            <Label htmlFor="name">Name*</Label>
             <Input
               className="w-full"
               name="name"
               id="name"
+              onChange={(e) => setProjectName(e.target.value)}
               placeholder="Project name"
               required
             />
           </div>
           <div className="w-full md:basis-1/2 space-y-1">
-            <Label htmlFor="slug">Slug</Label>
+            <Label htmlFor="slug">Slug*</Label>
             <Input
               className="w-full"
               name="slug"
               id="slug"
+              value={projectName.split(" ").join("-").toLocaleLowerCase()}
               placeholder="Project slug"
               required
             />
           </div>
         </div>
         <div className="w-full space-y-1">
-          <Label htmlFor="description">Description</Label>
+          <Label htmlFor="description">Description*</Label>
           <Textarea
             className="w-full"
             name="description"
@@ -210,7 +216,7 @@ const CreateProject = () => {
           />
         </div>
         <div className="w-full space-y-1">
-          <Label htmlFor="thumbnail">Thumbnail (Image or GIF, Required)</Label>
+          <Label htmlFor="thumbnail">Thumbnail (Image or GIF, Required)*</Label>
           <Input
             type="file"
             className="w-full"
@@ -234,7 +240,7 @@ const CreateProject = () => {
         </div>
         <div className="w-full space-y-1">
           <Label htmlFor="image-gallery">
-            Image Gallery (Images or GIFs, Max 10)
+            Image Gallery (Images or GIFs, Max 10)*
           </Label>
           <p className="text-xs text-gray-500 mb-2">
             💡 Hold Ctrl (or Cmd on Mac) to select multiple images at once
@@ -297,8 +303,16 @@ const CreateProject = () => {
             </div>
           )}
         </div>
+        <div className="w-full flex flex-col space-y-1">
+          <Label htmlFor="featured-project">Featured Project</Label>
+          <Switch
+            checked={isFeatured}
+            onClick={() => setIsFeatured((prev) => !prev)}
+            id="featured-project"
+          />
+        </div>
         <div className="w-full space-y-1">
-          <Label htmlFor="project-type">Project Type</Label>
+          <Label htmlFor="project-type">Project Type*</Label>
           <Select name="project-type" required>
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Select project type" />
@@ -317,7 +331,7 @@ const CreateProject = () => {
           </Select>
         </div>
         <div className="w-full space-y-1">
-          <Label htmlFor="role">Role</Label>
+          <Label htmlFor="role">Role*</Label>
           <Select name="role" required>
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Select role" />
@@ -361,7 +375,7 @@ const CreateProject = () => {
           <Tags />
         </div>
         <div className="w-full space-y-1">
-          <Label htmlFor="timeline">Timeline</Label>
+          <Label htmlFor="timeline">Timeline*</Label>
           <Input
             className="w-full"
             name="timeline"
@@ -370,7 +384,7 @@ const CreateProject = () => {
             required
           />
         </div>
-       
+
         <SearchRelatedProjects
           relatedProjects={relatedProjects}
           setRelatedProjects={setRelatedProjects}

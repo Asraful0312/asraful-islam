@@ -17,6 +17,7 @@ export default defineSchema({
     demoLink: v.optional(v.string()),
     tags: v.array(v.string()),
     timeline: v.string(),
+    isFeatured: v.optional(v.boolean()),
     relatedId: v.optional(v.array(v.id("projects"))),
     features: v.array(
       v.object({
@@ -39,6 +40,7 @@ export default defineSchema({
   })
     .index("by_userId", ["userId"])
     .index("by_slug", ["slug"])
+    .index("by_isfeatured", ["isFeatured"])
     .searchIndex("search_projects", {
       searchField: "name",
     }),

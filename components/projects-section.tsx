@@ -11,7 +11,7 @@ import { api } from "@/convex/_generated/api";
 import SkeletonLoader from "./project-skeleton-loader";
 
 export function ProjectsSection() {
-  const projects = useQuery(api.project.getUserProjects);
+  const projects = useQuery(api.project.getUserFeatureProjects);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
 
@@ -55,12 +55,15 @@ export function ProjectsSection() {
           for building innovative and user-friendly applications.
         </motion.p>
 
+        <Link className="underline hover:text-jordy_blue  text-sm" href="/project-list">
+          View all
+        </Link>
         {projects instanceof Error ? (
           <p className="text-center text-red-500">{projects?.message}</p>
         ) : projects === undefined ? (
           <SkeletonLoader />
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-4">
             {projects &&
               projects?.map((project) => (
                 <motion.div

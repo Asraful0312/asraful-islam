@@ -121,7 +121,7 @@ export function ContactSection() {
                   <div>
                     <h4 className="text-lg font-medium mb-1">Phone</h4>
                     <a
-                      href="tel:+1234567890"
+                      href="https://wa.me/8801873239795"
                       className="text-gray-400 hover:text-white transition-colors"
                     >
                       +8801873239795

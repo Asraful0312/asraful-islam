@@ -1,6 +1,7 @@
-import { v } from "convex/values";
+import { ConvexError, v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 import { getAuthUserId } from "@convex-dev/auth/server";
+import { paginationOptsValidator } from "convex/server";
 
 export const generateUploadUrl = mutation({
   args: {},
@@ -23,6 +24,7 @@ export const insertProject = mutation({
     tags: v.array(v.string()),
     timeline: v.string(),
     relatedId: v.optional(v.array(v.id("projects"))),
+    isFeatured: v.optional(v.boolean()),
     features: v.array(
       v.object({
         title: v.string(),
@@ -46,6 +48,30 @@ export const insertProject = mutation({
     const userId = await getAuthUserId(ctx);
     if (!userId) {
       throw new Error("Unauthorized");
+    }
+
+    const {
+      name,
+      slug,
+      description,
+      thumbnail,
+      imageGallery,
+      projectType,
+      role,
+      timeline,
+    } = args;
+
+    if (
+      !name ||
+      !slug ||
+      !description ||
+      !thumbnail ||
+      !imageGallery ||
+      !projectType ||
+      !role ||
+      !timeline
+    ) {
+      throw new ConvexError("Missing required fields");
     }
 
     // Validate slug uniqueness
@@ -75,6 +101,7 @@ export const insertProject = mutation({
       features: args.features,
       technicalDetails: args.technicalDetails,
       challenges: args.challenges,
+      isFeatured: args.isFeatured,
     });
 
     return projectId;
@@ -95,6 +122,7 @@ export const updateProject = mutation({
     demoLink: v.optional(v.string()),
     tags: v.array(v.string()),
     timeline: v.string(),
+    isFeatured: v.optional(v.boolean()),
     relatedId: v.optional(v.array(v.id("projects"))),
     features: v.array(
       v.object({
@@ -159,6 +187,7 @@ export const updateProject = mutation({
       features: args.features,
       technicalDetails: args.technicalDetails,
       challenges: args.challenges,
+      isFeatured: args.isFeatured,
     });
 
     return args.projectId;
@@ -215,7 +244,7 @@ export const getProject = query({
 export const getUserProjects = query({
   args: {},
   handler: async (ctx) => {
-    const projects = await ctx.db.query("projects").collect();
+    const projects = await ctx.db.query("projects").order("desc").collect();
 
     // Get URLs for thumbnails and gallery images
     return await Promise.all(
@@ -227,6 +256,56 @@ export const getUserProjects = query({
         return { ...project, thumbnailUrl, galleryImageUrls };
       })
     );
+  },
+});
+
+export const getUserFeatureProjects = query({
+  args: {},
+  handler: async (ctx) => {
+    const projects = await ctx.db
+      .query("projects")
+      .withIndex("by_isfeatured", (q) => q.eq("isFeatured", true))
+      .order("desc")
+      .collect();
+
+    // Get URLs for thumbnails and gallery images
+    return await Promise.all(
+      projects.map(async (project) => {
+        const thumbnailUrl = await ctx.storage.getUrl(project.thumbnail);
+        const galleryImageUrls = await Promise.all(
+          project.imageGallery.map((storageId) => ctx.storage.getUrl(storageId))
+        );
+        return { ...project, thumbnailUrl, galleryImageUrls };
+      })
+    );
+  },
+});
+
+export const getUserProjectList = query({
+  args: {
+    paginationOpts: paginationOptsValidator,
+  },
+  handler: async (ctx, args) => {
+    const projects = await ctx.db
+      .query("projects")
+
+      .order("desc")
+      .paginate(args.paginationOpts);
+
+    // Get URLs for thumbnails and gallery images
+    const projectWithDetails = await Promise.all(
+      projects.page.map(async (project) => {
+        const thumbnailUrl = await ctx.storage.getUrl(project.thumbnail);
+        const galleryImageUrls = await Promise.all(
+          project.imageGallery.map((storageId) => ctx.storage.getUrl(storageId))
+        );
+        return { ...project, thumbnailUrl, galleryImageUrls };
+      })
+    );
+    return {
+      ...projects,
+      page: projectWithDetails,
+    };
   },
 });
 

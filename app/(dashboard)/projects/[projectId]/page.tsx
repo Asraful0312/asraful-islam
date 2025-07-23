@@ -5,14 +5,16 @@ import { api } from "@/convex/_generated/api";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Id } from "@/convex/_generated/dataModel";
+import { use } from "react";
 
 interface ProjectProps {
   params: { projectId: Id<"projects"> };
 }
 
 const Project = ({ params }: ProjectProps) => {
+  const { projectId } = use<any>(params as any);
   const project = useQuery(api.project.getProject, {
-    projectId: params.projectId,
+    projectId: projectId,
   });
 
   if (project instanceof Error) {
@@ -86,7 +88,7 @@ const Project = ({ params }: ProjectProps) => {
         <div className="mt-6">
           <h2 className="text-xl font-semibold">Image Gallery</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4">
-            {project.imageGalleryUrls.map(
+            {project?.imageGalleryUrls?.map(
               (url, index) =>
                 url && (
                   <img
