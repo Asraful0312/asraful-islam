@@ -14,6 +14,7 @@ export default defineSchema({
     projectType: v.string(),
     role: v.string(),
     sourceCode: v.optional(v.string()),
+    videoUrl: v.optional(v.string()),
     demoLink: v.optional(v.string()),
     tags: v.array(v.string()),
     timeline: v.string(),

@@ -128,7 +128,7 @@ export function Navbar() {
               Games
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-jordy_blue-400 transition-all group-hover:w-full"></span>
             </Link>
-            <Link
+            {/* <Link
               href="/notes"
               className={cn(
                 "text-gray-300 hover:text-white transition-colors relative group"
@@ -136,7 +136,7 @@ export function Navbar() {
             >
               Notes
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-jordy_blue-400 transition-all group-hover:w-full"></span>
-            </Link>
+            </Link> */}
 
             <Link
               href="/terminal"
@@ -245,13 +245,13 @@ export function Navbar() {
               >
                 Games
               </Link>
-              <Link
+              {/* <Link
                 href="/notes"
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="block py-2 text-gray-300 hover:text-white transition-colors"
               >
                 Notes
-              </Link>
+              </Link> */}
 
               {/* <CartIcon /> */}
 

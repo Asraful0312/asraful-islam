@@ -156,6 +156,7 @@ const CreateProject = () => {
         timeline: formData.get("timeline") as string,
         features,
         technicalDetails,
+        videoUrl: formData.get("video-url") as string,
         challenges,
         relatedId: relatedProjects,
         isFeatured,
@@ -352,6 +353,15 @@ const CreateProject = () => {
               </SelectGroup>
             </SelectContent>
           </Select>
+        </div>
+        <div className="w-full space-y-1">
+          <Label htmlFor="video-url">Video URL</Label>
+          <Input
+            className="w-full"
+            name="video-url"
+            id="video-url"
+            placeholder="http://exmple.com"
+          />
         </div>
         <div className="w-full space-y-1">
           <Label htmlFor="source-code">Source Code</Label>

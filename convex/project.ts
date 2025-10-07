@@ -23,6 +23,7 @@ export const insertProject = mutation({
     demoLink: v.optional(v.string()),
     tags: v.array(v.string()),
     timeline: v.string(),
+    videoUrl: v.optional(v.string()),
     relatedId: v.optional(v.array(v.id("projects"))),
     isFeatured: v.optional(v.boolean()),
     features: v.array(
@@ -97,6 +98,7 @@ export const insertProject = mutation({
       demoLink: args.demoLink,
       tags: args.tags,
       timeline: args.timeline,
+      videoUrl: args.videoUrl,
       relatedId: args.relatedId,
       features: args.features,
       technicalDetails: args.technicalDetails,
@@ -123,6 +125,7 @@ export const updateProject = mutation({
     tags: v.array(v.string()),
     timeline: v.string(),
     isFeatured: v.optional(v.boolean()),
+    videoUrl: v.optional(v.string()),
     relatedId: v.optional(v.array(v.id("projects"))),
     features: v.array(
       v.object({
@@ -185,6 +188,7 @@ export const updateProject = mutation({
       timeline: args.timeline,
       relatedId: args.relatedId,
       features: args.features,
+      videoUrl: args.videoUrl,
       technicalDetails: args.technicalDetails,
       challenges: args.challenges,
       isFeatured: args.isFeatured,

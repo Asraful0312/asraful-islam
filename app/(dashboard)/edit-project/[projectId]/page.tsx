@@ -202,7 +202,7 @@ const EditProject = ({ params }: EditProjectProps) => {
         demoLink: (formData.get("demo") as string) || undefined,
         tags,
         timeline: formData.get("timeline") as string,
-
+        videoUrl: formData.get("video-url") as string,
         features,
         technicalDetails,
         challenges,
@@ -437,6 +437,16 @@ const EditProject = ({ params }: EditProjectProps) => {
               </SelectGroup>
             </SelectContent>
           </Select>
+        </div>
+        <div className="w-full space-y-1">
+          <Label htmlFor="video-url">Video URL</Label>
+          <Input
+            className="w-full"
+            name="video-url"
+            id="video-url"
+            placeholder="http://exmple.com"
+            defaultValue={project.videoUrl || ""}
+          />
         </div>
         <div className="w-full space-y-1">
           <Label htmlFor="source-code">Source Code</Label>

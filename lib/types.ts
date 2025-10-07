@@ -21,6 +21,7 @@ export interface Project {
   role: string;
   slug: string;
   sourceCode: string;
+  videoUrl?: string;
   tags: string[];
   technicalDetails: Array<{
     description: string;

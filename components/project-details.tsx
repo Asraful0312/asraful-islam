@@ -16,6 +16,7 @@ import {
   Layers,
 } from "lucide-react";
 import type { Project } from "@/lib/types";
+import { ProjectVideoPlayer } from "./project-video-player";
 
 interface ProjectDetailsProps {
   project?: Project;
@@ -128,6 +129,9 @@ export function ProjectDetails({
                 <TabsTrigger value="challenges">Challenges</TabsTrigger>
               </TabsList>
               <TabsContent value="overview" className="mt-6">
+                {project?.videoUrl && (
+                  <ProjectVideoPlayer videoUrl={project.videoUrl} />
+                )}
                 <div className="prose prose-invert max-w-none">
                   <p>{project?.description}</p>
                 </div>
