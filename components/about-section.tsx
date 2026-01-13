@@ -65,7 +65,7 @@ export function AboutSection() {
               <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-purple-600 to-blue-600 opacity-75 blur"></div>
               <div className="relative aspect-square rounded-3xl overflow-hidden border-2 border-gray-800">
                 <img
-                  src="/man.jpg"
+                  src="/man.png"
                   alt="John Doe"
                   className="w-full h-full object-cover"
                 />

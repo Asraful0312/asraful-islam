@@ -66,11 +66,7 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-[#0f0f0f]/90 backdrop-blur-md py-3 shadow-md"
-          : "bg-transparent py-5"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent py-5`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
@@ -84,33 +80,34 @@ export function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <NavLink href="#about" onClick={scrollToSection}>
-              About
-            </NavLink>
-            <NavLink href="#skills" onClick={scrollToSection}>
-              Skills
-            </NavLink>
-            <NavLink href="#projects" onClick={scrollToSection}>
-              Projects
-            </NavLink>
-            <NavLink href="#reviews" onClick={scrollToSection}>
-              Reviews
-            </NavLink>
-            <NavLink href="#contact" onClick={scrollToSection}>
-              Contact
-            </NavLink>
+          <div className="flex items-center gap-6">
+            <nav className="hidden md:flex items-center space-x-8 bg-transparent backdrop-blur-md rounded-full py-3 px-4">
+              <NavLink href="#about" onClick={scrollToSection}>
+                About
+              </NavLink>
+              <NavLink href="#skills" onClick={scrollToSection}>
+                Skills
+              </NavLink>
+              <NavLink href="#projects" onClick={scrollToSection}>
+                Projects
+              </NavLink>
+              <NavLink href="#reviews" onClick={scrollToSection}>
+                Reviews
+              </NavLink>
+              <NavLink href="#contact" onClick={scrollToSection}>
+                Contact
+              </NavLink>
 
-            <Link
-              href="/blog"
-              className={cn(
-                "text-gray-300 hover:text-white transition-colors relative group"
-              )}
-            >
-              Blogs
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-jordy_blue-400 transition-all group-hover:w-full"></span>
-            </Link>
-            {/* <Link
+              <Link
+                href="/blog"
+                className={cn(
+                  "text-gray-300 hover:text-white transition-colors relative group"
+                )}
+              >
+                Blogs
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-jordy_blue-400 transition-all group-hover:w-full"></span>
+              </Link>
+              {/* <Link
               href="/codes"
               className={cn(
                 "text-gray-300 hover:text-white transition-colors relative group"
@@ -119,16 +116,16 @@ export function Navbar() {
               Codes
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-jordy_blue-400 transition-all group-hover:w-full"></span>
             </Link> */}
-            <Link
-              href="/games"
-              className={cn(
-                "text-gray-300 hover:text-white transition-colors relative group"
-              )}
-            >
-              Games
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-jordy_blue-400 transition-all group-hover:w-full"></span>
-            </Link>
-            {/* <Link
+              <Link
+                href="/games"
+                className={cn(
+                  "text-gray-300 hover:text-white transition-colors relative group"
+                )}
+              >
+                Games
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-jordy_blue-400 transition-all group-hover:w-full"></span>
+              </Link>
+              {/* <Link
               href="/notes"
               className={cn(
                 "text-gray-300 hover:text-white transition-colors relative group"
@@ -138,43 +135,48 @@ export function Navbar() {
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-jordy_blue-400 transition-all group-hover:w-full"></span>
             </Link> */}
 
-            <Link
-              href="/terminal"
-              className={cn(
-                "text-gray-300 hover:text-white transition-colors relative group"
-              )}
-            >
-              <Terminal className="shrink-0" />
-            </Link>
-
-            {/* <CartIcon /> */}
-
-            <Authenticated>
-              <Button onClick={signOut} variant="secondary" className="">
-                Logout
-              </Button>
-            </Authenticated>
-            <Unauthenticated>
               <Link
-                href="/signin"
-                onClick={signOut}
-                className={buttonVariants({
-                  variant: "secondary",
-                })}
+                href="/terminal"
+                className={cn(
+                  "text-gray-300 hover:text-white transition-colors relative group"
+                )}
               >
-                Login
+                <Terminal className="shrink-0" />
               </Link>
-            </Unauthenticated>
-          </nav>
 
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-white"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+              {/* <CartIcon /> */}
+
+            </nav>
+            <div className="flex items-center gap-4">
+
+              <Authenticated>
+                <Button onClick={signOut} variant="secondary" className="">
+                  Logout
+                </Button>
+              </Authenticated>
+              <Unauthenticated>
+                <Link
+                  href="/signin"
+                  onClick={signOut}
+                  className={buttonVariants({
+                    variant: "default",
+                    className: 'text-jordy_blue-100'
+                  })}
+                >
+                  Login
+                </Link>
+              </Unauthenticated>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              className="md:hidden text-white"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </div>
 
