@@ -61,7 +61,7 @@ export function SkillsSection() {
     {
       category: "Mobile",
       icon: <Smartphone className="h-6 w-6 text-yellow-500" />,
-      items: ["React Native", "Expo", "Flutter", "Mobile-First Design"],
+      items: ["React Native", "Expo", "Mobile-First Design"],
     },
     {
       category: "DevOps",

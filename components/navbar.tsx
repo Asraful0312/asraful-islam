@@ -70,7 +70,7 @@ export function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
-          <Link href="/" className="text-xl font-bold">
+          <Link href="/" className="text-xl font-bold bg-transparent backdrop-blur-md py-3 px-4 rounded-full">
             <span className="text-white">Asraful</span>
             {/* <img
               className="size-9 shrink-0 object-cover rounded-full"
@@ -116,15 +116,7 @@ export function Navbar() {
               Codes
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-jordy_blue-400 transition-all group-hover:w-full"></span>
             </Link> */}
-              <Link
-                href="/games"
-                className={cn(
-                  "text-gray-300 hover:text-white transition-colors relative group"
-                )}
-              >
-                Games
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-jordy_blue-400 transition-all group-hover:w-full"></span>
-              </Link>
+
               {/* <Link
               href="/notes"
               className={cn(
@@ -240,20 +232,7 @@ export function Navbar() {
               >
                 Codes
               </Link> */}
-              <Link
-                href="/games"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="block py-2 text-gray-300 hover:text-white transition-colors"
-              >
-                Games
-              </Link>
-              {/* <Link
-                href="/notes"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="block py-2 text-gray-300 hover:text-white transition-colors"
-              >
-                Notes
-              </Link> */}
+
 
               {/* <CartIcon /> */}
 
