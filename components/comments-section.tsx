@@ -41,9 +41,9 @@ function CommentItem({
     api.comments.getReplies,
     showReplies
       ? {
-          commentId: comment._id,
-          paginationOpts: repliesPagination,
-        }
+        commentId: comment._id,
+        paginationOpts: repliesPagination,
+      }
       : "skip"
   );
 
@@ -74,15 +74,15 @@ function CommentItem({
 
   return (
     <div
-      className={`${level > 0 ? "ml-8 border-l-2 border-purple-500 pl-4" : ""}`}
+      className={`${level > 0 ? "ml-8 border-l-2 border-primary/50 pl-4" : ""}`}
     >
-      <div className="border-b pb-4 last:border-b-0">
-        <div className="flex items-center justify-between mb-2 bg-[#232323]">
+      <div className="border-b pb-4 last:border-b-0 border-border">
+        <div className="flex items-center justify-between mb-2 bg-secondary rounded-lg">
           <div className=" rounded-lg p-4 w-full">
             <div className="flex items-center justify-between mb-2">
-              <h4 className="font-medium text-sm">{comment.author}</h4>
+              <h4 className="font-medium text-sm text-foreground">{comment.author}</h4>
               <div className="flex items-center gap-2">
-                <span className="text-xs text-gray-400">
+                <span className="text-xs text-muted-foreground">
                   {" "}
                   {new Date(comment._creationTime).toLocaleDateString()}
                 </span>
@@ -97,7 +97,7 @@ function CommentItem({
                 )}
               </div>
             </div>
-            <p className="text-gray-300 text-sm">{comment.content}</p>
+            <p className="text-muted-foreground text-sm">{comment.content}</p>
           </div>
         </div>
 
@@ -105,11 +105,10 @@ function CommentItem({
           <button
             onClick={handleLike}
             disabled={isLiking}
-            className={`flex items-center gap-1 text-xs transition-colors ${
-              comment.isLiked
-                ? "text-purple-400"
-                : "text-gray-400 hover:text-white"
-            }`}
+            className={`flex items-center gap-1 text-xs transition-colors ${comment.isLiked
+              ? "text-primary"
+              : "text-muted-foreground hover:text-foreground"
+              }`}
           >
             <ThumbsUp
               className={`h-3 w-3 ${comment.isLiked ? "fill-current" : ""}`}
@@ -120,7 +119,7 @@ function CommentItem({
           {level === 0 && (
             <button
               onClick={() => onReply(comment._id)}
-              className="flex items-center gap-1 text-xs text-gray-400 hover:text-white transition-colors"
+              className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
             >
               <Reply className="h-3 w-3" />
               Reply
@@ -130,7 +129,7 @@ function CommentItem({
           {level === 0 && comment.replyCount > 0 && (
             <button
               onClick={() => setShowReplies(!showReplies)}
-              className="text-blue-600 text-xs px-2 py-1 rounded "
+              className="text-primary text-xs px-2 py-1 rounded "
             >
               {showReplies ? "Hide" : "Show"} {comment.replyCount}{" "}
               {comment.replyCount === 1 ? "reply" : "replies"}
@@ -157,7 +156,7 @@ function CommentItem({
           {!repliesResult.isDone && (
             <button
               onClick={loadMoreReplies}
-              className="text-blue-600 hover:text-blue-800 text-sm px-2 py-1 rounded hover:bg-blue-50"
+              className="text-primary hover:text-primary/80 text-sm px-2 py-1 rounded hover:bg-secondary"
             >
               Load more replies
             </button>
@@ -275,21 +274,21 @@ export default function CommentSection({ blogId }: BlogDetailProps) {
 
   return (
     <section className="mt-12">
-      <Separator className="mb-8 bg-gray-800" />
+      <Separator className="mb-8 bg-border" />
 
       <div className="mb-8">
-        <h3 className="text-2xl font-bold mb-2">
+        <h3 className="text-2xl font-bold mb-2 text-foreground">
           Comments ({totalCommentsCount || 0})
         </h3>
-        <p className="text-gray-400">
+        <p className="text-muted-foreground">
           Join the discussion and share your thoughts!
         </p>
       </div>
 
       {/* Add Comment Form */}
       <form onSubmit={handleAddComment} className="mb-8">
-        <div className="bg-[#1a1a1a] rounded-lg border border-gray-800 p-6">
-          <h4 className="text-lg font-semibold mb-4">Leave a Comment</h4>
+        <div className="bg-card rounded-lg border border-border p-6">
+          <h4 className="text-lg font-semibold mb-4 text-foreground">Leave a Comment</h4>
 
           <Textarea
             placeholder="Write your comment..."
@@ -297,11 +296,11 @@ export default function CommentSection({ blogId }: BlogDetailProps) {
             onChange={(e) => setNewComment(e.target.value)}
             required
             rows={4}
-            className="bg-[#232323] border-gray-700 focus:border-purple-500 mb-4"
+            className="bg-secondary border-border focus:border-primary mb-4 text-foreground"
           />
           <Button
             type="submit"
-            className="bg-jordy_blue-400 hover:bg-jordy_blue-400 text-indigo_dye-100"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground"
             disabled={isSubmittingComment || !newComment.trim()}
           >
             {isSubmittingComment ? (
@@ -333,14 +332,14 @@ export default function CommentSection({ blogId }: BlogDetailProps) {
               placeholder="Write a reply..."
               value={replyContent}
               onChange={(e) => setReplyContent(e.target.value)}
-              className="bg-[#1a1a1a] border-gray-700 focus:border-purple-500 text-sm"
+              className="bg-secondary border-border focus:border-primary text-sm text-foreground"
               rows={2}
             />
             <div className="flex flex-col gap-1">
               <Button
                 onClick={handleAddReply}
                 size="sm"
-                className="bg-jordy_blue-400 hover:bg-jordy_blue-400 text-indigo_dye-100"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground"
                 disabled={isSubmittingReply || !replyContent.trim()}
               >
                 {isSubmittingReply ? (
@@ -356,7 +355,7 @@ export default function CommentSection({ blogId }: BlogDetailProps) {
                 }}
                 size="sm"
                 variant="outline"
-                className="border-gray-700"
+                className="border-border text-muted-foreground hover:bg-secondary hover:text-foreground"
               >
                 Cancel
               </Button>
@@ -384,7 +383,7 @@ export default function CommentSection({ blogId }: BlogDetailProps) {
           ))}
 
           {commentsResult?.page.length === 0 && (
-            <p className="text-gray-500 text-center py-8">
+            <p className="text-muted-foreground text-center py-8">
               No comments yet. Be the first to comment!
             </p>
           )}
@@ -397,7 +396,7 @@ export default function CommentSection({ blogId }: BlogDetailProps) {
           {commentsPagination.cursor && (
             <button
               onClick={loadPreviousComments}
-              className="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition-colors"
+              className="px-4 py-2 bg-secondary text-foreground rounded hover:bg-secondary/80 transition-colors"
             >
               Show Latest Comments
             </button>
@@ -405,7 +404,7 @@ export default function CommentSection({ blogId }: BlogDetailProps) {
           {!commentsResult.isDone && (
             <button
               onClick={loadMoreComments}
-              className="px-4 py-2 bg-primary text-white rounded hover:bg-primary-hover transition-colors"
+              className="px-4 py-2 bg-primary text-primary-foreground rounded hover:bg-primary/90 transition-colors"
             >
               Load More Comments (
               {Math.max(

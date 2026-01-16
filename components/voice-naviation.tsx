@@ -108,7 +108,7 @@ export default function VoiceNavigator() {
       <Button
         size="icon"
         onClick={handleOnOff}
-        className="rounded right-6 bottom-5 z-50 fixed bg-indigo_dye-200 text-jordy_blue"
+        className="rounded right-6 bottom-5 z-50 fixed bg-secondary text-foreground"
       >
         {listening ? (
           <AudioLines className="size-4 shrink-0" />
@@ -118,11 +118,10 @@ export default function VoiceNavigator() {
       </Button>
 
       <div
-        className={`bg-jordy_blue/55 py-1 px-4 text-center text-white fixed bottom-5 right-[70px] h-8 z-50 transition-all duration-200 ${
-          transcript !== ""
-            ? "opacity-100 visible translate-x-0"
-            : "opacity-0 translate-x-5 invisible"
-        } `}
+        className={`bg-jordy_blue/55 py-1 px-4 text-center text-white fixed bottom-5 right-[70px] h-8 z-50 transition-all duration-200 ${transcript !== ""
+          ? "opacity-100 visible translate-x-0"
+          : "opacity-0 translate-x-5 invisible"
+          } `}
       >
         {transcript}
       </div>
@@ -136,9 +135,8 @@ export default function VoiceNavigator() {
 
       <div
         ref={ref}
-        className={`bg-[#232323] w-[250px] rounded fixed bottom-20 right-8 max-h-[350px] overflow-y-scroll text-white p-3 z-50 ${
-          show ? "block" : "hidden"
-        }`}
+        className={`bg-[#232323] w-[250px] rounded fixed bottom-20 right-8 max-h-[350px] overflow-y-scroll text-white p-3 z-50 ${show ? "block" : "hidden"
+          }`}
       >
         <div className="flex justify-end">
           <button onClick={() => setShow(false)}>

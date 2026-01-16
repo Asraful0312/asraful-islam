@@ -1,136 +1,163 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import Marquee from "@/components/ui/marquee";
+import { cn } from "@/lib/utils";
 import {
-  Code,
+  Code2,
   Database,
+  Globe,
   Layout,
   Server,
   Smartphone,
+  Terminal,
+  Cpu,
+  Cloud,
   Layers,
-  Palette,
+  Box,
+  Figma,
   GitBranch,
 } from "lucide-react";
 
 export function SkillsSection() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 },
-    },
-  };
-
-  const skills = [
-    {
-      category: "Frontend",
-      icon: <Layout className="h-6 w-6 text-purple-500" />,
-      items: [
-        "React",
-        "Next.js",
-        "TypeScript",
-        "Tailwind CSS",
-        "Framer Motion",
-      ],
-    },
-    {
-      category: "Backend",
-      icon: <Server className="h-6 w-6 text-blue-500" />,
-      items: ["Node.js", "Express", "NestJS", "GraphQL", "REST APIs"],
-    },
-    {
-      category: "Database",
-      icon: <Database className="h-6 w-6 text-green-500" />,
-      items: ["MongoDB", "PostgreSQL", "MySQL", "Redis", "Prisma"],
-    },
-    {
-      category: "Mobile",
-      icon: <Smartphone className="h-6 w-6 text-yellow-500" />,
-      items: ["React Native", "Expo", "Mobile-First Design"],
-    },
-    {
-      category: "DevOps",
-      icon: <GitBranch className="h-6 w-6 text-red-500" />,
-      items: ["Git", "GitHub Actions", "Docker", "AWS", "Vercel"],
-    },
-    {
-      category: "UI/UX",
-      icon: <Palette className="h-6 w-6 text-pink-500" />,
-      items: ["Figma", "Adobe XD", "Responsive Design", "Accessibility"],
-    },
-    {
-      category: "Languages",
-      icon: <Code className="h-6 w-6 text-indigo-500" />,
-      items: ["JavaScript", "TypeScript", "Python", "HTML", "CSS"],
-    },
-    {
-      category: "Architecture",
-      icon: <Layers className="h-6 w-6 text-orange-500" />,
-      items: ["Microservices", "Serverless", "MVC", "Clean Architecture"],
-    },
-  ];
-
   return (
-    <section id="skills" className="section-container bg-[#121212]" ref={ref}>
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
-      >
-        <motion.h2
-          variants={itemVariants}
-          className="section-heading text-center"
-        >
-          My <span className="text-jordy_blue">Skills</span>
-        </motion.h2>
-        <motion.p
-          variants={itemVariants}
-          className="text-gray-400 text-center max-w-3xl mx-auto mb-12 text-lg"
-        >
-          I've worked with a variety of technologies in the web development
-          world. Here's a quick overview of my technical skillset and areas of
-          expertise.
-        </motion.p>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {skills.map((skill, index) => (
-            <motion.div
-              key={skill.category}
-              variants={itemVariants}
-              className="bg-[#1a1a1a] rounded-3xl p-6 border border-gray-800 hover:border-jordy_blue-400/50 hover:shadow-sm hover:shadow-jordy_blue-400 transition-all duration-300 skill-card"
-              whileHover={{ y: -5 }}
-            >
-              <div className="flex items-center mb-4">
-                {skill.icon}
-                <h3 className="text-xl font-bold ml-2">{skill.category}</h3>
-              </div>
-              <ul className="space-y-2">
-                {skill.items.map((item) => (
-                  <li key={item} className="text-gray-400 flex items-center">
-                    <span className="h-1.5 w-1.5 rounded-full bg-jordy_blue-400 mr-2"></span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
+    <section id="skills" className="py-24 relative overflow-hidden bg-background">
+      <div className="absolute inset-0 bg-grid-black/[0.02] dark:bg-grid-white/[0.02] bg-[size:50px_50px]" />
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 text-center">
+        <div className="inline-block mb-3">
+          <span className="py-1 px-3 rounded-full bg-secondary border border-border text-sm font-medium text-purple-600 dark:text-purple-300">
+            Expertise
+          </span>
         </div>
-      </motion.div>
+        <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
+          My Tech <span className="text-jordy_blue-400 dark:text-jordy_blue-500">Stack</span>
+        </h2>
+        <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+          A curated list of technologies I use to build robust and scalable digital solutions.
+        </p>
+      </div>
+
+      <div className="relative flex flex-col gap-8 overflow-hidden py-4">
+        <Marquee pauseOnHover className="[--duration:40s]">
+          {firstRow.map((skill) => (
+            <SkillCard key={skill.name} {...skill} />
+          ))}
+        </Marquee>
+        <Marquee reverse pauseOnHover className="[--duration:40s]">
+          {secondRow.map((skill) => (
+            <SkillCard key={skill.name} {...skill} />
+          ))}
+        </Marquee>
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-background"></div>
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-background"></div>
+      </div>
     </section>
   );
 }
+
+const SkillCard = ({
+  icon: Icon,
+  name,
+  description,
+}: {
+  icon: any;
+  name: string;
+  description: string;
+}) => {
+  return (
+    <div
+      className={cn(
+        "relative w-64 cursor-pointer overflow-hidden rounded-xl border p-4",
+        "border-border bg-card hover:bg-secondary/20 hover:border-primary/20 transition-colors backdrop-blur-sm shadow-sm",
+      )}
+    >
+      <div className="flex flex-row items-center gap-2">
+        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-secondary">
+          <Icon className="h-6 w-6 text-foreground" />
+        </div>
+        <div className="flex flex-col">
+          <figcaption className="text-sm font-medium text-foreground">
+            {name}
+          </figcaption>
+          <p className="text-xs font-medium text-muted-foreground">{description}</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const skills = [
+  {
+    name: "React",
+    description: "Frontend Library",
+    icon: Code2,
+  },
+  {
+    name: "Next.js",
+    description: "React Framework",
+    icon: Globe,
+  },
+  {
+    name: "TypeScript",
+    description: "Typed JavaScript",
+    icon: Terminal,
+  },
+  {
+    name: "Tailwind CSS",
+    description: "Utility-first CSS",
+    icon: Layout,
+  },
+  {
+    name: "Node.js",
+    description: "JavaScript Runtime",
+    icon: Server,
+  },
+  {
+    name: "PostgreSQL",
+    description: "Relational Database",
+    icon: Database,
+  },
+  {
+    name: "React Native",
+    description: "Mobile Framework",
+    icon: Smartphone,
+  },
+  {
+    name: "AWS",
+    description: "Cloud Services",
+    icon: Cloud,
+  },
+  {
+    name: "Docker",
+    description: "Containerization",
+    icon: Box,
+  },
+  {
+    name: "Figma",
+    description: "Design Tool",
+    icon: Figma,
+  },
+  {
+    name: "Git",
+    description: "Version Control",
+    icon: GitBranch,
+  },
+  {
+    name: "GraphQL",
+    description: "Query Language",
+    icon: Layers,
+  },
+  {
+    name: "Prisma",
+    description: "ORM",
+    icon: Database
+  },
+  {
+    name: "Redis",
+    description: "In-memory Store",
+    icon: Layers
+  }
+
+];
+
+const firstRow = skills.slice(0, Math.ceil(skills.length / 2));
+const secondRow = skills.slice(Math.ceil(skills.length / 2));

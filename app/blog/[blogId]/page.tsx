@@ -34,7 +34,7 @@ export default function BlogDetailPage({ params }: BlogProps) {
   }
 
   return (
-    <main className="min-h-screen bg-[#0f0f0f]">
+    <main className="min-h-screen bg-background">
       <Navbar />
       <BlogDetails blog={blog as Blog} />
       <Footer />

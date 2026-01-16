@@ -82,10 +82,10 @@ export function BlogDetails({ blog }: BlogDetailsProps) {
   return (
     <div className="section-container pt-24">
       <Unauthenticated>
-        <div className="p-3 rounded-md bg-[#1a1a1a] w-full mb-8">
-          <p className="text-white font-semibold">
+        <div className="p-3 rounded-md bg-secondary w-full mb-8">
+          <p className="text-foreground font-semibold">
             Please{" "}
-            <Link className="underline" href="/signin">
+            <Link className="underline text-primary" href="/signin">
               Login
             </Link>{" "}
             to like and and comment to an blog.
@@ -99,7 +99,7 @@ export function BlogDetails({ blog }: BlogDetailsProps) {
       >
         <Link
           href="/blog"
-          className="inline-flex items-center text-gray-400 hover:text-white mb-8 transition-colors"
+          className="inline-flex items-center text-muted-foreground hover:text-foreground mb-8 transition-colors"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Blog
@@ -113,16 +113,16 @@ export function BlogDetails({ blog }: BlogDetailsProps) {
                 {blog.categories.map((category) => (
                   <Badge
                     key={category}
-                    className="bg-jordy_blue text-indigo_dye hover:bg-jordy_blue-700 "
+                    className="bg-jordy_blue-400 text-white hover:bg-jordy_blue-500"
                   >
                     {category}
                   </Badge>
                 ))}
               </div>
-              <h1 className="text-2xl md:text-5xl font-bold mb-6 leading-tight">
+              <h1 className="text-2xl md:text-5xl font-bold mb-6 leading-tight text-foreground">
                 {blog.title}
               </h1>
-              <div className="flex flex-wrap items-center gap-6 text-gray-400 mb-6">
+              <div className="flex flex-wrap items-center gap-6 text-muted-foreground mb-6">
                 <div className="flex items-center gap-2">
                   {blog.authorImage ? (
                     <button
@@ -138,7 +138,7 @@ export function BlogDetails({ blog }: BlogDetailsProps) {
                       />
                     </button>
                   ) : (
-                    <div className="w-10 h-10 rounded-full bg-jordy_blue flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-full bg-jordy_blue-100 dark:bg-jordy_blue-900/20 text-jordy_blue-500 flex items-center justify-center">
                       <User className="h-5 w-5" />
                     </div>
                   )}
@@ -199,7 +199,7 @@ export function BlogDetails({ blog }: BlogDetailsProps) {
                       </svg>
                     </div>
                   </button>
-                  <p className="text-gray-400">
+                  <p className="text-muted-foreground">
                     {" "}
                     {blog.likesCount} {blog.likesCount === 1 ? "Like" : "Likes"}
                   </p>
@@ -208,31 +208,31 @@ export function BlogDetails({ blog }: BlogDetailsProps) {
             </header>
 
             {/* Featured Image */}
-            <div className="mb-8 rounded-lg overflow-hidden border border-gray-800">
+            <div className="mb-8 rounded-lg overflow-hidden border border-border">
               <img
                 src={blog?.featureImageUrl || "/placeholder.svg"}
                 alt={blog.title}
-                className="w-full h-auto"
+                className="w-full h-auto bg-secondary/20"
               />
             </div>
 
             {/* Content */}
             <div className="prose prose-invert prose-lg max-w-none mb-12">
               <div
-                className="prose prose-invert prose-lg"
+                className="prose prose-invert prose-lg text-foreground"
                 dangerouslySetInnerHTML={{ __html: blog?.content }}
               />
             </div>
 
             {/* Tags */}
             <div className="mb-8">
-              <h3 className="text-lg font-semibold mb-4">Tags</h3>
+              <h3 className="text-lg font-semibold mb-4 text-foreground">Tags</h3>
               <div className="flex flex-wrap gap-2">
                 {blog.tags.map((tag) => (
                   <Badge
                     key={tag}
                     variant="outline"
-                    className="bg-[#232323] border-gray-700"
+                    className="bg-secondary/50 border-border text-muted-foreground"
                   >
                     #{tag}
                   </Badge>
@@ -240,11 +240,11 @@ export function BlogDetails({ blog }: BlogDetailsProps) {
               </div>
             </div>
 
-            <Separator className="my-8 bg-gray-800" />
+            <Separator className="my-8 bg-border" />
 
             {/* Share */}
             <div className="mb-12">
-              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2 text-foreground">
                 <Share2 className="h-5 w-5" />
                 Share this article
               </h3>
@@ -253,7 +253,7 @@ export function BlogDetails({ blog }: BlogDetailsProps) {
                   asChild
                   variant="outline"
                   size="sm"
-                  className="border-gray-700 hover:bg-blue-600/10 hover:border-blue-600"
+                  className="border-border hover:bg-blue-600/10 hover:border-blue-600 text-muted-foreground hover:text-blue-600"
                 >
                   <a
                     href={`https://twitter.com/intent/tweet?url=${shareUrl}&text=${shareTitle}`}
@@ -268,7 +268,7 @@ export function BlogDetails({ blog }: BlogDetailsProps) {
                   asChild
                   variant="outline"
                   size="sm"
-                  className="border-gray-700 hover:bg-blue-700/10 hover:border-blue-700"
+                  className="border-border hover:bg-blue-700/10 hover:border-blue-700 text-muted-foreground hover:text-blue-700"
                 >
                   <a
                     href={`https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`}
@@ -283,7 +283,7 @@ export function BlogDetails({ blog }: BlogDetailsProps) {
                   asChild
                   variant="outline"
                   size="sm"
-                  className="border-gray-700 hover:bg-blue-800/10 hover:border-blue-800"
+                  className="border-border hover:bg-blue-800/10 hover:border-blue-800 text-muted-foreground hover:text-blue-800"
                 >
                   <a
                     href={`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`}
@@ -298,7 +298,7 @@ export function BlogDetails({ blog }: BlogDetailsProps) {
                   onClick={handleCopyLink}
                   variant="outline"
                   size="sm"
-                  className="border-gray-700 hover:bg-gray-700/10"
+                  className="border-border hover:bg-secondary text-muted-foreground"
                 >
                   {copied ? (
                     <>
@@ -323,32 +323,32 @@ export function BlogDetails({ blog }: BlogDetailsProps) {
           <aside className="lg:col-span-1">
             <div className="sticky top-24 space-y-8">
               {/* Table of Contents */}
-              <div className="bg-[#1a1a1a] rounded-lg border border-gray-800 p-6">
-                <h3 className="text-lg font-semibold mb-4">
+              <div className="bg-card rounded-lg border border-border p-6">
+                <h3 className="text-lg font-semibold mb-4 text-foreground">
                   Table of Contents
                 </h3>
                 <nav className="space-y-2">
                   <a
                     href="#introduction"
-                    className="block text-gray-400 hover:text-white transition-colors"
+                    className="block text-muted-foreground hover:text-foreground transition-colors"
                   >
                     Introduction
                   </a>
                   <a
                     href="#getting-started"
-                    className="block text-gray-400 hover:text-white transition-colors"
+                    className="block text-muted-foreground hover:text-foreground transition-colors"
                   >
                     Getting Started
                   </a>
                   <a
                     href="#best-practices"
-                    className="block text-gray-400 hover:text-white transition-colors"
+                    className="block text-muted-foreground hover:text-foreground transition-colors"
                   >
                     Best Practices
                   </a>
                   <a
                     href="#conclusion"
-                    className="block text-gray-400 hover:text-white transition-colors"
+                    className="block text-muted-foreground hover:text-foreground transition-colors"
                   >
                     Conclusion
                   </a>
@@ -357,8 +357,8 @@ export function BlogDetails({ blog }: BlogDetailsProps) {
 
               {/* Related Posts */}
               {relatedBlogs && relatedBlogs?.length > 0 && (
-                <div className="bg-[#1a1a1a] rounded-lg border border-gray-800 p-6">
-                  <h3 className="text-lg font-semibold mb-4">
+                <div className="bg-card rounded-lg border border-border p-6">
+                  <h3 className="text-lg font-semibold mb-4 text-foreground">
                     Related Articles
                   </h3>
                   <div className="space-y-4">
@@ -369,21 +369,21 @@ export function BlogDetails({ blog }: BlogDetailsProps) {
                         className="block group"
                       >
                         <div className="flex gap-3">
-                          <div className="flex-shrink-0 w-16 h-12 overflow-hidden rounded border border-gray-800">
+                          <div className="flex-shrink-0 w-16 h-12 overflow-hidden rounded border border-border">
                             <img
                               src={
                                 relatedBlog.featureImageUrl ||
                                 "/placeholder.svg"
                               }
                               alt={relatedBlog.title}
-                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300 bg-secondary/20"
                             />
                           </div>
                           <div>
-                            <h4 className="font-medium group-hover:text-jordy_blue-500 transition-colors line-clamp-2 text-sm">
+                            <h4 className="font-medium group-hover:text-jordy_blue-500 transition-colors line-clamp-2 text-sm text-foreground">
                               {relatedBlog.title}
                             </h4>
-                            <p className="text-xs text-gray-400 mt-1">
+                            <p className="text-xs text-muted-foreground mt-1">
                               {new Date(
                                 relatedBlog._creationTime
                               ).toLocaleDateString()}
@@ -397,13 +397,13 @@ export function BlogDetails({ blog }: BlogDetailsProps) {
               )}
 
               {/* Newsletter Signup */}
-              <div className="bg-[#1a1a1a] rounded-lg border border-gray-800 p-6">
-                <h3 className="text-lg font-semibold mb-4">Stay Updated</h3>
-                <p className="text-gray-400 text-sm mb-4">
+              <div className="bg-card rounded-lg border border-border p-6">
+                <h3 className="text-lg font-semibold mb-4 text-foreground">Stay Updated</h3>
+                <p className="text-muted-foreground text-sm mb-4">
                   Get notified when I publish new articles about web development
                   and technology.
                 </p>
-                <Button className="w-full bg-jordy_blue-400 text-indigo_dye-100 hover:bg-jordy_blue-400 rounded-full">
+                <Button className="w-full bg-jordy_blue-400 text-white hover:bg-jordy_blue-500 rounded-full">
                   Subscribe to Newsletter
                 </Button>
               </div>

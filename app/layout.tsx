@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.className} bg-[#0f0f0f] text-white antialiased`}
+        className={`${inter.className} bg-background text-foreground antialiased`}
       >
         <ConvexClientProvider>
           <ThemeProvider

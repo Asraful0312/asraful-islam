@@ -39,7 +39,7 @@ export function ProjectDetails({
       >
         <Link
           href="/#projects"
-          className="inline-flex items-center text-gray-400 hover:text-white mb-8 transition-colors"
+          className="inline-flex items-center text-muted-foreground hover:text-foreground mb-8 transition-colors"
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Projects
@@ -53,7 +53,7 @@ export function ProjectDetails({
                 <Badge
                   key={tag}
                   variant="outline"
-                  className="bg-[#232323] text-gray-300 border-gray-700"
+                  className="bg-secondary/50 text-muted-foreground border-border"
                 >
                   {tag}
                 </Badge>
@@ -79,7 +79,7 @@ export function ProjectDetails({
                       );
                     }
                   }}
-                  className="bg-black/50 backdrop-blur-sm border-gray-700 hover:bg-black/70"
+                  className="bg-background/50 backdrop-blur-sm border-border hover:bg-background/80"
                 >
                   <ArrowLeft className="h-4 w-4" />
                 </Button>
@@ -93,7 +93,7 @@ export function ProjectDetails({
                       );
                     }
                   }}
-                  className="bg-black/50 backdrop-blur-sm border-gray-700 hover:bg-black/70"
+                  className="bg-background/50 backdrop-blur-sm border-border hover:bg-background/80"
                 >
                   <ArrowRight className="h-4 w-4" />
                 </Button>
@@ -106,11 +106,10 @@ export function ProjectDetails({
                   <button
                     key={index}
                     onClick={() => setCurrentImageIndex(index)}
-                    className={`flex-shrink-0 border-2 rounded overflow-hidden ${
-                      currentImageIndex === index
-                        ? "border-jordy_blue-400"
-                        : "border-gray-700"
-                    }`}
+                    className={`flex-shrink-0 border-2 rounded overflow-hidden ${currentImageIndex === index
+                      ? "border-primary"
+                      : "border-border"
+                      }`}
                   >
                     <img
                       src={image || "/placeholder.svg"}
@@ -122,7 +121,7 @@ export function ProjectDetails({
             </div>
 
             <Tabs defaultValue="overview" className="mb-12">
-              <TabsList className="bg-[#232323] border border-gray-800 flex-wrap h-auto">
+              <TabsList className="bg-secondary border border-border flex-wrap h-auto">
                 <TabsTrigger value="overview">Overview</TabsTrigger>
                 <TabsTrigger value="features">Features</TabsTrigger>
                 <TabsTrigger value="technical">Technical Details</TabsTrigger>
@@ -132,7 +131,7 @@ export function ProjectDetails({
                 {project?.videoUrl && (
                   <ProjectVideoPlayer videoUrl={project.videoUrl} />
                 )}
-                <div className="prose prose-invert max-w-none">
+                <div className="prose prose-invert max-w-none text-foreground">
                   <p>{project?.description}</p>
                 </div>
               </TabsContent>
@@ -140,12 +139,12 @@ export function ProjectDetails({
                 <ul className="space-y-4">
                   {project?.features.map((feature) => (
                     <li key={feature.title} className="flex items-start">
-                      <div className="bg-jordy_blue-500/10 p-2 rounded-full mr-3 mt-0.5">
-                        <div className="h-2 w-2 rounded-full bg-jordy_blue-500"></div>
+                      <div className="bg-primary/10 p-2 rounded-full mr-3 mt-0.5">
+                        <div className="h-2 w-2 rounded-full bg-primary"></div>
                       </div>
                       <div>
-                        <h3 className="font-medium text-lg">{feature.title}</h3>
-                        <p className="text-gray-400">{feature.description}</p>
+                        <h3 className="font-medium text-lg text-foreground">{feature.title}</h3>
+                        <p className="text-muted-foreground">{feature.description}</p>
                       </div>
                     </li>
                   ))}
@@ -155,8 +154,8 @@ export function ProjectDetails({
                 <div className="space-y-6">
                   {project?.technicalDetails.map((td) => (
                     <div key={td.title}>
-                      <h3 className="text-lg font-medium mb-2">{td.title}</h3>
-                      <p className="text-gray-400 mb-2">{td.description}</p>
+                      <h3 className="text-lg font-medium mb-2 text-foreground">{td.title}</h3>
+                      <p className="text-muted-foreground mb-2">{td.description}</p>
                       {/* <div className="flex flex-wrap gap-2">
                         {[
                           "React",
@@ -180,11 +179,11 @@ export function ProjectDetails({
               </TabsContent>
               <TabsContent value="challenges" className="mt-6">
                 <div className="prose prose-invert max-w-none">
-                  <p>
+                  <p className="text-foreground">
                     During the development of this project, several challenges
                     were encountered and overcome:
                   </p>
-                  <ul className="space-y-5">
+                  <ul className="space-y-5 text-foreground">
                     {project?.challenges.map((challenge) => (
                       <li>
                         <strong>{challenge.title}: </strong>
@@ -198,38 +197,38 @@ export function ProjectDetails({
           </div>
 
           <div className="lg:col-span-1">
-            <div className="bg-[#1a1a1a] rounded-lg border border-gray-800 p-6 sticky top-24">
+            <div className="bg-card rounded-lg border border-border p-6 sticky top-24">
               <h2 className="text-xl font-bold mb-6">Project Details</h2>
               <div className="space-y-6">
                 <div>
-                  <h3 className="text-sm text-gray-400 mb-2">Project Type</h3>
-                  <div className="flex items-center">
-                    <Globe className="h-5 w-5 text-jordy_blue-500 mr-2" />
+                  <h3 className="text-sm text-muted-foreground mb-2">Project Type</h3>
+                  <div className="flex items-center text-foreground">
+                    <Globe className="h-5 w-5 text-primary mr-2" />
                     <span>Web Application</span>
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-sm text-gray-400 mb-2">Timeline</h3>
-                  <div className="flex items-center">
-                    <Calendar className="h-5 w-5 text-jordy_blue-500 mr-2" />
+                  <h3 className="text-sm text-muted-foreground mb-2">Timeline</h3>
+                  <div className="flex items-center text-foreground">
+                    <Calendar className="h-5 w-5 text-primary mr-2" />
                     <span>3 months (Jan - Mar 2023)</span>
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-sm text-gray-400 mb-2">Role</h3>
-                  <div className="flex items-center">
-                    <Layers className="h-5 w-5 text-jordy_blue-500 mr-2" />
+                  <h3 className="text-sm text-muted-foreground mb-2">Role</h3>
+                  <div className="flex items-center text-foreground">
+                    <Layers className="h-5 w-5 text-primary mr-2" />
                     <span>Full-stack Developer</span>
                   </div>
                 </div>
                 <div>
-                  <h3 className="text-sm text-gray-400 mb-2">Links</h3>
+                  <h3 className="text-sm text-muted-foreground mb-2">Links</h3>
                   <div className="space-y-2">
                     <a
                       href={project?.demoLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center text-jordy_blue-400 hover:text-jordy_blue-300 transition-colors"
+                      className="flex items-center text-primary hover:text-primary/80 transition-colors"
                     >
                       <ExternalLink className="h-5 w-5 mr-2" />
                       Live Demo
@@ -238,7 +237,7 @@ export function ProjectDetails({
                       href={project?.sourceCode}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center text-jordy_blue-400 hover:text-jordy_blue-300 transition-colors"
+                      className="flex items-center text-primary hover:text-primary/80 transition-colors"
                     >
                       <Github className="h-5 w-5 mr-2" />
                       Source Code
@@ -247,7 +246,7 @@ export function ProjectDetails({
                 </div>
               </div>
 
-              <div className="mt-8 pt-8 border-t border-gray-800">
+              <div className="mt-8 pt-8 border-t border-border">
                 <h2 className="text-xl font-bold mb-6">Related Projects</h2>
                 {relatedProjects instanceof Error ? (
                   <p className="text-sm text-center text-red-500">
@@ -258,7 +257,7 @@ export function ProjectDetails({
                     <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
                   </div>
                 ) : relatedProjects.length === 0 ? (
-                  <p className="text-center text-sm text-gray-500">
+                  <p className="text-center text-sm text-muted-foreground">
                     No related projects added
                   </p>
                 ) : (
@@ -270,7 +269,7 @@ export function ProjectDetails({
                         className="block group"
                       >
                         <div className="flex gap-3">
-                          <div className="flex-shrink-0 w-16 h-12 overflow-hidden rounded border border-gray-800">
+                          <div className="flex-shrink-0 w-16 h-12 overflow-hidden rounded border border-border">
                             <img
                               src={
                                 relatedProject?.thumbnailUrl ||
@@ -281,10 +280,10 @@ export function ProjectDetails({
                             />
                           </div>
                           <div>
-                            <h3 className="font-medium group-hover:text-jordy_blue-400 transition-colors">
+                            <h3 className="font-medium group-hover:text-primary transition-colors text-foreground">
                               {relatedProject?.name}
                             </h3>
-                            <p className="text-sm text-gray-400 line-clamp-1">
+                            <p className="text-sm text-muted-foreground line-clamp-1">
                               {relatedProject.description.substring(0, 60)}...
                             </p>
                           </div>

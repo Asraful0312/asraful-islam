@@ -5,7 +5,7 @@ import React from "react";
 
 const ProjectsListPage = () => {
   return (
-    <main className="min-h-screen bg-[#0f0f0f]">
+    <main className="min-h-screen bg-background">
       <Navbar />
       <ProjectListing />
       <Footer />

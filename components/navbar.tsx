@@ -10,6 +10,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Authenticated, Unauthenticated } from "convex/react";
 import { useAuthActions } from "@convex-dev/auth/react";
+import { ModeToggle } from "@/components/mode-toggle";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -66,12 +67,12 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent py-5`}
+      className={`fixed top-0 left-0 right-0 z-[9999] transition-all duration-300 bg-transparent py-5`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
-          <Link href="/" className="text-xl font-bold bg-transparent backdrop-blur-md py-3 px-4 rounded-full">
-            <span className="text-white">Asraful</span>
+          <Link href="/" className="liquid-glass text-lg font-bold py-2 px-6 hover:scale-105">
+            <span className="dark:text-white text-jordy_blue-100">Asraful</span>
             {/* <img
               className="size-9 shrink-0 object-cover rounded-full"
               src="/me.png"
@@ -81,7 +82,7 @@ export function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="flex items-center gap-6">
-            <nav className="hidden md:flex items-center space-x-8 bg-transparent backdrop-blur-md rounded-full py-3 px-4">
+            <nav className="liquid-glass hidden md:flex items-center space-x-8 py-3 px-8">
               <NavLink href="#about" onClick={scrollToSection}>
                 About
               </NavLink>
@@ -101,7 +102,8 @@ export function Navbar() {
               <Link
                 href="/blog"
                 className={cn(
-                  "text-gray-300 hover:text-white transition-colors relative group"
+                  "text-zinc-800 dark:text-gray-300 hover:text-jordy_blue-500 dark:hover:text-white transition-colors relative group",
+                  "[text-shadow:_0_1px_2px_rgba(255,255,255,0.8)]  dark:[text-shadow:_0_1px_2px_rgba(0,0,0,0.5)]"
                 )}
               >
                 Blogs
@@ -127,20 +129,21 @@ export function Navbar() {
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-jordy_blue-400 transition-all group-hover:w-full"></span>
             </Link> */}
 
-              <Link
+              {/* <Link
                 href="/terminal"
                 className={cn(
-                  "text-gray-300 hover:text-white transition-colors relative group"
+                  "text-zinc-800 dark:text-gray-300 hover:text-jordy_blue-500 dark:hover:text-white transition-colors relative group",
+                  "[text-shadow:_0_1px_2px_rgba(255,255,255,0.8)]  dark:[text-shadow:_0_1px_2px_rgba(0,0,0,0.5)]"
                 )}
               >
                 <Terminal className="shrink-0" />
-              </Link>
+              </Link> */}
 
               {/* <CartIcon /> */}
 
             </nav>
             <div className="flex items-center gap-4">
-
+              <ModeToggle />
               <Authenticated>
                 <Button onClick={signOut} variant="secondary" className="">
                   Logout
@@ -281,7 +284,9 @@ function NavLink({
       href={href}
       onClick={(e) => onClick(e, href)}
       className={cn(
-        "text-gray-300 hover:text-white transition-colors relative group",
+        "text-zinc-800 dark:text-gray-300 hover:text-jordy_blue-500 dark:hover:text-white transition-colors relative group",
+        // Subtle text shadow for extra pop
+        "[text-shadow:_0_1px_2px_rgba(255,255,255,0.8)]  dark:[text-shadow:_0_1px_2px_rgba(0,0,0,0.5)]",
         className
       )}
     >

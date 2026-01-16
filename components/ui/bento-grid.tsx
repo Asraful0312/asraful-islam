@@ -43,14 +43,14 @@ export const BentoGridItem = ({
                 inactiveZone={0.01}
                 borderWidth={3}
             />
-            <div className="relative h-full flex flex-col justify-between space-y-4 rounded-[1.25rem] bg-zinc-900 border border-white/10 p-6 overflow-hidden">
+            <div className="relative h-full flex flex-col justify-between space-y-4 rounded-[1.25rem] bg-gray-100 dark:bg-zinc-900 border border-white/10 p-6 overflow-hidden">
                 {header}
                 <div className="group-hover/bento:translate-x-2 transition duration-200">
                     {icon}
-                    <div className="font-sans font-bold text-neutral-200 mb-2 mt-2 text-xl">
+                    <div className="font-sans font-bold text-jordy_blue-100 dark:text-neutral-200 mb-2 mt-2 text-xl">
                         {title}
                     </div>
-                    <div className="font-sans font-normal text-neutral-400 text-sm leading-relaxed">
+                    <div className="font-sans font-normal text-jordy_blue-100 dark:text-neutral-400 text-sm leading-relaxed">
                         {description}
                     </div>
                 </div>

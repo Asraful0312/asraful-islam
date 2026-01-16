@@ -1,4 +1,5 @@
 "use client";
+import { useTheme } from "next-themes";
 import React, { useEffect, useRef } from "react";
 
 interface Ghost {
@@ -14,6 +15,7 @@ interface Ghost {
 }
 
 const FloatingGhostsCanvas: React.FC = () => {
+  const { setTheme, resolvedTheme } = useTheme();
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const ghostsRef = useRef<Ghost[]>([]);
   const mousePosRef = useRef({ x: 0, y: 0 });
@@ -107,7 +109,7 @@ const FloatingGhostsCanvas: React.FC = () => {
         ctx.scale(scared ? 0.8 : 1, scared ? 0.8 : 1);
 
         // Ghost body
-        ctx.fillStyle = scared ? "rgba(255, 200, 200, 0.8)" : "white";
+        ctx.fillStyle = scared ? "rgba(255, 200, 200, 0.8)" : resolvedTheme === "dark" ? "white" : "#9ca3af";
         ctx.beginPath();
         ctx.arc(0, 0, ghost.size / 2, 0, Math.PI, true);
         ctx.lineTo(-ghost.size / 2, ghost.size / 2);

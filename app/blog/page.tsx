@@ -5,7 +5,7 @@ import { BlogListing } from "@/components/blog-listing";
 
 export default function BlogPage() {
   return (
-    <main className="min-h-screen bg-[#0f0f0f]">
+    <main className="min-h-screen bg-background">
       <Navbar />
       <BlogListing />
       <Footer />
