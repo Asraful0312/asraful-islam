@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 import { Authenticated, Unauthenticated } from "convex/react";
 import { useAuthActions } from "@convex-dev/auth/react";
 import { ModeToggle } from "@/components/mode-toggle";
+import { AnimatedThemeToggler } from "./ui/animated-theme-toggler";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -143,7 +144,7 @@ export function Navbar() {
 
             </nav>
             <div className="flex items-center gap-4">
-              <ModeToggle />
+              <AnimatedThemeToggler className="text-jordy_blue-100 dark:text-white" />
               <Authenticated>
                 <Button onClick={signOut} variant="secondary" className="">
                   Logout
