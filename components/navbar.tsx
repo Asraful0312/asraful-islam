@@ -102,7 +102,7 @@ export function Navbar() {
               <Link
                 href="/blog"
                 className={cn(
-                  "text-zinc-800 dark:text-gray-300 hover:text-jordy_blue-500 dark:hover:text-white transition-colors relative group",
+                  "text-zinc-800 dark:text-gray-300 dark:hover:text-white transition-colors relative group",
                   "[text-shadow:_0_1px_2px_rgba(255,255,255,0.8)]  dark:[text-shadow:_0_1px_2px_rgba(0,0,0,0.5)]"
                 )}
               >
@@ -165,7 +165,7 @@ export function Navbar() {
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden text-white"
+              className="md:hidden text-jordy_blue-100 dark:text-white"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle menu"
             >
@@ -183,7 +183,7 @@ export function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-[#0f0f0f] border-t border-gray-800"
+            className="md:hidden bg-background border-t border-border"
           >
             <div className="px-4 py-5 space-y-4">
               <MobileNavLink
@@ -224,7 +224,7 @@ export function Navbar() {
               <Link
                 href="/blog"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="block py-2 text-gray-300 hover:text-white transition-colors"
+                className="block py-2 text-foreground transition-colors"
               >
                 Blogs
               </Link>
@@ -284,7 +284,7 @@ function NavLink({
       href={href}
       onClick={(e) => onClick(e, href)}
       className={cn(
-        "text-zinc-800 dark:text-gray-300 hover:text-jordy_blue-500 dark:hover:text-white transition-colors relative group",
+        "text-zinc-800 dark:text-gray-300  dark:hover:text-white transition-colors relative group",
         // Subtle text shadow for extra pop
         "[text-shadow:_0_1px_2px_rgba(255,255,255,0.8)]  dark:[text-shadow:_0_1px_2px_rgba(0,0,0,0.5)]",
         className
@@ -315,7 +315,7 @@ function MobileNavLink({
     <Link
       href={href}
       onClick={(e) => onClick(e, href, closeMenu)}
-      className="block py-2 text-gray-300 hover:text-white transition-colors"
+      className="block py-2 text-foreground transition-colors"
     >
       {children}
     </Link>

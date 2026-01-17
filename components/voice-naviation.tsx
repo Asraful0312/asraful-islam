@@ -135,12 +135,12 @@ export default function VoiceNavigator() {
 
       <div
         ref={ref}
-        className={`bg-[#232323] w-[250px] rounded fixed bottom-20 right-8 max-h-[350px] overflow-y-scroll text-white p-3 z-50 ${show ? "block" : "hidden"
+        className={`bg-background w-[250px] rounded fixed bottom-20 right-8 max-h-[350px] overflow-y-scroll text-foreground p-3 z-50 ${show ? "block" : "hidden"
           }`}
       >
         <div className="flex justify-end">
           <button onClick={() => setShow(false)}>
-            <X className="text-white shrink-0 size-4" />
+            <X className="text-foreground shrink-0 size-4" />
           </button>
         </div>
         <h2 className="text-center font-semibold text-sm mb-2">
@@ -149,7 +149,7 @@ export default function VoiceNavigator() {
         <ul className="list-disc ml-5 space-y-2">
           {commands.map((c) => (
             <li key={c.label} className="text-sm">
-              Say <span className="font-bold text-jordy_blue">{c.command}</span>{" "}
+              Say <span className="font-bold text-jordy_blue-400">{c.command}</span>{" "}
               to navigate to{" "}
               <span className="text-indigo_dye-600 font-bold">{c.label}</span>{" "}
               {c.command === "p1" || c.command === "p2"
@@ -160,7 +160,7 @@ export default function VoiceNavigator() {
             </li>
           ))}
           <li>
-            Say <span className="font-bold text-jordy_blue">stop</span> to stop
+            Say <span className="font-bold text-jordy_blue-400">stop</span> to stop
             voice navigation.
           </li>
         </ul>
