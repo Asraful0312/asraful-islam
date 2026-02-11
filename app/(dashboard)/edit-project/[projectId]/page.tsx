@@ -48,12 +48,17 @@ const EditProject = ({ params }: EditProjectProps) => {
   const deleteImage = useMutation(api.image.deleteImage);
   const [isFeatured, setIsFeatured] = useState(false);
 
-  // Initialize existingGalleryUrls with project.imageGalleryUrls
+  console.log("isFeatured", isFeatured);
+
+  // Initialize states with project data
   useEffect(() => {
-    if (project?.galleryImageUrls) {
-      setExistingGalleryUrls(
-        project.galleryImageUrls.filter((url): url is string => url !== null)
-      );
+    if (project) {
+      if (project.galleryImageUrls) {
+        setExistingGalleryUrls(
+          project.galleryImageUrls.filter((url): url is string => url !== null)
+        );
+      }
+      setIsFeatured(project.isFeatured ?? false);
     }
   }, [project]);
 
@@ -387,8 +392,8 @@ const EditProject = ({ params }: EditProjectProps) => {
         <div className="w-full flex flex-col space-y-1">
           <Label htmlFor="featured-project">Featured Project</Label>
           <Switch
-            checked={project.isFeatured}
-            onClick={() => setIsFeatured((prev) => !prev)}
+            checked={isFeatured}
+            onCheckedChange={setIsFeatured}
             id="featured-project"
           />
         </div>
