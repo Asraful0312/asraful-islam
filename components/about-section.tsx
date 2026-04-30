@@ -24,9 +24,9 @@ export function AboutSection() {
           viewport={{ once: true }}
           className="mb-16 text-center"
         >
-          <div className="inline-block mb-3">
-            <span className="py-1 px-3 rounded-full bg-secondary border border-border text-sm font-medium text-muted-foreground">
-              Discover
+          <div className="inline-block mb-4">
+            <span className="py-1 px-3 rounded-full bg-secondary border border-border text-xs font-semibold tracking-widest uppercase text-muted-foreground">
+              Background
             </span>
           </div>
           <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6 tracking-tight">

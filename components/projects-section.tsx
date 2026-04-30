@@ -4,105 +4,103 @@ import { useQuery } from "convex-helpers/react/cache";
 import { api } from "@/convex/_generated/api";
 import Link from "next/link";
 import { ArrowUpRight, Github } from "lucide-react";
-import { CardBody, CardContainer, CardItem } from "./ui/3d-card";
+import { motion } from "framer-motion";
 
 export function ProjectsSection() {
   const projects = useQuery(api.project.getUserFeatureProjects);
 
   return (
-    <div className="w-full py-20 bg-background" id="projects">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-        <div className="inline-block mb-3">
-          <span className="py-1 px-3 rounded-full bg-secondary border border-border text-sm font-medium text-muted-foreground">
-            Latest Work
-          </span>
+    <section className="py-24 bg-background" id="projects">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="mb-14">
+          <div className="inline-block mb-4">
+            <span className="py-1 px-3 rounded-full bg-secondary border border-border text-xs font-semibold tracking-widest uppercase text-muted-foreground">
+              Latest work
+            </span>
+          </div>
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+            <div>
+              <h2 className="text-3xl md:text-5xl font-bold text-foreground tracking-tight mb-3">
+                Featured <span className="text-jordy_blue-400 dark:text-jordy_blue">projects</span>
+              </h2>
+              <p className="text-muted-foreground max-w-xl text-base leading-relaxed">
+                A selection of full-stack apps and tools I've built — real problems, real users.
+              </p>
+            </div>
+            <Link
+              href="/project-list"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-jordy_blue-400 dark:text-jordy_blue hover:underline underline-offset-4 shrink-0"
+            >
+              View all <ArrowUpRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
-        <h2 className="text-3xl md:text-5xl font-bold text-foreground font-sans mb-4">
-          Featured <span className="text-jordy_blue-400 dark:text-jordy_blue">Projects</span>
-        </h2>
-        <p className="text-muted-foreground max-w-2xl text-lg">
-          Explore a selection of my recent work, featuring full-stack applications and innovative designs. Hover over the cards to see the 3D effect.
-        </p>
-      </div>
 
-      <div className="flex flex-wrap items-center justify-center gap-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {projects?.map((project) => (
-          <CardContainer key={project._id} className="inter-var">
-            <CardBody className="bg-card relative group/card hover:shadow-2xl dark:hover:shadow-emerald-500/[0.1] border-border w-auto sm:w-[30rem] h-auto rounded-xl p-6 border shadow-sm dark:shadow-none">
-              <CardItem
-                translateZ="50"
-                className="text-xl font-bold text-foreground"
-              >
-                {project.name}
-              </CardItem>
-              <CardItem
-                as="p"
-                translateZ="60"
-                className="text-muted-foreground text-sm max-w-sm mt-2 line-clamp-2"
-              >
-                {project.description}
-              </CardItem>
-              <CardItem translateZ="100" className="w-full mt-6">
-                <Link href={`/projects-details/${project._id}`} className="block">
-                  <img
-                    src={project.thumbnailUrl || "/placeholder.svg"}
-                    height="1000"
-                    width="1000"
-                    className="h-60 w-full object-cover rounded-xl group-hover/card:shadow-xl cursor-pointer"
-                    alt={project.name}
-                  />
-                </Link>
-              </CardItem>
-              <div className="flex justify-between items-center mt-10">
-                <div className="flex gap-2">
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {projects?.map((project, i) => (
+            <motion.div
+              key={project._id}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              viewport={{ once: true }}
+              className="group flex flex-col rounded-2xl border border-border/60 bg-card overflow-hidden hover:border-jordy_blue-400/30 transition-all duration-300 hover:shadow-lg"
+            >
+              {/* Thumbnail */}
+              <Link href={`/projects-details/${project._id}`} className="block overflow-hidden aspect-video relative">
+                <img
+                  src={project.thumbnailUrl || "/placeholder.svg"}
+                  alt={project.name}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </Link>
+
+              {/* Content */}
+              <div className="flex flex-col flex-1 p-5 gap-3">
+                <div className="flex-1">
+                  <h3 className="text-base font-semibold text-foreground mb-1.5 leading-snug">
+                    {project.name}
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
+                    {project.description}
+                  </p>
+                </div>
+
+                {/* Actions — pinned to bottom */}
+                <div className="flex items-center gap-2 pt-3 border-t border-border/50">
                   {project.demoLink && (
-                    <CardItem
-                      translateZ={20}
-                      as={Link}
+                    <Link
                       href={project.demoLink}
-                      target="__blank"
-                      className="px-4 py-2 rounded-xl text-xs font-normal text-primary-foreground bg-primary"
+                      target="_blank"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-primary text-primary-foreground text-xs font-semibold hover:bg-primary/90 active:scale-95 transition-all duration-200"
                     >
-                      <div className="flex items-center gap-2 group-hover:text-jordy_blue transition-colors">
-                        Live <ArrowUpRight className="w-4 h-4" />
-                      </div>
-                    </CardItem>
+                      Live <ArrowUpRight className="w-3.5 h-3.5" />
+                    </Link>
                   )}
                   {project.sourceCode && (
-                    <CardItem
-                      translateZ={20}
-                      as={Link}
+                    <Link
                       href={project.sourceCode}
-                      target="__blank"
-                      className="px-4 py-2 rounded-xl bg-secondary text-secondary-foreground text-xs font-bold border border-border"
+                      target="_blank"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-secondary border border-border text-secondary-foreground text-xs font-semibold hover:bg-secondary/80 active:scale-95 transition-all duration-200"
                     >
-                      GitHub
-                    </CardItem>
+                      <Github className="w-3.5 h-3.5" /> GitHub
+                    </Link>
                   )}
+                  <Link
+                    href={`/projects-details/${project._id}`}
+                    className="ml-auto text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    Details →
+                  </Link>
                 </div>
-                <CardItem
-                  translateZ={20}
-                  as={Link}
-                  href={`/projects-details/${project._id}`}
-                  className="px-4 py-2 rounded-xl border border-border text-xs font-bold hover:bg-secondary/50 transition-colors text-foreground"
-                >
-                  Details
-                </CardItem>
               </div>
-            </CardBody>
-          </CardContainer>
-        ))}
+            </motion.div>
+          ))}
+        </div>
       </div>
-
-      <div className="flex justify-center mt-12">
-        <Link
-          href="/project-list"
-          className="inline-flex items-center justify-center px-8 py-3 text-sm font-medium text-primary-foreground bg-primary border border-transparent rounded-full hover:bg-primary/90 transition-all duration-300 group"
-        >
-          View All Projects
-          <ArrowUpRight className="ml-2 w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-        </Link>
-      </div>
-    </div>
+    </section>
   );
 }

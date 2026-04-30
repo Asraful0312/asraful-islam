@@ -9,7 +9,7 @@ import { ReviewsSection } from "@/components/reviews-section";
 
 export default function Home() {
   return (
-    <main className="min-h-screen dark:bg-[#0f0f0f]">
+    <main className="min-h-screen bg-background">
       <Navbar />
       <HeroSection />
       <AboutSection />
