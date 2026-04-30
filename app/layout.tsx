@@ -1,5 +1,5 @@
 import type React from "react";
-import { Inter } from "next/font/google";
+import { Outfit } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 
@@ -9,12 +9,11 @@ import { ConvexClientProvider } from "./ConvexClientProvider";
 import { Toaster } from "sonner";
 import { CartProvider } from "@/contexts/use-context";
 
-const inter = Inter({ subsets: ["latin"] });
+const outfit = Outfit({ subsets: ["latin"], weight: ["300", "400", "500", "600", "700", "800"] });
 
 export const metadata = {
-  title: "Portfolio | Creative Developer",
-  description: "Personal portfolio showcasing creative development work",
-  generator: "v0.dev",
+  title: "Asraful Islam — Full Stack Developer",
+  description: "Full stack developer building fast, thoughtful web applications. Based in Bangladesh.",
 };
 
 export default function RootLayout({
@@ -25,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.className} bg-background text-foreground antialiased`}
+        className={`${outfit.className} bg-background text-foreground antialiased`}
       >
         <ConvexClientProvider>
           <ThemeProvider

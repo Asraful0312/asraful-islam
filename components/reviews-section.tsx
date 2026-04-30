@@ -39,45 +39,38 @@ export function ReviewsSection() {
   return (
     <section id="reviews" className="section-container overflow-hidden py-20 bg-background" ref={ref}>
       <div className="text-center mb-10">
-        <h2 className="section-heading">
-          Client <span className="dark:text-jordy_blue text-jordy_blue-400">Testimonials</span>
+        <h2 className="text-3xl md:text-4xl font-bold mb-3 text-foreground tracking-tight">
+          Client <span className="text-jordy_blue-400 dark:text-jordy_blue">testimonials</span>
         </h2>
-        <p className="text-muted-foreground max-w-3xl mx-auto text-lg">
-          Don't just take my word for it. Here's what clients and colleagues
-          have to say about working with me.
+        <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+          What clients and colleagues say about working with me.
         </p>
       </div>
 
       <AnimatedTestimonials testimonials={testimonials} autoplay={true} />
 
-      <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto px-4">
-        <div className="bg-card rounded-3xl p-6 border border-border flex flex-col items-center text-center hover:border-jordy_blue/30 transition-colors shadow-none">
-          <div className="bg-jordy_blue/10 p-4 rounded-full mb-4">
-            <span className="text-2xl font-bold text-jordy_blue-400 dark:text-jordy_blue">25+</span>
-          </div>
-          <h3 className="text-xl font-bold mb-2 text-foreground">Projects</h3>
-          <p className="text-muted-foreground">
-            Successfully completed for clients across various industries
+      <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto px-4">
+        <div className="bg-card rounded-2xl p-6 border border-border flex flex-col items-center text-center hover:border-jordy_blue-400/30 transition-colors duration-300">
+          <span className="text-4xl font-bold text-jordy_blue-400 dark:text-jordy_blue mb-1 tabular-nums">23</span>
+          <h3 className="text-base font-semibold mb-1 text-foreground">Projects shipped</h3>
+          <p className="text-muted-foreground text-sm">
+            Across SaaS products, marketplaces, and internal tools
           </p>
         </div>
 
-        <div className="bg-card rounded-3xl p-6 border border-border flex flex-col items-center text-center hover:border-jordy_blue/30 transition-colors shadow-none">
-          <div className="bg-jordy_blue/10 p-4 rounded-full mb-4">
-            <span className="text-2xl font-bold text-jordy_blue-400 dark:text-jordy_blue">5+</span>
-          </div>
-          <h3 className="text-xl font-bold mb-2 text-foreground">Years</h3>
-          <p className="text-muted-foreground">
-            Of experience in web development and design
+        <div className="bg-card rounded-2xl p-6 border border-border flex flex-col items-center text-center hover:border-jordy_blue-400/30 transition-colors duration-300">
+          <span className="text-4xl font-bold text-jordy_blue-400 dark:text-jordy_blue mb-1 tabular-nums">4</span>
+          <h3 className="text-base font-semibold mb-1 text-foreground">Years of experience</h3>
+          <p className="text-muted-foreground text-sm">
+            In full-stack web development and UI engineering
           </p>
         </div>
 
-        <div className="bg-card rounded-3xl p-6 border border-border flex flex-col items-center text-center hover:border-jordy_blue/30 transition-colors shadow-none">
-          <div className="bg-jordy_blue/10 p-4 rounded-full mb-4">
-            <span className="text-2xl font-bold text-jordy_blue-400 dark:text-jordy_blue">100%</span>
-          </div>
-          <h3 className="text-xl font-bold mb-2 text-foreground">Satisfaction</h3>
-          <p className="text-muted-foreground">
-            Client satisfaction rate with project deliverables
+        <div className="bg-card rounded-2xl p-6 border border-border flex flex-col items-center text-center hover:border-jordy_blue-400/30 transition-colors duration-300">
+          <span className="text-4xl font-bold text-jordy_blue-400 dark:text-jordy_blue mb-1 tabular-nums">96%</span>
+          <h3 className="text-base font-semibold mb-1 text-foreground">Client satisfaction</h3>
+          <p className="text-muted-foreground text-sm">
+            Based on post-project feedback and repeat engagement rate
           </p>
         </div>
       </div>

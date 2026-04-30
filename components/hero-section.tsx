@@ -54,14 +54,10 @@ export function HeroSection() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <div className="inline-block px-3 py-1 mb-4 text-sm font-medium tracking-wider text-foreground uppercase bg-secondary/50 rounded-full border border-border backdrop-blur-sm">
+              <div className="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-widest text-muted-foreground uppercase bg-secondary/60 rounded-full border border-border/60 backdrop-blur-sm">
                 Full Stack Developer
               </div>
-              <h1
-
-                className="text-5xl md:text-6xl lg:text-7xl font-bold mb-3"
-              >
-                {/* <span className="text-color">Asraful Islam</span> */}
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-3 tracking-tight leading-[1.05]">
                 <SparklesText className="text-jordy_blue-400 dark:text-jordy_blue" text="Asraful Islam" />
               </h1>
             </motion.div>
@@ -72,8 +68,7 @@ export function HeroSection() {
               transition={{ duration: 0.5, delay: 0.4 }}
               className="text-lg md:text-xl text-muted-foreground max-w-lg leading-relaxed"
             >
-              Crafting exceptional digital experiences with a focus on accessibility
-              and human-centered design. I build things for the web that matter.
+              I build full-stack web applications with clean code, reliable architecture, and shipped on time. Based in Bangladesh, working with teams worldwide.
             </motion.p>
 
             <motion.div
@@ -85,19 +80,19 @@ export function HeroSection() {
               <Button
                 asChild
                 size="lg"
-                className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 font-semibold shadow-[0_0_20px_rgba(0,0,0,0.1)] dark:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_25px_rgba(0,0,0,0.2)] dark:hover:shadow-[0_0_25px_rgba(255,255,255,0.45)] transition-all duration-300"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 active:scale-[0.98] rounded-full px-8 font-semibold transition-all duration-200"
               >
                 <Link href="/#projects">
-                  View Work <ArrowRight className="ml-2 h-4 w-4" />
+                  View work <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
               <Button
                 asChild
                 size="lg"
                 variant="outline"
-                className="border-border text-foreground hover:bg-secondary rounded-full px-8 backdrop-blur-md bg-background/5"
+                className="border-border text-foreground hover:bg-secondary active:scale-[0.98] rounded-full px-8 backdrop-blur-md bg-background/5 transition-all duration-200"
               >
-                <Link href="/#contact">Contact Me</Link>
+                <Link href="/#contact">Get in touch</Link>
               </Button>
             </motion.div>
 
@@ -127,21 +122,21 @@ export function HeroSection() {
           </div>
 
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, rotate: 5 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.4 }}
             className="relative hidden md:block"
           >
             <div className="relative w-80 h-80 lg:w-[400px] lg:h-[400px] mx-auto">
-              <div className="absolute inset-0 bg-gradient-to-tr from-blue-500 to-purple-500 rounded-[2rem] opacity-30 blur-3xl animate-pulse"></div>
-              <div className="relative h-full w-full rounded-[2rem] overflow-hidden border border-white/10 bg-Card backdrop-blur-sm shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
+              <div className="absolute -inset-1 rounded-[2.5rem] bg-jordy_blue-400/10 dark:bg-jordy_blue/10 blur-2xl" />
+              <div className="relative h-full w-full rounded-[2rem] overflow-hidden border border-border/40 shadow-2xl hover:shadow-jordy_blue-400/10 transition-shadow duration-500">
                 <img
                   src="/me.png"
-                  alt="Asraful Islam"
+                  alt="Asraful Islam — Full Stack Developer"
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                  <p className="text-white font-medium">Asraful Islam</p>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                  <p className="text-white font-medium text-sm">Asraful Islam</p>
                 </div>
               </div>
             </div>

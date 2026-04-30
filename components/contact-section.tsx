@@ -83,15 +83,14 @@ export function ContactSection() {
             {/* Left Content */}
             <motion.div variants={itemVariants} className="flex flex-col justify-center h-full">
               <div className="mb-8">
-                <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-                  Let's Build Something <br />
+                <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6 tracking-tight">
+                  Let's build something<br />
                   <span className="text-jordy_blue-400 dark:text-jordy_blue-500">
-                    Amazing Together
+                    worth shipping.
                   </span>
                 </h2>
                 <p className="text-muted-foreground text-lg leading-relaxed max-w-lg">
-                  Have a project in mind or want to discuss potential opportunities?
-                  I'm always open to new challenges and creative collaborations.
+                  Have a project in mind or want to talk through an idea? Send me a message and I'll get back to you within a day.
                 </p>
               </div>
 
@@ -155,8 +154,7 @@ export function ContactSection() {
 
             {/* Right Form */}
             <motion.div variants={itemVariants} className="relative">
-              {/* Glow Effect from behind form */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-jordy_blue-500 to-purple-600 rounded-3xl blur opacity-20 pointer-events-none" />
+              <div className="absolute -inset-1 bg-jordy_blue-400/15 dark:bg-jordy_blue/10 rounded-3xl blur-xl pointer-events-none" />
 
               <form
                 onSubmit={handleSubmit}
@@ -171,7 +169,7 @@ export function ContactSection() {
                         name="name"
                         value={formState.name}
                         onChange={handleChange}
-                        placeholder="John Doe"
+                        placeholder="Your name"
                         required
                         className="bg-background/50 border-border focus:border-jordy_blue-500 focus:ring-1 focus:ring-jordy_blue-500 transition-all rounded-xl py-6 text-foreground placeholder:text-muted-foreground"
                       />

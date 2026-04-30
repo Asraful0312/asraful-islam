@@ -29,12 +29,11 @@ export function AboutSection() {
               Discover
             </span>
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-            About <span className="text-jordy_blue-400 dark:text-jordy_blue-500">Me</span>
+          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6 tracking-tight">
+            About <span className="text-jordy_blue-400 dark:text-jordy_blue-500">me</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg leading-relaxed">
-            I'm a developer who loves building things that are both beautiful and functional.
-            Here's a bit more about what drives me.
+            I write code that works, ships, and holds up over time. Here's what that looks like in practice.
           </p>
         </motion.div>
 
@@ -68,44 +67,44 @@ export function AboutSection() {
 
 const items = [
   {
-    title: "Full Stack Mastery",
-    description: "Building scalable applications end-to-end with the modern web stack.",
+    title: "End-to-end ownership",
+    description: "From database schema to UI animation — I own the full stack without dropping quality at either end.",
     header: (
-      <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-secondary/50 to-secondary items-center justify-center border border-border group-hover/bento:border-purple-500/30 transition-colors">
-        <LayoutDashboard className="w-12 h-12 text-muted-foreground group-hover/bento:text-purple-600 dark:group-hover/bento:text-purple-400 transition-colors duration-300" />
+      <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-secondary/50 to-secondary items-center justify-center border border-border group-hover/bento:border-jordy_blue-400/30 transition-colors">
+        <LayoutDashboard className="w-12 h-12 text-muted-foreground group-hover/bento:text-jordy_blue-400 transition-colors duration-300" />
       </div>
     ),
     className: "md:col-span-2",
     icon: <ArrowRight className="h-4 w-4 text-muted-foreground" />,
   },
   {
-    title: "Global Perspective",
-    description: "Collaborating with clients worldwide to deliver impact.",
+    title: "Remote-first",
+    description: "Clear async communication, timezone-aware delivery, and work you can rely on.",
     header: (
-      <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-secondary/50 to-secondary items-center justify-center border border-border group-hover/bento:border-blue-500/30 transition-colors">
-        <Globe className="w-12 h-12 text-muted-foreground group-hover/bento:text-blue-600 dark:group-hover/bento:text-blue-400 transition-colors duration-300" />
+      <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-secondary/50 to-secondary items-center justify-center border border-border group-hover/bento:border-jordy_blue-400/30 transition-colors">
+        <Globe className="w-12 h-12 text-muted-foreground group-hover/bento:text-jordy_blue-400 transition-colors duration-300" />
       </div>
     ),
     className: "md:col-span-1",
     icon: <ArrowRight className="h-4 w-4 text-muted-foreground" />,
   },
   {
-    title: "Modern Tech Stack",
-    description: "Expertise in React, Next.js, Node.js, and Cloud Infrastructure.",
+    title: "Practical tech choices",
+    description: "React, Next.js, Node.js, PostgreSQL, and the cloud — chosen for the problem, not the resume.",
     header: (
-      <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-secondary/50 to-secondary items-center justify-center border border-border group-hover/bento:border-orange-500/30 transition-colors">
-        <Code2 className="w-12 h-12 text-muted-foreground group-hover/bento:text-orange-600 dark:group-hover/bento:text-orange-400 transition-colors duration-300" />
+      <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-secondary/50 to-secondary items-center justify-center border border-border group-hover/bento:border-jordy_blue-400/30 transition-colors">
+        <Code2 className="w-12 h-12 text-muted-foreground group-hover/bento:text-jordy_blue-400 transition-colors duration-300" />
       </div>
     ),
     className: "md:col-span-1",
     icon: <ArrowRight className="h-4 w-4 text-muted-foreground" />,
   },
   {
-    title: "Innovation Driven",
-    description: "Constantly pushing boundaries and exploring new frontiers in tech.",
+    title: "Problem first, technology second",
+    description: "I reach for boring, proven tools when they work, and new ones only when they genuinely solve a real problem.",
     header: (
-      <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-secondary/50 to-secondary items-center justify-center border border-border group-hover/bento:border-green-500/30 transition-colors">
-        <Rocket className="w-12 h-12 text-muted-foreground group-hover/bento:text-green-600 dark:group-hover/bento:text-green-400 transition-colors duration-300" />
+      <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-secondary/50 to-secondary items-center justify-center border border-border group-hover/bento:border-jordy_blue-400/30 transition-colors">
+        <Rocket className="w-12 h-12 text-muted-foreground group-hover/bento:text-jordy_blue-400 transition-colors duration-300" />
       </div>
     ),
     className: "md:col-span-2",

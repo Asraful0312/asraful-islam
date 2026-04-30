@@ -5,56 +5,52 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
+    --foreground: 220 15% 10%;
     --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
+    --card-foreground: 220 15% 10%;
     --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
+    --popover-foreground: 220 15% 10%;
     --primary: 240 5.9% 10%;
     --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
+    --secondary: 220 14% 94%;
+    --secondary-foreground: 220 15% 10%;
+    --muted: 220 14% 94%;
+    --muted-foreground: 220 10% 46%;
+    --accent: 220 14% 94%;
+    --accent-foreground: 220 15% 10%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    --ring: 240 5.9% 10%;
+    --border: 220 13% 88%;
+    --input: 220 13% 88%;
+    --ring: 220 15% 10%;
     --radius: 0.5rem;
   }
 
   .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
+    --background: 222 20% 7%;
+    --foreground: 210 20% 96%;
+    --card: 222 18% 9%;
+    --card-foreground: 210 20% 96%;
+    --popover: 222 18% 9%;
+    --popover-foreground: 210 20% 96%;
+    --primary: 210 20% 96%;
+    --primary-foreground: 222 20% 7%;
+    --secondary: 220 15% 14%;
+    --secondary-foreground: 210 20% 96%;
+    --muted: 220 15% 14%;
+    --muted-foreground: 215 12% 58%;
+    --accent: 220 15% 14%;
+    --accent-foreground: 210 20% 96%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
+    --border: 220 14% 17%;
+    --input: 220 14% 17%;
+    --ring: 215 20% 78%;
   }
 }
 
 .ql-code-block-container {
   @apply bg-background py-3 px-4 rounded-lg selection:bg-purple-500/40 overflow-scroll;
-}
-
-body {
-  @apply bg-background text-foreground;
 }
 
 ::view-transition-old(root),
@@ -121,40 +117,19 @@ body {
 
 body {
   @apply bg-background text-foreground;
-  font-feature-settings:
-    "rlig" 1,
-    "calt" 1;
+  font-feature-settings: "rlig" 1, "calt" 1;
   scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 .gradient-text {
-  @apply bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-blue-500;
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-jordy_blue-400 to-jordy_blue-300;
 }
 
 .animate-in {
   animation: animateIn 0.5s ease-in-out forwards;
   opacity: 0;
-}
-
-/* Text Color Animation: Creates a gradient text color animation that smoothly transitions through different colors. Ideal for headings or any text you want to highlight with dynamic color changes. */
-.text-color {
-  color: #ffff;
-  background-image: linear-gradient(to right,
-      #60a5fa,
-      #fb923c,
-      #7e22ce,
-      #60a5fa);
-  background-size: 200% auto;
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-  animation: TextColor 5s linear infinite;
-}
-
-@keyframes TextColor {
-  to {
-    background-position: -200% center;
-  }
 }
 
 @keyframes animateIn {
@@ -278,7 +253,16 @@ body {
 }
 
 .section-heading {
-  @apply text-3xl md:text-4xl font-bold mb-2 text-zinc-900 dark:text-white;
+  @apply text-3xl md:text-4xl font-bold mb-2 text-foreground tracking-tight;
+  text-wrap: balance;
+}
+
+h1, h2, h3 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
 }
 
 .section-container {
@@ -312,10 +296,6 @@ body {
 @layer base {
   * {
     @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground;
   }
 }
 
