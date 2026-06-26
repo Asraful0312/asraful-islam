@@ -17,6 +17,7 @@ import {
   Lightbulb,
   Wrench,
 } from "lucide-react";
+import { useTheme } from "next-themes";
 
 /* ─────────────────────────────────────────────
    Visual 1 — Stack layers cycling highlight
@@ -105,6 +106,7 @@ function StackLayersVisual() {
 ────────────────────────────────────────────── */
 function TimezoneVisual() {
   const [activeTz, setActiveTz] = useState(0);
+  const {theme } = useTheme();
 
   useEffect(() => {
     const id = setInterval(() => setActiveTz((p) => (p + 1) % 3), 2000);
@@ -145,7 +147,9 @@ function TimezoneVisual() {
               key={tz.zone}
               animate={{
                 backgroundColor: isActive
-                  ? "rgba(163,230,53,0.08)"
+                  ? theme === "dark"
+                    ? "#0a0a0a"
+                    : "rgba(163,230,53,0.08)"
                   : undefined,
               }}
               className={cn(
