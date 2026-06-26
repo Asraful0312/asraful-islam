@@ -3,8 +3,95 @@ import React from "react";
 import { useQuery } from "convex-helpers/react/cache";
 import { api } from "@/convex/_generated/api";
 import Link from "next/link";
-import { ArrowUpRight, Github } from "lucide-react";
+import { ArrowUpRight, Github, ExternalLink } from "lucide-react";
 import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
+
+function ProjectCard({
+  name,
+  description,
+  thumbnailUrl,
+  demoLink,
+  sourceCode,
+  detailsHref,
+  index,
+}: {
+  name: string;
+  description: string;
+  thumbnailUrl?: string | null;
+  demoLink?: string | null;
+  sourceCode?: string | null;
+  detailsHref: string;
+  index: number;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.45, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+      viewport={{ once: true }}
+      className={cn(
+        "group relative flex flex-col gap-3 overflow-hidden rounded-[20px] p-4",
+        "bg-white dark:bg-neutral-900",
+        "shadow-[0_0_0_1px_rgba(0,0,0,0.08),0_2px_4px_rgba(0,0,0,0.04)]",
+        "dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05),0_0_0_1px_rgba(255,255,255,0.05),0_2px_4px_rgba(0,0,0,0.2)]"
+      )}
+    >
+     
+
+      {/* Title + description */}
+      <div className="z-10 flex flex-col gap-1.5">
+        <h3 className="font-semibold text-foreground text-sm tracking-tight leading-snug">
+          {name}
+        </h3>
+        <p className="text-muted-foreground text-xs leading-relaxed line-clamp-2 max-w-[90%]">
+          {description}
+        </p>
+      </div>
+
+      {/* Action links */}
+      <div className="flex items-center gap-2 mt-auto">
+        {demoLink && (
+          <Link
+            href={demoLink}
+            target="_blank"
+            className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-primary text-primary-foreground text-[11px] font-semibold hover:bg-primary/90 active:scale-95 transition-all duration-200"
+          >
+            <ExternalLink className="w-3 h-3" /> Live
+          </Link>
+        )}
+        {sourceCode && (
+          <Link
+            href={sourceCode}
+            target="_blank"
+            className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-secondary border border-border text-secondary-foreground text-[11px] font-semibold hover:bg-secondary/80 active:scale-95 transition-all duration-200"
+          >
+            <Github className="w-3 h-3" /> GitHub
+          </Link>
+        )}
+        <Link
+          href={detailsHref}
+          className="ml-auto text-[11px] font-medium text-muted-foreground hover:text-foreground transition-colors"
+        >
+          Details →
+        </Link>
+      </div>
+
+       {/* Thumbnail — inner card style matching AgentBentoGrid visual area */}
+      <Link
+        href={detailsHref}
+        className="relative w-full overflow-hidden rounded-[14px] border border-border/50 bg-background/50 dark:bg-neutral-950/50 aspect-video block shrink-0"
+      >
+        <img
+          src={thumbnailUrl || "/placeholder.svg"}
+          alt={name}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[14px]" />
+      </Link>
+    </motion.div>
+  );
+}
 
 export function ProjectsSection() {
   const projects = useQuery(api.project.getUserFeatureProjects);
@@ -25,7 +112,7 @@ export function ProjectsSection() {
                 Featured <span className="text-jordy_blue-400 dark:text-jordy_blue">projects</span>
               </h2>
               <p className="text-muted-foreground max-w-xl text-base leading-relaxed">
-                A selection of full-stack apps and tools I've built — real problems, real users.
+                A selection of full-stack apps and tools I&apos;ve built — real problems, real users.
               </p>
             </div>
             <Link
@@ -37,67 +124,19 @@ export function ProjectsSection() {
           </div>
         </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Bento grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
           {projects?.map((project, i) => (
-            <motion.div
+            <ProjectCard
               key={project._id}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              viewport={{ once: true }}
-              className="group flex flex-col rounded-2xl border border-border/60 bg-card overflow-hidden hover:border-jordy_blue-400/30 transition-all duration-300 hover:shadow-lg"
-            >
-              {/* Thumbnail */}
-              <Link href={`/projects-details/${project._id}`} className="block overflow-hidden aspect-video relative">
-                <img
-                  src={project.thumbnailUrl || "/placeholder.svg"}
-                  alt={project.name}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </Link>
-
-              {/* Content */}
-              <div className="flex flex-col flex-1 p-5 gap-3">
-                <div className="flex-1">
-                  <h3 className="text-base font-semibold text-foreground mb-1.5 leading-snug">
-                    {project.name}
-                  </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
-                    {project.description}
-                  </p>
-                </div>
-
-                {/* Actions — pinned to bottom */}
-                <div className="flex items-center gap-2 pt-3 border-t border-border/50">
-                  {project.demoLink && (
-                    <Link
-                      href={project.demoLink}
-                      target="_blank"
-                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-primary text-primary-foreground text-xs font-semibold hover:bg-primary/90 active:scale-95 transition-all duration-200"
-                    >
-                      Live <ArrowUpRight className="w-3.5 h-3.5" />
-                    </Link>
-                  )}
-                  {project.sourceCode && (
-                    <Link
-                      href={project.sourceCode}
-                      target="_blank"
-                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-secondary border border-border text-secondary-foreground text-xs font-semibold hover:bg-secondary/80 active:scale-95 transition-all duration-200"
-                    >
-                      <Github className="w-3.5 h-3.5" /> GitHub
-                    </Link>
-                  )}
-                  <Link
-                    href={`/projects-details/${project._id}`}
-                    className="ml-auto text-xs font-medium text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    Details →
-                  </Link>
-                </div>
-              </div>
-            </motion.div>
+              index={i}
+              name={project.name}
+              description={project.description}
+              thumbnailUrl={project.thumbnailUrl}
+              demoLink={project.demoLink}
+              sourceCode={project.sourceCode}
+              detailsHref={`/projects-details/${project._id}`}
+            />
           ))}
         </div>
       </div>
