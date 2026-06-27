@@ -146,11 +146,9 @@ function TimezoneVisual() {
             <motion.div
               key={tz.zone}
               animate={{
-                backgroundColor: isActive
-                  ? theme === "dark"
-                    ? "#0a0a0a"
-                    : "rgba(163,230,53,0.08)"
-                  : undefined,
+                 backgroundColor: isActive
+                ? "rgba(163,230,53,0.08)"
+                : "rgba(0,0,0,0)",
               }}
               className={cn(
                 "flex items-center justify-between rounded-lg px-3 py-2 transition-colors duration-300",
