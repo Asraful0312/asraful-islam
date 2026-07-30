@@ -228,7 +228,7 @@ export function BlogDetails({ blog }: BlogDetailsProps) {
             <div className="mb-8">
               <h3 className="text-lg font-semibold mb-4 text-foreground">Tags</h3>
               <div className="flex flex-wrap gap-2">
-                {blog.tags.map((tag) => (
+                {blog.tags?.map((tag) => (
                   <Badge
                     key={tag}
                     variant="outline"

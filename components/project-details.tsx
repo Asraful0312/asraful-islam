@@ -167,7 +167,7 @@ export function ProjectDetails({
                           <Badge
                             key={tech}
                             variant="outline"
-                            className="bg-[#232323] text-gray-300 border-gray-700"
+                            className="bg-[#232323] text-muted-foreground border-gray-700"
                           >
                             {tech}
                           </Badge>

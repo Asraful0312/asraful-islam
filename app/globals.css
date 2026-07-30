@@ -112,10 +112,10 @@
   }
 }
 
-.ql-code-block-container {
+/* .ql-code-block-container {
   @apply bg-background py-3 px-4 rounded-lg overflow-scroll;
   selection: bg-purple-500/40;
-}
+} */
 
 ::view-transition-old(root),
 ::view-transition-new(root) {

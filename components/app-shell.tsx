@@ -8,12 +8,10 @@ import { api } from "./../convex/_generated/api";
 export default function AppShell({ children }: { children: React.ReactNode }) {
   const currentUser = useQuery(api.auth.loggedInUser);
 
-  const adminEmail = process.env.NEXT_PUBLIC_ADMIN_EMAIL!;
-
   return (
     <>
       <Authenticated>
-        {adminEmail === currentUser?.email ? (
+        {currentUser?.role === "admin" ? (
           <SidebarProvider>
             <AppSidebar />
             <div className="w-full ">
@@ -23,7 +21,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
             </div>
           </SidebarProvider>
         ) : (
-          <p className="text-lg text-center mt-20 text-white">
+          <p className="text-lg text-center mt-20">
             You cannot access this page!
           </p>
         )}
@@ -32,7 +30,7 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
         <div className="flex items-center justify-center h-full">
           <Link
             href="/signin"
-            className="text-white text-lg font-bold underline mt-20"
+            className="text-lg font-bold underline mt-20"
           >
             Please login to access this page
           </Link>

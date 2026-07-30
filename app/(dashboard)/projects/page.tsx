@@ -64,7 +64,7 @@ const Projects = () => {
                   />
                 )}
                 <h2 className="text-xl font-semibold">{project.name}</h2>
-                <p className="text-gray-300 mb-4">
+                <p className="text-muted-foreground mb-4">
                   {project.description.substring(0, 150)}...
                 </p>
                 <div className="flex space-x-2">

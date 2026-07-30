@@ -248,11 +248,11 @@ const CreateBlog = () => {
           {categories?.map((c) => (
             <div
               key={c}
-              className="flex items-center gap-2 text-white py-1 px-2 border justify-between border-purple-500 mt-5"
+              className="flex items-center gap-2 py-1 px-2 border justify-between mt-5"
             >
               {c}
               <button onClick={() => removeCategory(c)} type="button">
-                <X className="size-4 text-white shrink-0" />
+                <X className="size-4 shrink-0" />
               </button>
             </div>
           ))}
@@ -266,11 +266,11 @@ const CreateBlog = () => {
             id="published"
             checked={published}
             onChange={(e) => setPublished(e.target.checked)}
-            className="h-4 w-4 text-gray-300 focus:ring-primary border-gray-300 rounded"
+            className="h-4 w-4 text-muted-foreground focus:ring-primary border-border rounded"
           />
           <label
             htmlFor="published"
-            className="ml-2 block text-sm text-gray-300"
+            className="ml-2 block text-sm text-muted-foreground"
           >
             Publish immediately (uncheck to save as draft)
           </label>

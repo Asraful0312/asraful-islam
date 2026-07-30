@@ -138,7 +138,7 @@ export function CodeDetails({ code, relatedCodes }: CodeDetailsProps) {
                     <Badge variant="outline">{code.language}</Badge>
                   </div>
                   <pre className="bg-[#0f0f0f] p-4 rounded border border-gray-700 overflow-x-auto text-sm">
-                    <code className="text-gray-300">
+                    <code className="text-muted-foreground">
                       {`// ${code.title} - ${code.language} Code
 // This is a preview of the source code
 
@@ -229,7 +229,7 @@ export default ${code.title.replace(/\s+/g, "")};`}
                               2 days ago
                             </span>
                           </div>
-                          <p className="text-gray-300">
+                          <p className="text-muted-foreground">
                             Excellent code quality! Very well documented and
                             easy to integrate. Saved me hours of development
                             time. Highly recommended!

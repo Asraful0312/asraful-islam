@@ -43,7 +43,7 @@ const Project = ({ params }: ProjectProps) => {
             className="w-full max-w-md h-auto object-cover rounded mb-6"
           />
         )}
-        <p className="text-gray-300 mb-4">{project.description}</p>
+        <p className="text-muted-foreground mb-4">{project.description}</p>
         <p>
           <strong>Project Type:</strong> {project.projectType}
         </p>

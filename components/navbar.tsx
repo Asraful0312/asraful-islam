@@ -103,7 +103,7 @@ export function Navbar() {
               <Link
                 href="/blog"
                 className={cn(
-                  "text-zinc-800 dark:text-gray-300 dark:hover:text-white transition-colors relative group",
+                  "text-zinc-800 dark:text-muted-foreground dark:hover:text-white transition-colors relative group",
                   "[text-shadow:_0_1px_2px_rgba(255,255,255,0.8)]  dark:[text-shadow:_0_1px_2px_rgba(0,0,0,0.5)]"
                 )}
               >
@@ -113,7 +113,7 @@ export function Navbar() {
               {/* <Link
               href="/codes"
               className={cn(
-                "text-gray-300 hover:text-white transition-colors relative group"
+                "text-muted-foreground hover:text-white transition-colors relative group"
               )}
             >
               Codes
@@ -123,7 +123,7 @@ export function Navbar() {
               {/* <Link
               href="/notes"
               className={cn(
-                "text-gray-300 hover:text-white transition-colors relative group"
+                "text-muted-foreground hover:text-white transition-colors relative group"
               )}
             >
               Notes
@@ -133,7 +133,7 @@ export function Navbar() {
               {/* <Link
                 href="/terminal"
                 className={cn(
-                  "text-zinc-800 dark:text-gray-300 hover:text-jordy_blue-500 dark:hover:text-white transition-colors relative group",
+                  "text-zinc-800 dark:text-muted-foreground hover:text-jordy_blue-500 dark:hover:text-white transition-colors relative group",
                   "[text-shadow:_0_1px_2px_rgba(255,255,255,0.8)]  dark:[text-shadow:_0_1px_2px_rgba(0,0,0,0.5)]"
                 )}
               >
@@ -232,7 +232,7 @@ export function Navbar() {
               {/* <Link
                 href="/codes"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="block py-2 text-gray-300 hover:text-white transition-colors"
+                className="block py-2 text-muted-foreground hover:text-white transition-colors"
               >
                 Codes
               </Link> */}
@@ -285,7 +285,7 @@ function NavLink({
       href={href}
       onClick={(e) => onClick(e, href)}
       className={cn(
-        "text-zinc-800 dark:text-gray-300  dark:hover:text-white transition-colors relative group",
+        "text-zinc-800 dark:text-muted-foreground  dark:hover:text-white transition-colors relative group",
         // Subtle text shadow for extra pop
         "[text-shadow:_0_1px_2px_rgba(255,255,255,0.8)]  dark:[text-shadow:_0_1px_2px_rgba(0,0,0,0.5)]",
         className

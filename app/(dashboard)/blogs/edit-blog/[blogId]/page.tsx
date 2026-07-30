@@ -314,11 +314,11 @@ const EditBlog = ({ params }: EditBlogProps) => {
             id="published"
             checked={published}
             onChange={(e) => setPublished(e.target.checked)}
-            className="h-4 w-4 text-gray-300 focus:ring-primary border-gray-300 rounded"
+            className="h-4 w-4 text-muted-foreground focus:ring-primary border-gray-300 rounded"
           />
           <label
             htmlFor="published"
-            className="ml-2 block text-sm text-gray-300"
+            className="ml-2 block text-sm text-muted-foreground"
           >
             Publish immediately (uncheck to save as draft)
           </label>

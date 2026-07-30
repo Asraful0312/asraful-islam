@@ -11,9 +11,12 @@ export const { auth, signIn, signOut, store, isAuthenticated } = convexAuth({
 
 export default Password<DataModel>({
   profile(params) {
+    const email = params.email as string;
+    const adminEmail = process.env.ADMIN_EMAIL;
     return {
-      email: params.email as string,
+      email,
       name: params.name as string,
+      role: adminEmail && email === adminEmail ? "admin" : "user",
     };
   },
 });
