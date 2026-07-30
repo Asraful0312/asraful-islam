@@ -108,7 +108,7 @@ export function Navbar() {
                 )}
               >
                 Blogs
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-jordy_blue-400 transition-all group-hover:w-full"></span>
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
               </Link>
               {/* <Link
               href="/codes"
@@ -117,7 +117,7 @@ export function Navbar() {
               )}
             >
               Codes
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-jordy_blue-400 transition-all group-hover:w-full"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
             </Link> */}
 
               {/* <Link
@@ -127,7 +127,7 @@ export function Navbar() {
               )}
             >
               Notes
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-jordy_blue-400 transition-all group-hover:w-full"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
             </Link> */}
 
               {/* <Link
@@ -292,7 +292,7 @@ function NavLink({
       )}
     >
       {children}
-      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-jordy_blue-400 transition-all group-hover:w-full"></span>
+      <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
     </Link>
   );
 }

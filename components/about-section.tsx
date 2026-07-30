@@ -52,7 +52,7 @@ function StackLayersVisual() {
             className={cn(
               "flex items-center gap-3 rounded-xl p-3 border transition-colors duration-300",
               isActive
-                ? "border-jordy_blue-400/30"
+                ? "border-primary/30"
                 : "bg-muted/60 border-transparent"
             )}
           >
@@ -60,7 +60,7 @@ function StackLayersVisual() {
               className={cn(
                 "flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-all duration-300",
                 isActive
-                  ? "bg-jordy_blue-400/20 text-jordy_blue-400"
+                  ? "bg-primary/20 text-primary"
                   : "bg-muted text-muted-foreground"
               )}
             >
@@ -79,7 +79,7 @@ function StackLayersVisual() {
             </span>
             {isActive && (
               <motion.div
-                className="w-1.5 h-1.5 rounded-full bg-jordy_blue-400 shrink-0"
+                className="w-1.5 h-1.5 rounded-full bg-primary shrink-0"
                 animate={{ opacity: [1, 0.3, 1], scale: [1, 1.4, 1] }}
                 transition={{ repeat: Infinity, duration: 1 }}
               />
@@ -93,7 +93,7 @@ function StackLayersVisual() {
           <LayoutDashboard className="h-3 w-3" />
           Full ownership
         </span>
-        <span className="text-xs text-jordy_blue-400 font-medium">
+        <span className="text-xs text-primary font-medium">
           Schema → Deploy
         </span>
       </div>
@@ -122,7 +122,7 @@ function TimezoneVisual() {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-2">
-        <Globe className="h-4 w-4 text-jordy_blue-400" />
+        <Globe className="h-4 w-4 text-primary" />
         <span className="text-xs text-muted-foreground">
           Timezone-aware delivery
         </span>
@@ -161,7 +161,7 @@ function TimezoneVisual() {
               <span
                 className={cn(
                   "text-xs font-medium transition-colors duration-300",
-                  isActive ? "text-jordy_blue-400" : "text-foreground"
+                  isActive ? "text-primary" : "text-foreground"
                 )}
               >
                 {tz.label}
@@ -170,7 +170,7 @@ function TimezoneVisual() {
                 animate={{ opacity: isActive ? 1 : 0.4 }}
                 className={cn(
                   "text-xs",
-                  isActive ? "text-jordy_blue-400" : "text-muted-foreground/40"
+                  isActive ? "text-primary" : "text-muted-foreground/40"
                 )}
               >
                 {isActive ? "●" : "○"}
@@ -182,7 +182,7 @@ function TimezoneVisual() {
 
       <div className="bg-muted/60 rounded-lg p-3 flex justify-between text-xs">
         <span className="text-muted-foreground">Async preferred</span>
-        <span className="text-jordy_blue-400 font-medium">Clear handoffs</span>
+        <span className="text-primary font-medium">Clear handoffs</span>
       </div>
     </div>
   );
@@ -216,7 +216,7 @@ function TechStackVisual() {
   return (
     <div className="flex flex-col gap-5">
       <div className="flex items-center gap-2">
-        <Code2 className="h-4 w-4 text-jordy_blue-400" />
+        <Code2 className="h-4 w-4 text-primary" />
         <span className="text-xs text-muted-foreground">Current stack</span>
       </div>
       <div className="flex flex-wrap gap-2">
@@ -232,7 +232,7 @@ function TechStackVisual() {
               className={cn(
                 "text-xs font-medium px-3 py-1.5 rounded-full border transition-colors duration-300",
                 isActive
-                  ? "bg-jordy_blue-400/15 border-jordy_blue-400/40 text-jordy_blue-400"
+                  ? "bg-primary/15 border-jordy_blue-400/40 text-primary"
                   : "bg-muted/80 border-border text-foreground"
               )}
             >
@@ -253,7 +253,7 @@ function TechStackVisual() {
 ────────────────────────────────────────────── */
 const PIPELINE_STEPS = [
   { icon: Lightbulb, label: "Problem", color: "text-muted-foreground", activeBg: "bg-muted/60", activeColor: "text-foreground" },
-  { icon: Wrench, label: "Right tool", color: "text-jordy_blue-400", activeBg: "bg-jordy_blue-400/10", activeColor: "text-jordy_blue-400" },
+  { icon: Wrench, label: "Right tool", color: "text-primary", activeBg: "bg-primary/10", activeColor: "text-primary" },
   { icon: Rocket, label: "Shipped", color: "text-green-500", activeBg: "bg-green-500/10", activeColor: "text-green-500" },
 ];
 
@@ -271,7 +271,7 @@ function PipelineVisual() {
   return (
     <div className="flex flex-col gap-5">
       <div className="flex items-center gap-2">
-        <Lightbulb className="h-4 w-4 text-jordy_blue-400" />
+        <Lightbulb className="h-4 w-4 text-primary" />
         <span className="text-xs text-muted-foreground">My approach</span>
       </div>
 
@@ -319,7 +319,7 @@ function PipelineVisual() {
                   <ArrowRight
                     className={cn(
                       "h-4 w-4 shrink-0 transition-colors duration-300",
-                      step > i ? "text-jordy_blue-400" : "text-muted-foreground"
+                      step > i ? "text-primary" : "text-muted-foreground"
                     )}
                   />
                 </motion.div>
@@ -341,7 +341,7 @@ function PipelineVisual() {
             transition={{ delay: i * 0.15, duration: 0.4 }}
             className="flex items-center gap-2 text-xs"
           >
-            <CheckCircle2 className="h-3.5 w-3.5 text-jordy_blue-400 shrink-0" />
+            <CheckCircle2 className="h-3.5 w-3.5 text-primary shrink-0" />
             <span className="text-muted-foreground">{item}</span>
           </motion.div>
         ))}
@@ -401,7 +401,7 @@ export function AboutSection() {
             </span>
           </div>
           <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-6 tracking-tight">
-            About <span className="text-jordy_blue-400 dark:text-jordy_blue-500">me</span>
+            About <span className="text-primary dark:text-jordy_blue-500">me</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg leading-relaxed">
             I write code that works, ships, and holds up over time. Here&apos;s

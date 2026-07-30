@@ -160,7 +160,7 @@ export function ProjectListing() {
                   onClick={() => setSelectedCategory(category)}
                   className={
                     selectedCategory === category
-                      ? "bg-jordy_blue-400 hover:bg-jordy_blue-500 text-white rounded-3xl border-transparent"
+                      ? "bg-primary hover:bg-jordy_blue-500 text-white rounded-3xl border-transparent"
                       : "border-border hover:bg-secondary text-muted-foreground rounded-3xl"
                   }
                 >
@@ -217,7 +217,7 @@ export function ProjectListing() {
                   <Button
                     asChild
                     variant="ghost"
-                    className="text-jordy_blue-400 hover:text-jordy_blue-400 hover:bg-jordy_blue-500/10 px-2"
+                    className="text-primary hover:text-primary hover:bg-jordy_blue-500/10 px-2"
                   >
                     <Link href={`/projects-details/${project._id}`}>
                       View Details <ArrowUpRight className="ml-1 h-4 w-4" />

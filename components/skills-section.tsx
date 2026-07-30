@@ -29,7 +29,7 @@ export function SkillsSection() {
           </span>
         </div>
         <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-5 tracking-tight">
-          My tech <span className="text-jordy_blue-400 dark:text-jordy_blue-500">stack</span>
+          My tech <span className="text-primary dark:text-jordy_blue-500">stack</span>
         </h2>
         <p className="text-muted-foreground max-w-xl mx-auto text-base leading-relaxed">
           Tools I use to build production-grade applications — chosen for the right reasons.

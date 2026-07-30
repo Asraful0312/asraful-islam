@@ -108,7 +108,7 @@ export function ReviewsSection() {
         {/* Header */}
         <div className="mb-16 flex flex-col items-center text-center">
           <h2 className="text-foreground mb-4 text-4xl font-bold md:text-5xl tracking-tight">
-            Client <span className="text-jordy_blue-400 dark:text-jordy_blue">testimonials</span>
+            Client <span className="text-primary dark:text-jordy_blue">testimonials</span>
           </h2>
           <p className="text-muted-foreground mt-2 max-w-2xl text-lg">
             What clients and colleagues say about working with me.

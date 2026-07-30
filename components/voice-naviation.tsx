@@ -149,7 +149,7 @@ export default function VoiceNavigator() {
         <ul className="list-disc ml-5 space-y-2">
           {commands.map((c) => (
             <li key={c.label} className="text-sm">
-              Say <span className="font-bold text-jordy_blue-400">{c.command}</span>{" "}
+              Say <span className="font-bold text-primary">{c.command}</span>{" "}
               to navigate to{" "}
               <span className="text-indigo_dye-600 font-bold">{c.label}</span>{" "}
               {c.command === "p1" || c.command === "p2"
@@ -160,7 +160,7 @@ export default function VoiceNavigator() {
             </li>
           ))}
           <li>
-            Say <span className="font-bold text-jordy_blue-400">stop</span> to stop
+            Say <span className="font-bold text-primary">stop</span> to stop
             voice navigation.
           </li>
         </ul>

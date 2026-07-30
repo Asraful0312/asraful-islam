@@ -55,11 +55,11 @@ export function HeroSection() {
               transition={{ duration: 0.5, delay: 0.1 }}
             >
               <div className="inline-flex items-center gap-2 px-3 py-1 mb-5 text-xs font-semibold tracking-widest text-muted-foreground uppercase bg-secondary/60 rounded-full border border-border/60 backdrop-blur-sm">
-                <span className="w-1.5 h-1.5 rounded-full bg-jordy_blue-400 dark:bg-jordy_blue animate-pulse" />
+                <span className="w-1.5 h-1.5 rounded-full bg-primary dark:bg-jordy_blue animate-pulse" />
                 Available for work
               </div>
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-[1.05]">
-                <SparklesText className="text-jordy_blue-400 dark:text-jordy_blue" text="Asraful Islam" />
+                <SparklesText className="text-primary dark:text-jordy_blue" text="Asraful Islam" />
               </h1>
               <p className="mt-2 text-lg font-medium text-muted-foreground">Full Stack Developer</p>
             </motion.div>
@@ -144,7 +144,7 @@ export function HeroSection() {
           >
             <div className="relative w-72 h-72 lg:w-[380px] lg:h-[380px]">
               {/* Ambient glow */}
-              <div className="absolute -inset-4 rounded-[3rem] bg-jordy_blue-400/8 dark:bg-jordy_blue/8 blur-3xl" />
+              <div className="absolute -inset-4 rounded-[3rem] bg-primary/8 dark:bg-jordy_blue/8 blur-3xl" />
               {/* Decorative ring */}
               <div className="absolute -inset-3 rounded-[2.5rem] border border-jordy_blue-400/20 dark:border-jordy_blue/15" />
               <div className="relative h-full w-full rounded-[2rem] overflow-hidden border border-border/40 shadow-2xl group">

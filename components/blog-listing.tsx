@@ -151,7 +151,7 @@ export function BlogListing() {
                 onClick={() => setSelectedCategory(category)}
                 className={
                   selectedCategory === category
-                    ? "bg-jordy_blue-400 hover:bg-jordy_blue-500 text-white rounded-3xl border-transparent"
+                    ? "bg-primary hover:bg-jordy_blue-500 text-white rounded-3xl border-transparent"
                     : "border-border hover:bg-secondary text-muted-foreground rounded-3xl"
                 }
               >
@@ -191,7 +191,7 @@ export function BlogListing() {
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 bg-secondary/20"
                   />
                   <div className="absolute top-4 left-4">
-                    <Badge className="bg-jordy_blue-400 text-white hover:bg-jordy_blue-500">
+                    <Badge className="bg-primary text-white hover:bg-jordy_blue-500">
                       {blog.categories[0]}
                     </Badge>
                   </div>

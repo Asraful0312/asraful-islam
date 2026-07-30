@@ -113,7 +113,7 @@ export function BlogDetails({ blog }: BlogDetailsProps) {
                 {blog.categories.map((category) => (
                   <Badge
                     key={category}
-                    className="bg-jordy_blue-400 text-white hover:bg-jordy_blue-500"
+                    className="bg-primary text-white hover:bg-jordy_blue-500"
                   >
                     {category}
                   </Badge>
@@ -403,7 +403,7 @@ export function BlogDetails({ blog }: BlogDetailsProps) {
                   Get notified when I publish new articles about web development
                   and technology.
                 </p>
-                <Button className="w-full bg-jordy_blue-400 text-white hover:bg-jordy_blue-500 rounded-full">
+                <Button className="w-full bg-primary hover:bg-jordy_blue-500 rounded-full">
                   Subscribe to Newsletter
                 </Button>
               </div>

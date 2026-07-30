@@ -109,7 +109,7 @@ export function ProjectsSection() {
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
             <div>
               <h2 className="text-3xl md:text-5xl font-bold text-foreground tracking-tight mb-3">
-                Featured <span className="text-jordy_blue-400 dark:text-jordy_blue">projects</span>
+                Featured <span className="text-primary dark:text-jordy_blue">projects</span>
               </h2>
               <p className="text-muted-foreground max-w-xl text-base leading-relaxed">
                 A selection of full-stack apps and tools I&apos;ve built — real problems, real users.
@@ -117,7 +117,7 @@ export function ProjectsSection() {
             </div>
             <Link
               href="/project-list"
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-jordy_blue-400 dark:text-jordy_blue hover:underline underline-offset-4 shrink-0"
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-primary dark:text-jordy_blue hover:underline underline-offset-4 shrink-0"
             >
               View all <ArrowUpRight className="w-4 h-4" />
             </Link>
