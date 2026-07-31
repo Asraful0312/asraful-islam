@@ -59,6 +59,7 @@ export default defineSchema({
   blogs: defineTable({
     title: v.string(),
     content: v.string(),
+    contentFormat: v.optional(v.union(v.literal("html"), v.literal("markdown"))),
     excerpt: v.string(),
     authorId: v.id("users"),
     slug: v.string(),

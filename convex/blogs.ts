@@ -3,6 +3,22 @@ import { query, mutation } from "./_generated/server";
 import { getAuthUserId } from "@convex-dev/auth/server";
 import { paginationOptsValidator } from "convex/server";
 
+// Minimal published blog list for sitemap generation
+export const getPublishedBlogsForSitemap = query({
+  args: {},
+  handler: async (ctx) => {
+    const blogs = await ctx.db
+      .query("blogs")
+      .withIndex("by_published", (q) => q.eq("published", true))
+      .collect();
+
+    return blogs.map((blog) => ({
+      _id: blog._id,
+      _creationTime: blog._creationTime,
+    }));
+  },
+});
+
 // Get paginated blogs
 export const getBlogs = query({
   args: {
@@ -114,6 +130,7 @@ export const createBlog = mutation({
   args: {
     title: v.string(),
     content: v.string(),
+    contentFormat: v.optional(v.union(v.literal("html"), v.literal("markdown"))),
     excerpt: v.string(),
     published: v.boolean(),
     tags: v.optional(v.array(v.string())),
@@ -143,6 +160,7 @@ export const updateBlog = mutation({
     blogId: v.id("blogs"),
     title: v.string(),
     content: v.string(),
+    contentFormat: v.optional(v.union(v.literal("html"), v.literal("markdown"))),
     excerpt: v.string(),
     published: v.boolean(),
     tags: v.optional(v.array(v.string())),

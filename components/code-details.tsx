@@ -168,7 +168,7 @@ export default ${code.title.replace(/\s+/g, "")};`}
               <TabsContent value="documentation" className="mt-6">
                 <div className="bg-[#1a1a1a] rounded-lg border border-gray-800 p-6">
                   <h3 className="text-lg font-semibold mb-4">Documentation</h3>
-                  <div className="prose prose-invert max-w-none">
+                  <div className="prose dark:prose-invert max-w-none">
                     <h4>Installation</h4>
                     <pre className="bg-[#0f0f0f] p-3 rounded text-sm">
                       <code>

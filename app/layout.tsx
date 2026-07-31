@@ -19,6 +19,9 @@ const ibmPlexSans = IBM_Plex_Sans({
 const outfit = Outfit({ subsets: ["latin"], weight: ["300", "400", "500", "600", "700", "800"] });
 
 export const metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
+  ),
   title: "Asraful Islam — Full Stack Developer",
   description: "Full stack developer building fast, thoughtful web applications. Based in Bangladesh.",
 };

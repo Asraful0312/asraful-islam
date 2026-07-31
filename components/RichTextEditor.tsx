@@ -1,12 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Editor } from "primereact/editor";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { Button } from "@/components/ui/button";
+
+export type ContentFormat = "html" | "markdown";
+type Mode = "rich" | "html" | "markdown";
 
 type Props = {
   description: string;
   setDescription: (value: string) => void;
+  format?: ContentFormat;
+  onFormatChange?: (format: ContentFormat) => void;
 };
 
 function unescapeHtmlEntities(value: string) {
@@ -15,17 +22,33 @@ function unescapeHtmlEntities(value: string) {
   return el.value;
 }
 
-export default function RichTextEditor({ setDescription, description }: Props) {
-  const [mode, setMode] = useState<"rich" | "html">("rich");
+export default function RichTextEditor({
+  setDescription,
+  description,
+  format,
+  onFormatChange,
+}: Props) {
+  const [mode, setInternalMode] = useState<Mode>(
+    format === "markdown" ? "markdown" : "rich"
+  );
+
+  useEffect(() => {
+    if (format === "markdown") setInternalMode("markdown");
+  }, [format]);
+
+  const selectMode = (next: Mode) => {
+    setInternalMode(next);
+    onFormatChange?.(next === "markdown" ? "markdown" : "html");
+  };
 
   return (
     <div className="max-w-3xl mx-auto mt-8">
-      <div className="flex justify-end gap-2 mb-3">
+      <div className="flex flex-wrap justify-end gap-2 mb-3">
         <Button
           type="button"
           size="sm"
           variant={mode === "rich" ? "default" : "outline"}
-          onClick={() => setMode("rich")}
+          onClick={() => selectMode("rich")}
         >
           Rich Text
         </Button>
@@ -33,9 +56,17 @@ export default function RichTextEditor({ setDescription, description }: Props) {
           type="button"
           size="sm"
           variant={mode === "html" ? "default" : "outline"}
-          onClick={() => setMode("html")}
+          onClick={() => selectMode("html")}
         >
           Raw HTML
+        </Button>
+        <Button
+          type="button"
+          size="sm"
+          variant={mode === "markdown" ? "default" : "outline"}
+          onClick={() => selectMode("markdown")}
+        >
+          Markdown
         </Button>
         {mode === "html" && (
           <Button
@@ -51,13 +82,14 @@ export default function RichTextEditor({ setDescription, description }: Props) {
       </div>
 
       <div className="card">
-        {mode === "rich" ? (
+        {mode === "rich" && (
           <Editor
             value={description}
             onTextChange={(e) => setDescription(e?.htmlValue || "")}
             style={{ height: "320px" }}
           />
-        ) : (
+        )}
+        {mode === "html" && (
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -65,13 +97,31 @@ export default function RichTextEditor({ setDescription, description }: Props) {
             className="w-full h-80 p-3 border rounded font-mono text-sm resize-y"
           />
         )}
+        {mode === "markdown" && (
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            placeholder={"## Heading\n\nWrite **markdown** here, including ```code blocks```."}
+            className="w-full h-80 p-3 border rounded font-mono text-sm resize-y"
+          />
+        )}
       </div>
 
       {description && (
         <div className="mt-6 w-full">
-          <h2 className="font-semibold mb-2">Output HTML:</h2>
+          <h2 className="font-semibold mb-2">Preview:</h2>
           <div className="p-2 border rounded text-sm w-full overflow-y-scroll max-h-100">
-            <pre className="whitespace-pre-wrap wrap-break-word">{description}</pre>
+            {mode === "markdown" ? (
+              <div className="prose prose-sm max-w-none dark:prose-invert">
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {description}
+                </ReactMarkdown>
+              </div>
+            ) : (
+              <pre className="whitespace-pre-wrap wrap-break-word">
+                {description}
+              </pre>
+            )}
           </div>
         </div>
       )}

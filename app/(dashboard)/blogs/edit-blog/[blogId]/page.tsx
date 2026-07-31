@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 "use client";
 import AppShell from "@/components/app-shell";
-import RichTextEditor from "@/components/RichTextEditor";
+import RichTextEditor, { ContentFormat } from "@/components/RichTextEditor";
 import Tags from "@/components/tags";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -38,6 +38,7 @@ const EditBlog = ({ params }: EditBlogProps) => {
   const [submitting, setSubmitting] = useState(false);
   const [thumbnailFile, setThumbnailFile] = useState<File | null>(null);
   const [description, setDescription] = useState("");
+  const [contentFormat, setContentFormat] = useState<ContentFormat>("html");
   const [published, setPublished] = useState(false);
   const [categories, setCategories] = useState<string[]>([]);
   const [deletedImageId, setDeletedImageId] = useState<Id<"_storage"> | null>(
@@ -53,6 +54,7 @@ const EditBlog = ({ params }: EditBlogProps) => {
   React.useEffect(() => {
     if (blog) {
       setDescription(blog.content);
+      setContentFormat(blog.contentFormat === "markdown" ? "markdown" : "html");
       setPublished(blog.published);
       setCategories(blog.categories);
       setRelatedBlogs(blog?.relatedBlogs);
@@ -153,6 +155,7 @@ const EditBlog = ({ params }: EditBlogProps) => {
         blogId: params.blogId,
         title,
         content: description,
+        contentFormat,
         excerpt,
         published,
         tags: tags.length > 0 ? tags : undefined,
@@ -239,6 +242,8 @@ const EditBlog = ({ params }: EditBlogProps) => {
           <RichTextEditor
             setDescription={setDescription}
             description={description}
+            format={contentFormat}
+            onFormatChange={setContentFormat}
           />
         </div>
         <div className="w-full space-y-1">
@@ -291,11 +296,11 @@ const EditBlog = ({ params }: EditBlogProps) => {
             </SelectContent>
           </Select>
           <div className="ml-4 mt-5">
-            <h2 className="text-white font-semibold">Selected Categories</h2>
+            <h2 className="font-semibold">Selected Categories</h2>
             {categories?.map((c) => (
               <div
                 key={c}
-                className="flex items-center gap-2 text-white py-1 px-2 border justify-between border-purple-500 mt-1"
+                className="flex items-center gap-2 py-1 px-2 border justify-between mt-1"
               >
                 {c}
                 <button onClick={() => removeCategory(c)} type="button">
@@ -314,7 +319,7 @@ const EditBlog = ({ params }: EditBlogProps) => {
             id="published"
             checked={published}
             onChange={(e) => setPublished(e.target.checked)}
-            className="h-4 w-4 text-muted-foreground focus:ring-primary border-gray-300 rounded"
+            className="h-4 w-4 text-muted-foreground focus:ring-primary border-border rounded"
           />
           <label
             htmlFor="published"

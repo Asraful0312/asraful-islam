@@ -41,6 +41,7 @@ export interface Blog {
   categories: string[];
   commentsCount: number;
   content: string;
+  contentFormat?: "html" | "markdown";
   excerpt: string;
   featureImageUrl: string;
   featuredImage: Id<"_storage">;

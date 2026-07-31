@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 "use client";
 import AppShell from "@/components/app-shell";
-import RichTextEditor from "@/components/RichTextEditor";
+import RichTextEditor, { ContentFormat } from "@/components/RichTextEditor";
 import Tags from "@/components/tags";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -28,6 +28,7 @@ import SearchRelated from "@/components/search-related";
 const CreateBlog = () => {
   const [thumbnailFile, setThumbnailFile] = useState<File | null>(null);
   const [description, setDescription] = useState("");
+  const [contentFormat, setContentFormat] = useState<ContentFormat>("html");
   const thumbnailInputRef = useRef<HTMLInputElement>(null);
   const [published, setPublished] = useState(false);
   const [categories, setCategories] = useState<string[]>([]);
@@ -115,6 +116,7 @@ const CreateBlog = () => {
       const blogData = {
         title,
         content: description,
+        contentFormat,
         excerpt,
         published,
         tags: tags.length > 0 ? tags : undefined,
@@ -133,6 +135,7 @@ const CreateBlog = () => {
       // Reset form
       setThumbnailFile(null);
       setDescription("");
+      setContentFormat("html");
       setCategories([]);
       setPublished(false);
       if (thumbnailInputRef.current) thumbnailInputRef.current.value = "";
@@ -197,6 +200,8 @@ const CreateBlog = () => {
           <RichTextEditor
             setDescription={setDescription}
             description={description}
+            format={contentFormat}
+            onFormatChange={setContentFormat}
           />
         </div>
         <div className="w-full space-y-1">

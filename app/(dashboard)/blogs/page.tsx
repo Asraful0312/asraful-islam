@@ -98,7 +98,7 @@ const BlogsPage = () => {
                 <>
                   <article
                     key={blog._id}
-                    className="bg-[#1a1a1a] rounded-lg overflow-hidden border border-gray-800 hover:border-purple-500/50 transition-all duration-300 group"
+                    className="bg-card rounded-lg overflow-hidden border border-border transition-all duration-300 group"
                   >
                     <Link href={`/blog/${blog._id}`}>
                       <div className="relative overflow-hidden aspect-video">
@@ -114,7 +114,7 @@ const BlogsPage = () => {
                         </div>
                       </div>
                       <div className="p-6">
-                        <div className="flex items-center gap-4 text-sm text-gray-400 mb-3">
+                        <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
                           <div className="flex items-center gap-1">
                             <Calendar className="h-4 w-4" />
                             {/* {new Date(blog.publishedAt).toLocaleDateString()} */}
@@ -125,10 +125,10 @@ const BlogsPage = () => {
                             {blog.readingTime} min read
                           </div>
                         </div>
-                        <h2 className="text-xl font-bold mb-3 group-hover:text-purple-400 transition-colors line-clamp-2">
+                        <h2 className="text-xl font-bold mb-3 transition-colors line-clamp-2">
                           {blog.title}
                         </h2>
-                        <p className="text-gray-400 mb-4 line-clamp-3">
+                        <p className="text-muted-foreground mb-4 line-clamp-3">
                           {blog.excerpt}
                         </p>
 
@@ -136,7 +136,7 @@ const BlogsPage = () => {
                           <div className="w-8 h-8 rounded-full bg-jordy_blue flex items-center justify-center">
                             <User className="h-4 w-4" />
                           </div>
-                          <span className="text-sm text-gray-400">
+                          <span className="text-sm text-muted-foreground">
                             {blog.author}
                           </span>
                         </div>
@@ -146,7 +146,7 @@ const BlogsPage = () => {
                             <Badge
                               key={tag}
                               variant="outline"
-                              className="text-xs bg-[#232323] border-gray-700"
+                              className="text-xs bg-primary text-primary-foreground" 
                             >
                               {tag}
                             </Badge>
@@ -181,7 +181,7 @@ const BlogsPage = () => {
               {paginationOpts.cursor && (
                 <button
                   onClick={loadPrevious}
-                  className="px-4 py-2 bg-gray-200 text-gray-700 rounded hover:bg-gray-300 transition-colors"
+                  className="px-4 py-2 bg-muted text-muted-foreground rounded hover:bg-muted-foreground transition-colors"
                 >
                   Previous
                 </button>
@@ -189,7 +189,7 @@ const BlogsPage = () => {
               {!isDone && (
                 <button
                   onClick={loadMore}
-                  className="px-4 py-2 bg-primary text-white rounded hover:bg-primary-hover transition-colors"
+                  className="px-4 py-2 bg-primary rounded hover:bg-primary-hover transition-colors"
                 >
                   Load More
                 </button>

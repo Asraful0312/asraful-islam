@@ -131,7 +131,7 @@ export function ProjectDetails({
                 {project?.videoUrl && (
                   <ProjectVideoPlayer videoUrl={project.videoUrl} />
                 )}
-                <div className="prose prose-invert max-w-none text-foreground">
+                <div className="prose dark:prose-invert max-w-none text-foreground">
                   <p>{project?.description}</p>
                 </div>
               </TabsContent>
@@ -178,7 +178,7 @@ export function ProjectDetails({
                 </div>
               </TabsContent>
               <TabsContent value="challenges" className="mt-6">
-                <div className="prose prose-invert max-w-none">
+                <div className="prose dark:prose-invert max-w-none">
                   <p className="text-foreground">
                     During the development of this project, several challenges
                     were encountered and overcome:

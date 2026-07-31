@@ -3,6 +3,8 @@
 import { useCallback, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
@@ -217,11 +219,14 @@ export function BlogDetails({ blog }: BlogDetailsProps) {
             </div>
 
             {/* Content */}
-            <div className="prose prose-invert prose-lg max-w-none mb-12">
-              <div
-                className="prose prose-invert prose-lg text-foreground"
-                dangerouslySetInnerHTML={{ __html: blog?.content }}
-              />
+            <div className="prose dark:prose-invert prose-lg max-w-none mb-12 text-foreground">
+              {blog.contentFormat === "markdown" ? (
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {blog.content}
+                </ReactMarkdown>
+              ) : (
+                <div dangerouslySetInnerHTML={{ __html: blog?.content }} />
+              )}
             </div>
 
             {/* Tags */}
