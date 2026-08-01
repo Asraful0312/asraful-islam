@@ -1,11 +1,11 @@
 "use client";
 import {
   BookText,
-  Calendar,
   FolderKanban,
   Home,
   Search,
   Settings,
+  ShoppingBag,
 } from "lucide-react";
 
 import {
@@ -38,6 +38,11 @@ const items = [
     title: "My blogs",
     url: "/blogs",
     icon: BookText,
+  },
+  {
+    title: "Marketplace",
+    url: "/products",
+    icon: ShoppingBag,
   },
   {
     title: "Search",

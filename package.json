@@ -6,11 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "cf:build": "opennextjs-cloudflare build",
+    "cf:preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "cf:deploy": "npx convex deploy --cmd 'opennextjs-cloudflare build' && opennextjs-cloudflare deploy"
   },
   "dependencies": {
     "@auth/core": "^0.37.0",
     "@convex-dev/auth": "^0.0.87",
+    "@convex-dev/r2": "^0.10.2",
     "@convex-dev/rag": "^0.3.2",
     "@emotion/is-prop-valid": "latest",
     "@hookform/resolvers": "^3.9.1",
@@ -81,6 +85,7 @@
     "vaul": "^1.1.2"
   },
   "devDependencies": {
+    "@opennextjs/cloudflare": "^1.20.2",
     "@tailwindcss/typography": "^0.5.20",
     "@types/lodash": "^4.17.20",
     "@types/node": "^22",
@@ -93,6 +98,7 @@
     "eslint-config-next": "16.1.2",
     "postcss": "^8",
     "tailwindcss": "^4.3.1",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wrangler": "^4.118.0"
   }
 }

@@ -66,12 +66,11 @@ export interface CodeProduct {
   language: string;
   categories: string[];
   tags: string[];
-  rating: number;
-  reviews: number;
   downloads: number;
   createdAt: string;
   updatedAt: string;
   version: string;
+  sourceFileUrl?: string | null;
 }
 
 export interface Game {

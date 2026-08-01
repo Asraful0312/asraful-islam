@@ -5,7 +5,8 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { Menu, Terminal, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import { CartIcon } from "@/components/cart-icon";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Authenticated, Unauthenticated } from "convex/react";
@@ -93,9 +94,9 @@ export function Navbar() {
               <NavLink href="#projects" onClick={scrollToSection}>
                 Projects
               </NavLink>
-              <NavLink href="#reviews" onClick={scrollToSection}>
+              {/* <NavLink href="#reviews" onClick={scrollToSection}>
                 Reviews
-              </NavLink>
+              </NavLink> */}
               <NavLink href="#contact" onClick={scrollToSection}>
                 Contact
               </NavLink>
@@ -104,43 +105,23 @@ export function Navbar() {
                 href="/blog"
                 className={cn(
                   "text-zinc-800 dark:text-muted-foreground dark:hover:text-white transition-colors relative group",
-                  "[text-shadow:_0_1px_2px_rgba(255,255,255,0.8)]  dark:[text-shadow:_0_1px_2px_rgba(0,0,0,0.5)]"
+                  "[text-shadow:0_1px_2px_rgba(255,255,255,0.8)]  dark:[text-shadow:0_1px_2px_rgba(0,0,0,0.5)]"
                 )}
               >
                 Blogs
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
               </Link>
-              {/* <Link
-              href="/codes"
-              className={cn(
-                "text-muted-foreground hover:text-white transition-colors relative group"
-              )}
-            >
-              Codes
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
-            </Link> */}
-
-              {/* <Link
-              href="/notes"
-              className={cn(
-                "text-muted-foreground hover:text-white transition-colors relative group"
-              )}
-            >
-              Notes
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
-            </Link> */}
-
-              {/* <Link
-                href="/terminal"
+              <Link
+                href="/codes"
                 className={cn(
-                  "text-zinc-800 dark:text-muted-foreground hover:text-jordy_blue-500 dark:hover:text-white transition-colors relative group",
+                  "text-zinc-800 dark:text-muted-foreground dark:hover:text-white transition-colors relative group",
                   "[text-shadow:_0_1px_2px_rgba(255,255,255,0.8)]  dark:[text-shadow:_0_1px_2px_rgba(0,0,0,0.5)]"
                 )}
               >
-                <Terminal className="shrink-0" />
-              </Link> */}
-
-              {/* <CartIcon /> */}
+                Marketplace
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full"></span>
+              </Link>
+              <CartIcon />
 
             </nav>
             <div className="flex items-center gap-4">
@@ -208,13 +189,13 @@ export function Navbar() {
               >
                 Projects
               </MobileNavLink>
-              <MobileNavLink
+              {/* <MobileNavLink
                 href="#reviews"
                 onClick={scrollToSection}
                 closeMenu={() => setIsMobileMenuOpen(false)}
               >
                 Reviews
-              </MobileNavLink>
+              </MobileNavLink> */}
               <MobileNavLink
                 href="#contact"
                 onClick={scrollToSection}
@@ -229,16 +210,14 @@ export function Navbar() {
               >
                 Blogs
               </Link>
-              {/* <Link
+              <Link
                 href="/codes"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="block py-2 text-muted-foreground hover:text-white transition-colors"
+                className="block py-2 text-foreground transition-colors"
               >
-                Codes
-              </Link> */}
-
-
-              {/* <CartIcon /> */}
+                Marketplace
+              </Link>
+              <CartIcon />
 
               <Unauthenticated>
                 <Link
