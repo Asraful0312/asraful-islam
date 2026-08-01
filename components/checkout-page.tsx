@@ -1,69 +1,22 @@
 "use client";
 
-import type React from "react";
-
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Trash2, CreditCard, Lock, ShoppingBag } from "lucide-react";
+import { Trash2, ShoppingBag, CreditCard } from "lucide-react";
 
 import Link from "next/link";
 import { useCart } from "@/contexts/use-context";
 
 export function CheckoutPage() {
-  const { items, removeFromCart, getTotalPrice, clearCart } = useCart();
-  const [isProcessing, setIsProcessing] = useState(false);
-  const [orderComplete, setOrderComplete] = useState(false);
+  const { items, removeFromCart, getTotalPrice } = useCart();
 
-  const handleCheckout = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsProcessing(true);
-
-    // Simulate payment processing
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-
-    setIsProcessing(false);
-    setOrderComplete(true);
-    clearCart();
+  // TODO: wire up Creem checkout here
+  const handleCreemCheckout = () => {
+    alert("Creem payment integration coming soon!");
   };
-
-  if (orderComplete) {
-    return (
-      <div className="section-container pt-24">
-        <div className="max-w-2xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="bg-green-500/10 p-8 rounded-full w-24 h-24 mx-auto mb-6 flex items-center justify-center">
-              <ShoppingBag className="h-12 w-12 text-green-500" />
-            </div>
-            <h1 className="text-3xl font-bold mb-4 text-green-400">
-              Order Complete!
-            </h1>
-            <p className="text-gray-400 mb-8">
-              Thank you for your purchase! Your codes have been sent to your
-              email address.
-            </p>
-            <div className="flex gap-4 justify-center">
-              <Button asChild className="bg-jordy_blue hover:bg-purple-700">
-                <Link href="/codes">Browse More Codes</Link>
-              </Button>
-              <Button asChild variant="outline">
-                <Link href="/">Back to Home</Link>
-              </Button>
-            </div>
-          </motion.div>
-        </div>
-      </div>
-    );
-  }
 
   if (items.length === 0) {
     return (
@@ -94,7 +47,7 @@ export function CheckoutPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Order Summary */}
           <div>
-            <Card className="bg-[#1a1a1a] border-gray-800">
+            <Card className="">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <ShoppingBag className="h-5 w-5" />
@@ -105,9 +58,9 @@ export function CheckoutPage() {
                 {items.map((item) => (
                   <div
                     key={item.id}
-                    className="flex items-center gap-4 p-4 bg-[#232323] rounded-lg"
+                    className="flex items-center gap-4 p-4 bg-card rounded-lg"
                   >
-                    <div className="w-16 h-12 overflow-hidden rounded border border-gray-700">
+                    <div className="w-16 h-12 overflow-hidden rounded border border-border">
                       <img
                         src={item.preview || "/placeholder.svg"}
                         alt={item.title}
@@ -120,7 +73,7 @@ export function CheckoutPage() {
                         <Badge variant="outline" className="text-xs">
                           {item.language}
                         </Badge>
-                        <span className="text-sm text-gray-400">
+                        <span className="text-sm text-muted-foreground">
                           {item.price === 0 ? "Free" : `$${item.price}`}
                         </span>
                       </div>
@@ -136,18 +89,18 @@ export function CheckoutPage() {
                   </div>
                 ))}
 
-                <Separator className="bg-gray-800" />
+                <Separator className="bg-border" />
 
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-400">Subtotal:</span>
+                    <span className="text-muted-foreground">Subtotal:</span>
                     <span>${getTotalPrice().toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-gray-400">Processing Fee:</span>
+                    <span className="text-muted-foreground">Processing Fee:</span>
                     <span>$0.00</span>
                   </div>
-                  <Separator className="bg-gray-800" />
+                  <Separator className="bg-border" />
                   <div className="flex justify-between text-lg font-bold">
                     <span>Total:</span>
                     <span className="text-purple-400">
@@ -159,102 +112,33 @@ export function CheckoutPage() {
             </Card>
           </div>
 
-          {/* Payment Form */}
+          {/* Payment — Creem placeholder */}
           <div>
-            <Card className="bg-[#1a1a1a] border-gray-800">
+            <Card className="bg-background border-border">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <CreditCard className="h-5 w-5" />
-                  Payment Information
+                  Payment
                 </CardTitle>
               </CardHeader>
-              <CardContent>
-                <form onSubmit={handleCheckout} className="space-y-6">
-                  <div className="space-y-4">
-                    <div>
-                      <Label htmlFor="email">Email Address</Label>
-                      <Input
-                        id="email"
-                        type="email"
-                        placeholder="john@example.com"
-                        required
-                        className="bg-[#232323] border-gray-700 focus:border-purple-500"
-                      />
-                    </div>
+              <CardContent className="space-y-6">
+                <div className="rounded-lg border border-dashed border-border p-6 text-center space-y-3">
+                  <p className="text-sm text-muted-foreground">
+                    Powered by{" "}
+                    <span className="font-semibold text-foreground">Creem</span>
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    Creem checkout will open here once the integration is wired up.
+                  </p>
+                </div>
 
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <Label htmlFor="firstName">First Name</Label>
-                        <Input
-                          id="firstName"
-                          placeholder="John"
-                          required
-                          className="bg-[#232323] border-gray-700 focus:border-purple-500"
-                        />
-                      </div>
-                      <div>
-                        <Label htmlFor="lastName">Last Name</Label>
-                        <Input
-                          id="lastName"
-                          placeholder="Doe"
-                          required
-                          className="bg-[#232323] border-gray-700 focus:border-purple-500"
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="cardNumber">Card Number</Label>
-                      <Input
-                        id="cardNumber"
-                        placeholder="1234 5678 9012 3456"
-                        required
-                        className="bg-[#232323] border-gray-700 focus:border-purple-500"
-                      />
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <Label htmlFor="expiry">Expiry Date</Label>
-                        <Input
-                          id="expiry"
-                          placeholder="MM/YY"
-                          required
-                          className="bg-[#232323] border-gray-700 focus:border-purple-500"
-                        />
-                      </div>
-                      <div>
-                        <Label htmlFor="cvc">CVC</Label>
-                        <Input
-                          id="cvc"
-                          placeholder="123"
-                          required
-                          className="bg-[#232323] border-gray-700 focus:border-purple-500"
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-2 text-sm text-gray-400">
-                    <Lock className="h-4 w-4" />
-                    Your payment information is secure and encrypted
-                  </div>
-
-                  <Button
-                    type="submit"
-                    className="w-full bg-jordy_blue hover:bg-purple-700"
-                    disabled={isProcessing}
-                  >
-                    {isProcessing ? (
-                      <span className="flex items-center gap-2">
-                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
-                        Processing...
-                      </span>
-                    ) : (
-                      `Complete Purchase - $${getTotalPrice().toFixed(2)}`
-                    )}
-                  </Button>
-                </form>
+                <Button
+                  className="w-full"
+                  onClick={handleCreemCheckout}
+                  disabled={items.length === 0}
+                >
+                  Pay ${getTotalPrice().toFixed(2)} with Creem
+                </Button>
               </CardContent>
             </Card>
           </div>

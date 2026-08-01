@@ -2,10 +2,12 @@ import { ConvexError, v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 import { getAuthUserId } from "@convex-dev/auth/server";
 import { paginationOptsValidator } from "convex/server";
+import { assertAdmin } from "./helpers";
 
 export const generateUploadUrl = mutation({
   args: {},
   handler: async (ctx) => {
+    await assertAdmin(ctx);
     return await ctx.storage.generateUploadUrl();
   },
 });
@@ -46,10 +48,8 @@ export const insertProject = mutation({
     ),
   },
   handler: async (ctx, args) => {
-    const userId = await getAuthUserId(ctx);
-    if (!userId) {
-      throw new Error("Unauthorized");
-    }
+    await assertAdmin(ctx);
+    const userId = (await getAuthUserId(ctx))!;
 
     const {
       name,
@@ -148,15 +148,12 @@ export const updateProject = mutation({
     deletedImageIds: v.array(v.id("_storage")),
   },
   handler: async (ctx, args) => {
-    const userId = await getAuthUserId(ctx);
-    if (!userId) {
-      throw new Error("Unauthorized");
-    }
+    await assertAdmin(ctx);
 
-    // Verify project exists and belongs to user
+    // Verify project exists
     const project = await ctx.db.get(args.projectId);
-    if (!project || project.userId !== userId) {
-      throw new Error("Project not found or unauthorized");
+    if (!project) {
+      throw new ConvexError("Project not found");
     }
 
     // Validate slug uniqueness (excluding current project)
@@ -201,15 +198,11 @@ export const updateProject = mutation({
 export const deleteProject = mutation({
   args: { projectId: v.id("projects") },
   handler: async (ctx, args) => {
-    const userId = await getAuthUserId(ctx);
-    if (!userId) {
-      throw new Error("Unauthorized");
-    }
+    await assertAdmin(ctx);
 
-    // Verify project exists and belongs to user
     const project = await ctx.db.get(args.projectId);
-    if (!project || project.userId !== userId) {
-      throw new Error("Project not found or unauthorized");
+    if (!project) {
+      throw new ConvexError("Project not found");
     }
 
     // Delete thumbnail and gallery images from storage

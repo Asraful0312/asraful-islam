@@ -14,13 +14,13 @@ import {
 } from "@/components/ui/card";
 import {
   Search,
-  Star,
   Download,
   Eye,
   Code,
   ShoppingCart,
   Filter,
   SlidersHorizontal,
+  Package,
 } from "lucide-react";
 
 import type { CodeProduct } from "@/lib/types";
@@ -35,13 +35,13 @@ export function CodesListing({ codes }: CodesListingProps) {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [priceFilter, setPriceFilter] = useState("All");
   const [sortBy, setSortBy] = useState("newest");
-  const { addToCart } = useCart();
+  const { addToCart, isInCart } = useCart();
 
   const categories = [
     "All",
     ...Array.from(new Set(codes.flatMap((code) => code.categories))),
   ];
-  const priceRanges = ["All", "Free", "$1-$10", "$11-$25", "$26-$50", "$50+"];
+  const priceRanges = ["All", "Free", "$1-$25", "$26-$50", "$50+"];
 
   const filteredCodes = codes
     .filter((code) => {
@@ -51,60 +51,25 @@ export function CodesListing({ codes }: CodesListingProps) {
         code.tags.some((tag) =>
           tag.toLowerCase().includes(searchTerm.toLowerCase())
         );
-
       const matchesCategory =
         selectedCategory === "All" ||
         code.categories.includes(selectedCategory);
-
       const matchesPrice = (() => {
         if (priceFilter === "All") return true;
         if (priceFilter === "Free") return code.price === 0;
-        if (priceFilter === "$1-$10") return code.price > 0 && code.price <= 10;
-        if (priceFilter === "$11-$25")
-          return code.price > 10 && code.price <= 25;
-        if (priceFilter === "$26-$50")
-          return code.price > 25 && code.price <= 50;
+        if (priceFilter === "$1-$25") return code.price > 0 && code.price <= 25;
+        if (priceFilter === "$26-$50") return code.price > 25 && code.price <= 50;
         if (priceFilter === "$50+") return code.price > 50;
         return true;
       })();
-
       return matchesSearch && matchesCategory && matchesPrice;
     })
     .sort((a, b) => {
-      switch (sortBy) {
-        case "price-low":
-          return a.price - b.price;
-        case "price-high":
-          return b.price - a.price;
-        case "popular":
-          return b.downloads - a.downloads;
-        case "rating":
-          return b.rating - a.rating;
-        default: // newest
-          return (
-            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-          );
-      }
+      if (sortBy === "price-low") return a.price - b.price;
+      if (sortBy === "price-high") return b.price - a.price;
+      if (sortBy === "popular") return b.downloads - a.downloads;
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
     });
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 },
-    },
-  };
 
   return (
     <div className="section-container pt-24">
@@ -113,13 +78,13 @@ export function CodesListing({ codes }: CodesListingProps) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
+        {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">
             Code Marketplace
           </h1>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Premium code snippets, templates, and components to accelerate your
-            development workflow.
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            Source code, templates, and components built by Asraful Islam — ready to drop into your project.
           </p>
         </div>
 
@@ -127,24 +92,23 @@ export function CodesListing({ codes }: CodesListingProps) {
         <div className="mb-8 space-y-4">
           <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
             <div className="relative w-full lg:w-96">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground h-4 w-4" />
               <Input
-                placeholder="Search codes..."
+                placeholder="Search products…"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 bg-[#1a1a1a] border-gray-700 focus:border-purple-500"
+                className="pl-10"
               />
             </div>
             <div className="flex items-center gap-2">
-              <SlidersHorizontal className="h-4 w-4 text-gray-400" />
+              <SlidersHorizontal className="h-4 w-4 text-muted-foreground" />
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="bg-[#1a1a1a] border border-gray-700 rounded-md px-3 py-2 text-sm focus:border-purple-500 focus:outline-none"
+                className="bg-background border border-border rounded-md px-3 py-2 text-sm focus:border-primary focus:outline-none"
               >
                 <option value="newest">Newest</option>
-                <option value="popular">Most Popular</option>
-                <option value="rating">Highest Rated</option>
+                <option value="popular">Most Downloaded</option>
                 <option value="price-low">Price: Low to High</option>
                 <option value="price-high">Price: High to Low</option>
               </select>
@@ -152,21 +116,14 @@ export function CodesListing({ codes }: CodesListingProps) {
           </div>
 
           <div className="flex flex-wrap gap-2 items-center">
-            <Filter className="h-4 w-4 text-gray-400" />
+            <Filter className="h-4 w-4 text-muted-foreground shrink-0" />
             <div className="flex flex-wrap gap-2">
               {categories.map((category) => (
                 <Button
                   key={category}
-                  variant={
-                    selectedCategory === category ? "default" : "outline"
-                  }
+                  variant={selectedCategory === category ? "default" : "outline"}
                   size="sm"
                   onClick={() => setSelectedCategory(category)}
-                  className={
-                    selectedCategory === category
-                      ? "bg-jordy_blue hover:bg-purple-700"
-                      : "border-gray-700 hover:bg-jordy_blue/10"
-                  }
                 >
                   {category}
                 </Button>
@@ -176,14 +133,9 @@ export function CodesListing({ codes }: CodesListingProps) {
               {priceRanges.map((range) => (
                 <Button
                   key={range}
-                  variant={priceFilter === range ? "default" : "outline"}
+                  variant={priceFilter === range ? "secondary" : "outline"}
                   size="sm"
                   onClick={() => setPriceFilter(range)}
-                  className={
-                    priceFilter === range
-                      ? "bg-green-600 hover:bg-green-700"
-                      : "border-gray-700 hover:bg-green-600/10"
-                  }
                 >
                   {range}
                 </Button>
@@ -192,119 +144,110 @@ export function CodesListing({ codes }: CodesListingProps) {
           </div>
         </div>
 
-        {/* Results count */}
-        <div className="mb-6">
-          <p className="text-gray-400">
-            Showing {filteredCodes.length} of {codes.length} code products
-          </p>
-        </div>
+        <p className="text-sm text-muted-foreground mb-6">
+          {filteredCodes.length} product{filteredCodes.length !== 1 ? "s" : ""}
+        </p>
 
-        {/* Codes Grid */}
+        {/* Grid */}
         <motion.div
-          variants={containerVariants}
           initial="hidden"
           animate="visible"
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { opacity: 1, transition: { staggerChildren: 0.08 } },
+          }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           {filteredCodes.map((code) => (
-            <motion.div key={code.id} variants={itemVariants}>
-              <Card className="bg-[#1a1a1a] border-gray-800 hover:border-purple-500/50 transition-all duration-300 group h-full flex flex-col">
+            <motion.div
+              key={code.id}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+              }}
+            >
+              <Card className="group h-full flex flex-col hover:border-primary/50 transition-colors duration-300">
                 <CardHeader className="p-0">
                   <div className="relative overflow-hidden aspect-video rounded-t-lg">
                     <img
                       src={code.preview || "/placeholder.svg"}
                       alt={code.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                     <div className="absolute top-3 left-3">
-                      <Badge className="bg-jordy_blue hover:bg-purple-700">
-                        {code.categories[0]}
-                      </Badge>
+                      <Badge variant="secondary">{code.categories[0]}</Badge>
                     </div>
                     <div className="absolute top-3 right-3">
                       {code.price === 0 ? (
-                        <Badge className="bg-green-600 hover:bg-green-700">
+                        <Badge className="bg-green-600 hover:bg-green-700 text-white">
                           FREE
                         </Badge>
                       ) : (
-                        <Badge className="bg-blue-600 hover:bg-blue-700">
-                          ${code.price}
-                        </Badge>
+                        <Badge className="bg-primary">${code.price}</Badge>
                       )}
                     </div>
                     <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                       <Link href={`/codes/${code.slug}`}>
-                        <Button
-                          size="sm"
-                          className="bg-white text-black hover:bg-gray-200"
-                        >
+                        <Button size="sm" variant="secondary">
                           <Eye className="h-4 w-4 mr-2" />
-                          Preview
+                          View Details
                         </Button>
                       </Link>
                     </div>
                   </div>
                 </CardHeader>
-                <CardContent className="p-4 flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <div className="flex items-center">
-                      {[...Array(5)].map((_, i) => (
-                        <Star
-                          key={i}
-                          className={`h-3 w-3 ${
-                            i < Math.floor(code.rating)
-                              ? "fill-yellow-400 text-yellow-400"
-                              : "text-gray-600"
-                          }`}
-                        />
-                      ))}
-                      <span className="text-xs text-gray-400 ml-1">
-                        ({code.reviews})
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-1 text-xs text-gray-400">
-                      <Download className="h-3 w-3" />
-                      {code.downloads}
-                    </div>
-                  </div>
-                  <h3 className="text-lg font-bold mb-2 group-hover:text-purple-400 transition-colors">
+
+                <CardContent className="p-4 flex-1 space-y-3">
+                  <h3 className="font-bold text-base group-hover:text-primary transition-colors line-clamp-1">
                     {code.title}
                   </h3>
-                  <p className="text-gray-400 text-sm mb-3 line-clamp-2">
+                  <p className="text-muted-foreground text-sm line-clamp-2">
                     {code.description}
                   </p>
-                  <div className="flex flex-wrap gap-1 mb-3">
+                  <div className="flex flex-wrap gap-1">
                     {code.tags.slice(0, 3).map((tag) => (
-                      <Badge
-                        key={tag}
-                        variant="outline"
-                        className="text-xs bg-[#232323] border-gray-700"
-                      >
+                      <Badge key={tag} variant="outline" className="text-xs">
                         {tag}
                       </Badge>
                     ))}
                   </div>
                 </CardContent>
+
                 <CardFooter className="p-4 pt-0 flex justify-between items-center">
-                  <div className="flex items-center gap-2">
-                    <Code className="h-4 w-4 text-purple-500" />
-                    <span className="text-sm text-gray-400">
+                  <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                    <span className="flex items-center gap-1">
+                      <Code className="h-3 w-3" />
                       {code.language}
                     </span>
+                    {code.downloads > 0 && (
+                      <span className="flex items-center gap-1">
+                        <Download className="h-3 w-3" />
+                        {code.downloads}
+                      </span>
+                    )}
                   </div>
-                  <div className="flex gap-2">
-                    <Button asChild variant="outline" size="sm">
-                      <Link href={`/codes/${code.slug}`}>View Details</Link>
+
+                  {code.price === 0 && code.sourceFileUrl ? (
+                    <Button size="sm" variant="secondary" asChild>
+                      <a href={code.sourceFileUrl} download>
+                        <Download className="h-4 w-4 mr-1" />
+                        Download
+                      </a>
                     </Button>
+                  ) : (
                     <Button
-                      onClick={() => addToCart(code)}
                       size="sm"
-                      className="bg-jordy_blue hover:bg-purple-700"
+                      onClick={() => addToCart(code)}
+                      disabled={isInCart(code.id)}
                     >
                       <ShoppingCart className="h-4 w-4 mr-1" />
-                      {code.price === 0 ? "Get Free" : `$${code.price}`}
+                      {isInCart(code.id)
+                        ? "In Cart"
+                        : code.price === 0
+                        ? "Get Free"
+                        : `$${code.price}`}
                     </Button>
-                  </div>
+                  )}
                 </CardFooter>
               </Card>
             </motion.div>
@@ -312,10 +255,12 @@ export function CodesListing({ codes }: CodesListingProps) {
         </motion.div>
 
         {filteredCodes.length === 0 && (
-          <div className="text-center py-12">
-            <Code className="h-16 w-16 text-gray-600 mx-auto mb-4" />
-            <p className="text-gray-400 text-lg">
-              No code products found matching your criteria.
+          <div className="text-center py-20">
+            <Package className="h-16 w-16 text-muted-foreground/30 mx-auto mb-4" />
+            <p className="text-muted-foreground text-lg">
+              {codes.length === 0
+                ? "No products yet — check back soon."
+                : "No products match your filters."}
             </p>
           </div>
         )}

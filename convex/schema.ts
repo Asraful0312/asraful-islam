@@ -116,4 +116,40 @@ export default defineSchema({
     createdAt: v.string(),
     author: v.string(),
   }),
+
+  products: defineTable({
+    title: v.string(),
+    slug: v.string(),
+    description: v.string(),
+    price: v.number(),
+    previewImage: v.id("_storage"),
+    tags: v.array(v.string()),
+    categories: v.array(v.string()),
+    language: v.string(),
+    published: v.boolean(),
+    version: v.string(),
+    downloads: v.optional(v.number()),
+    sourceFileKey: v.optional(v.string()),
+    sourceFileName: v.optional(v.string()),
+  })
+    .index("by_slug", ["slug"])
+    .index("by_published", ["published"])
+    .searchIndex("search_products", {
+      searchField: "title",
+      filterFields: ["published"],
+    }),
+
+  orders: defineTable({
+    productIds: v.array(v.id("products")),
+    buyerEmail: v.string(),
+    totalAmount: v.number(),
+    status: v.union(
+      v.literal("pending"),
+      v.literal("paid"),
+      v.literal("failed")
+    ),
+    creemOrderId: v.optional(v.string()),
+  })
+    .index("by_buyer", ["buyerEmail"])
+    .index("by_status", ["status"]),
 });
