@@ -11,3 +11,7 @@ export async function assertAdmin(ctx: QueryCtx | MutationCtx): Promise<void> {
     throw new ConvexError("Forbidden: admin access required");
   }
 }
+
+export function normalizeEmail(email: string): string {
+  return email.trim().toLowerCase();
+}

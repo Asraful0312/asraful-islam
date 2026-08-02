@@ -8,6 +8,8 @@ const navLinks = [
   { label: "Reviews", href: "/#reviews" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/#contact" },
+  { label: "Marketplace", href: "/codes" },
+  { label: "Track Order", href: "/orders" },
 ];
 
 const socials = [

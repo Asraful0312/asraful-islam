@@ -131,6 +131,7 @@ export default defineSchema({
     downloads: v.optional(v.number()),
     sourceFileKey: v.optional(v.string()),
     sourceFileName: v.optional(v.string()),
+    creemProductId: v.optional(v.string()),
   })
     .index("by_slug", ["slug"])
     .index("by_published", ["published"])
@@ -140,6 +141,7 @@ export default defineSchema({
     }),
 
   orders: defineTable({
+    token: v.string(),
     productIds: v.array(v.id("products")),
     buyerEmail: v.string(),
     totalAmount: v.number(),
@@ -150,6 +152,14 @@ export default defineSchema({
     ),
     creemOrderId: v.optional(v.string()),
   })
+    .index("by_token", ["token"])
     .index("by_buyer", ["buyerEmail"])
+    .index("by_buyer_and_status", ["buyerEmail", "status"])
     .index("by_status", ["status"]),
+
+  orderLookupTokens: defineTable({
+    token: v.string(),
+    email: v.string(),
+    expiresAt: v.number(),
+  }).index("by_token", ["token"]),
 });

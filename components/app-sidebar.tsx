@@ -3,6 +3,7 @@ import {
   BookText,
   FolderKanban,
   Home,
+  LayoutDashboard,
   Search,
   Settings,
   ShoppingBag,
@@ -24,6 +25,11 @@ import { useAuthActions } from "@convex-dev/auth/react";
 
 // Menu items.
 const items = [
+  {
+    title: "Dashboard",
+    url: "/dashboard",
+    icon: LayoutDashboard,
+  },
   {
     title: "Home",
     url: "/",

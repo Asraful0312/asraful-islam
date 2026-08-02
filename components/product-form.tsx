@@ -3,6 +3,7 @@
 import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useMutation } from "convex/react";
+import { useQuery } from "convex-helpers/react/cache";
 import { useUploadFile } from "@convex-dev/r2/react";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
@@ -12,7 +13,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
-import { Upload, FileCode } from "lucide-react";
+import { Upload, FileCode, CreditCard } from "lucide-react";
 import { toast } from "sonner";
 
 interface ProductFormProps {
@@ -32,6 +33,7 @@ interface ProductFormProps {
     previewImageUrl?: string | null;
     sourceFileKey?: string;
     sourceFileName?: string;
+    creemProductId?: string;
   };
 }
 
@@ -68,12 +70,18 @@ export function ProductForm({ mode, productId, defaultValues }: ProductFormProps
   );
   const [uploadingSource, setUploadingSource] = useState(false);
 
+  // Creem product link (for paid checkout)
+  const [creemProductId, setCreemProductId] = useState(
+    defaultValues?.creemProductId ?? ""
+  );
+
   const [saving, setSaving] = useState(false);
 
   const generatePreviewUploadUrl = useMutation(api.products.generatePreviewUploadUrl);
   const uploadSourceFile = useUploadFile(api.r2);
   const createProduct = useMutation(api.products.createProduct);
   const updateProduct = useMutation(api.products.updateProduct);
+  const creemProducts = useQuery(api.billing.listCreemProducts, {});
 
   const handlePreviewUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -146,6 +154,7 @@ export function ProductForm({ mode, productId, defaultValues }: ProductFormProps
         published,
         sourceFileKey: sourceFileKey ?? undefined,
         sourceFileName: sourceFileName ?? undefined,
+        creemProductId: creemProductId.trim() || undefined,
       };
 
       if (mode === "create") {
@@ -214,6 +223,41 @@ export function ProductForm({ mode, productId, defaultValues }: ProductFormProps
           />
         </div>
       </div>
+
+      {Number(price) > 0 && (
+        <div className="space-y-2">
+          <Label className="flex items-center gap-2">
+            <CreditCard className="h-4 w-4" />
+            Creem Product ID
+          </Label>
+          <Input
+            value={creemProductId}
+            onChange={(e) => setCreemProductId(e.target.value)}
+            placeholder="prod_xxxxxxxxxxxx"
+          />
+          <p className="text-xs text-muted-foreground">
+            Create a product with this exact price in your Creem dashboard first, then paste (or pick below) its Product ID here. Required for paid checkout.
+          </p>
+          {creemProducts && creemProducts.length > 0 && (
+            <div className="flex flex-wrap gap-2 pt-1">
+              {creemProducts.map((p) => (
+                <button
+                  key={p.id}
+                  type="button"
+                  onClick={() => setCreemProductId(p.id)}
+                  className={`text-xs px-2.5 py-1 rounded-md border transition-colors ${
+                    creemProductId === p.id
+                      ? "border-primary bg-primary/10 text-primary"
+                      : "border-border hover:border-primary/50"
+                  }`}
+                >
+                  {p.name} · ${(p.price / 100).toFixed(2)}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
 
       <div className="space-y-1">
         <Label>Language / Framework</Label>
@@ -318,7 +362,7 @@ export function ProductForm({ mode, productId, defaultValues }: ProductFormProps
         <p className="text-xs text-muted-foreground">
           Buyers receive a permanent link:{" "}
           <code className="text-xs">
-            assets.asostacks.com/
+            assets.asrafulislam.uk/
             {sourceFileKey ? sourceFileKey.slice(0, 20) + "…" : "<key>"}
           </code>
         </p>
