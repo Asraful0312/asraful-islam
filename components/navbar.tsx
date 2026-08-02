@@ -115,7 +115,7 @@ export function Navbar() {
                 href="/codes"
                 className={cn(
                   "text-zinc-800 dark:text-muted-foreground dark:hover:text-white transition-colors relative group",
-                  "[text-shadow:_0_1px_2px_rgba(255,255,255,0.8)]  dark:[text-shadow:_0_1px_2px_rgba(0,0,0,0.5)]"
+                  "[text-shadow:0_1px_2px_rgba(255,255,255,0.8)]  dark:[text-shadow:0_1px_2px_rgba(0,0,0,0.5)]"
                 )}
               >
                 Marketplace
@@ -266,7 +266,7 @@ function NavLink({
       className={cn(
         "text-zinc-800 dark:text-muted-foreground  dark:hover:text-white transition-colors relative group",
         // Subtle text shadow for extra pop
-        "[text-shadow:_0_1px_2px_rgba(255,255,255,0.8)]  dark:[text-shadow:_0_1px_2px_rgba(0,0,0,0.5)]",
+        "[text-shadow:0_1px_2px_rgba(255,255,255,0.8)]  dark:[text-shadow:0_1px_2px_rgba(0,0,0,0.5)]",
         className
       )}
     >

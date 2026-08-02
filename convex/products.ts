@@ -116,6 +116,7 @@ export const createProduct = mutation({
     version: v.string(),
     sourceFileKey: v.optional(v.string()),
     sourceFileName: v.optional(v.string()),
+    creemProductId: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     await assertAdmin(ctx);
@@ -146,6 +147,7 @@ export const updateProduct = mutation({
     version: v.string(),
     sourceFileKey: v.optional(v.string()),
     sourceFileName: v.optional(v.string()),
+    creemProductId: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     await assertAdmin(ctx);
@@ -179,21 +181,6 @@ export const deleteProduct = mutation({
     await ctx.storage.delete(product.previewImage);
     // Note: call api.r2.deleteSourceFile separately if sourceFileKey exists
     await ctx.db.delete(args.productId);
-  },
-});
-
-// Placeholder: create order (will be wired to Creem webhook later)
-export const createOrder = mutation({
-  args: {
-    productIds: v.array(v.id("products")),
-    buyerEmail: v.string(),
-    totalAmount: v.number(),
-  },
-  handler: async (ctx, args) => {
-    return await ctx.db.insert("orders", {
-      ...args,
-      status: "pending",
-    });
   },
 });
 
