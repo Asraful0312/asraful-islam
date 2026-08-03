@@ -42,6 +42,7 @@ export function CodeDetailWrapper({ slug }: { slug: string }) {
     version: p.version,
     sourceFileUrl: p.sourceFileUrl,
     demoUrl: p.demoUrl,
+    descriptionFormat: p.descriptionFormat,
   });
 
   const related: CodeProduct[] = (allProducts as typeof product[])

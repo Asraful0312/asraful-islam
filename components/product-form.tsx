@@ -10,11 +10,12 @@ import { Id } from "@/convex/_generated/dataModel";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
 import { Upload, FileCode, CreditCard, Globe } from "lucide-react";
 import { toast } from "sonner";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 interface ProductFormProps {
   mode: "create" | "edit";
@@ -35,6 +36,7 @@ interface ProductFormProps {
     sourceFileName?: string;
     creemProductId?: string;
     demoUrl?: string;
+    descriptionFormat?: "html" | "markdown";
   };
 }
 
@@ -46,6 +48,10 @@ export function ProductForm({ mode, productId, defaultValues }: ProductFormProps
   const [title, setTitle] = useState(defaultValues?.title ?? "");
   const [slug, setSlug] = useState(defaultValues?.slug ?? "");
   const [description, setDescription] = useState(defaultValues?.description ?? "");
+  const [descriptionFormat, setDescriptionFormat] = useState<"markdown" | "html">(
+    defaultValues?.descriptionFormat ?? "markdown"
+  );
+  const [descPreviewMode, setDescPreviewMode] = useState<"edit" | "preview">("edit");
   const [price, setPrice] = useState(String(defaultValues?.price ?? 0));
   const [tags, setTags] = useState(defaultValues?.tags ?? "");
   const [categories, setCategories] = useState(defaultValues?.categories ?? "");
@@ -160,6 +166,7 @@ export function ProductForm({ mode, productId, defaultValues }: ProductFormProps
         sourceFileName: sourceFileName ?? undefined,
         creemProductId: creemProductId.trim() || undefined,
         demoUrl: demoUrl.trim() || undefined,
+        descriptionFormat,
       };
 
       if (mode === "create") {
@@ -197,14 +204,59 @@ export function ProductForm({ mode, productId, defaultValues }: ProductFormProps
         />
       </div>
 
-      <div className="space-y-1">
-        <Label>Description</Label>
-        <Textarea
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          rows={4}
-          required
-        />
+      <div className="space-y-2">
+        <div className="flex items-center justify-between">
+          <Label>Description</Label>
+          <div className="flex items-center gap-1 rounded-md border p-0.5 text-xs">
+            <button
+              type="button"
+              onClick={() => setDescPreviewMode("edit")}
+              className={`px-2.5 py-1 rounded transition-colors ${
+                descPreviewMode === "edit"
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              Edit
+            </button>
+            <button
+              type="button"
+              onClick={() => setDescPreviewMode("preview")}
+              className={`px-2.5 py-1 rounded transition-colors ${
+                descPreviewMode === "preview"
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              Preview
+            </button>
+          </div>
+        </div>
+
+        {descPreviewMode === "edit" ? (
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            rows={10}
+            required
+            placeholder={"## What's included\n\n- Feature one\n- Feature two\n\n## Tech stack\n\nNext.js, Tailwind CSS, TypeScript"}
+            className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm font-mono resize-y focus:outline-none focus:ring-2 focus:ring-ring"
+          />
+        ) : (
+          <div className="min-h-[200px] rounded-md border border-input bg-muted/30 px-4 py-3 prose prose-sm max-w-none dark:prose-invert overflow-auto">
+            {description ? (
+              <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                {description}
+              </ReactMarkdown>
+            ) : (
+              <p className="text-muted-foreground italic text-sm">Nothing to preview yet — switch to Edit and write some markdown.</p>
+            )}
+          </div>
+        )}
+
+        <p className="text-xs text-muted-foreground">
+          Supports markdown: **bold**, *italic*, `code`, ## headings, - lists, etc.
+        </p>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
