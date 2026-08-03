@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
@@ -66,9 +68,7 @@ export function CodeDetails({ code, relatedCodes }: CodeDetailsProps) {
               <h1 className="text-3xl md:text-4xl font-bold mb-4">
                 {code.title}
               </h1>
-              <p className="text-muted-foreground text-lg leading-relaxed">
-                {code.description}
-              </p>
+          
 
               <div className="flex items-center gap-4 mt-4">
                 {code.downloads > 0 && (
@@ -99,6 +99,18 @@ export function CodeDetails({ code, relatedCodes }: CodeDetailsProps) {
                 className="w-full object-cover"
               />
             </div>
+
+                {code.descriptionFormat === "markdown" ? (
+                <div className="prose prose-base max-w-none dark:prose-invert text-muted-foreground">
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                    {code.description}
+                  </ReactMarkdown>
+                </div>
+              ) : (
+                <p className="text-muted-foreground text-lg leading-relaxed">
+                  {code.description}
+                </p>
+              )}
 
             {/* Source file state */}
             <div className="rounded-lg border p-6">

@@ -118,6 +118,7 @@ export const createProduct = mutation({
     sourceFileName: v.optional(v.string()),
     creemProductId: v.optional(v.string()),
     demoUrl: v.optional(v.string()),
+    descriptionFormat: v.optional(v.union(v.literal("html"), v.literal("markdown"))),
   },
   handler: async (ctx, args) => {
     await assertAdmin(ctx);
@@ -150,6 +151,7 @@ export const updateProduct = mutation({
     sourceFileName: v.optional(v.string()),
     creemProductId: v.optional(v.string()),
     demoUrl: v.optional(v.string()),
+    descriptionFormat: v.optional(v.union(v.literal("html"), v.literal("markdown"))),
   },
   handler: async (ctx, args) => {
     await assertAdmin(ctx);
