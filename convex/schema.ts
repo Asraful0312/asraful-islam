@@ -132,6 +132,7 @@ export default defineSchema({
     sourceFileKey: v.optional(v.string()),
     sourceFileName: v.optional(v.string()),
     creemProductId: v.optional(v.string()),
+    demoUrl: v.optional(v.string()),
   })
     .index("by_slug", ["slug"])
     .index("by_published", ["published"])

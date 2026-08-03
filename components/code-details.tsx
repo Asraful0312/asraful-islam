@@ -16,6 +16,7 @@ import {
   Code,
   Lock,
   Package,
+  ExternalLink,
 } from "lucide-react";
 
 import type { CodeProduct } from "@/lib/types";
@@ -69,12 +70,25 @@ export function CodeDetails({ code, relatedCodes }: CodeDetailsProps) {
                 {code.description}
               </p>
 
-              {code.downloads > 0 && (
-                <div className="flex items-center gap-1 mt-4 text-sm text-muted-foreground">
-                  <Download className="h-4 w-4" />
-                  {code.downloads} downloads
-                </div>
-              )}
+              <div className="flex items-center gap-4 mt-4">
+                {code.downloads > 0 && (
+                  <div className="flex items-center gap-1 text-sm text-muted-foreground">
+                    <Download className="h-4 w-4" />
+                    {code.downloads} downloads
+                  </div>
+                )}
+                {code.demoUrl && (
+                  <a
+                    href={code.demoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-sm text-primary hover:underline"
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                    View Live Demo
+                  </a>
+                )}
+              </div>
             </div>
 
             {/* Preview image */}
@@ -160,6 +174,15 @@ export function CodeDetails({ code, relatedCodes }: CodeDetailsProps) {
                   )}
                   <p className="text-sm text-muted-foreground">One-time purchase</p>
                 </div>
+
+                {code.demoUrl && (
+                  <Button variant="outline" className="w-full" asChild>
+                    <a href={code.demoUrl} target="_blank" rel="noopener noreferrer">
+                      <ExternalLink className="h-4 w-4 mr-2" />
+                      View Live Demo
+                    </a>
+                  </Button>
+                )}
 
                 {isFree && hasFile ? (
                   <Button className="w-full" asChild>

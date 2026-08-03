@@ -94,9 +94,6 @@ export function Navbar() {
               <NavLink href="#projects" onClick={scrollToSection}>
                 Projects
               </NavLink>
-              {/* <NavLink href="#reviews" onClick={scrollToSection}>
-                Reviews
-              </NavLink> */}
               <NavLink href="#contact" onClick={scrollToSection}>
                 Contact
               </NavLink>
@@ -189,13 +186,6 @@ export function Navbar() {
               >
                 Projects
               </MobileNavLink>
-              {/* <MobileNavLink
-                href="#reviews"
-                onClick={scrollToSection}
-                closeMenu={() => setIsMobileMenuOpen(false)}
-              >
-                Reviews
-              </MobileNavLink> */}
               <MobileNavLink
                 href="#contact"
                 onClick={scrollToSection}
