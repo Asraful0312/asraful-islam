@@ -13,7 +13,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
-import { Upload, FileCode, CreditCard } from "lucide-react";
+import { Upload, FileCode, CreditCard, Globe } from "lucide-react";
 import { toast } from "sonner";
 
 interface ProductFormProps {
@@ -34,6 +34,7 @@ interface ProductFormProps {
     sourceFileKey?: string;
     sourceFileName?: string;
     creemProductId?: string;
+    demoUrl?: string;
   };
 }
 
@@ -74,6 +75,9 @@ export function ProductForm({ mode, productId, defaultValues }: ProductFormProps
   const [creemProductId, setCreemProductId] = useState(
     defaultValues?.creemProductId ?? ""
   );
+
+  // Live demo URL (optional)
+  const [demoUrl, setDemoUrl] = useState(defaultValues?.demoUrl ?? "");
 
   const [saving, setSaving] = useState(false);
 
@@ -155,6 +159,7 @@ export function ProductForm({ mode, productId, defaultValues }: ProductFormProps
         sourceFileKey: sourceFileKey ?? undefined,
         sourceFileName: sourceFileName ?? undefined,
         creemProductId: creemProductId.trim() || undefined,
+        demoUrl: demoUrl.trim() || undefined,
       };
 
       if (mode === "create") {
@@ -258,6 +263,22 @@ export function ProductForm({ mode, productId, defaultValues }: ProductFormProps
           )}
         </div>
       )}
+
+      <div className="space-y-1">
+        <Label className="flex items-center gap-2">
+          <Globe className="h-4 w-4" />
+          Live Demo URL
+          <span className="text-xs font-normal text-muted-foreground">
+            (optional)
+          </span>
+        </Label>
+        <Input
+          type="url"
+          value={demoUrl}
+          onChange={(e) => setDemoUrl(e.target.value)}
+          placeholder="https://your-demo.example.com"
+        />
+      </div>
 
       <div className="space-y-1">
         <Label>Language / Framework</Label>

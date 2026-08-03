@@ -71,6 +71,7 @@ export interface CodeProduct {
   updatedAt: string;
   version: string;
   sourceFileUrl?: string | null;
+  demoUrl?: string;
 }
 
 export interface Game {

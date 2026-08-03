@@ -40,6 +40,7 @@ export function CodesListingWrapper() {
     updatedAt: new Date(p._creationTime).toISOString(),
     version: p.version,
     sourceFileUrl: p.sourceFileUrl,
+    demoUrl: p.demoUrl,
   }));
 
   return <CodesListing codes={codes} />;

@@ -57,6 +57,7 @@ export default function EditProductPage({
             sourceFileKey: product.sourceFileKey,
             sourceFileName: product.sourceFileName,
             creemProductId: product.creemProductId,
+            demoUrl: product.demoUrl,
           }}
         />
       </div>
