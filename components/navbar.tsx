@@ -83,7 +83,7 @@ export function Navbar() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-2 sm:gap-6">
             <nav className="liquid-glass hidden md:flex items-center space-x-8 py-3 px-8">
               <NavLink href="#about" onClick={scrollToSection}>
                 About
@@ -121,30 +121,32 @@ export function Navbar() {
               <CartIcon />
 
             </nav>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 sm:gap-4">
               <AnimatedThemeToggler className="text-jordy_blue-100 dark:text-white" />
-              <Authenticated>
-                <Button onClick={signOut} variant="secondary" className="">
-                  Logout
-                </Button>
-              </Authenticated>
-              <Unauthenticated>
-                <Link
-                  href="/signin"
-                  onClick={signOut}
-                  className={buttonVariants({
-                    variant: "default",
-                    className: 'text-jordy_blue-100'
-                  })}
-                >
-                  Login
-                </Link>
-              </Unauthenticated>
+              <div className="hidden md:flex items-center gap-4">
+                <Authenticated>
+                  <Button onClick={signOut} variant="secondary" className="">
+                    Logout
+                  </Button>
+                </Authenticated>
+                <Unauthenticated>
+                  <Link
+                    href="/signin"
+                    onClick={signOut}
+                    className={buttonVariants({
+                      variant: "default",
+                      className: 'text-jordy_blue-100'
+                    })}
+                  >
+                    Login
+                  </Link>
+                </Unauthenticated>
+              </div>
             </div>
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden text-jordy_blue-100 dark:text-white"
+              className="md:hidden text-jordy_blue-100 dark:text-white shrink-0"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle menu"
             >

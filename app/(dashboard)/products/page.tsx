@@ -10,6 +10,7 @@ import { Id } from "@/convex/_generated/dataModel";
 import { toast } from "sonner";
 import Link from "next/link";
 import { useState } from "react";
+import { stripMarkdown } from "@/lib/utils";
 
 export default function ProductsPage() {
   const [paginationOpts, setPaginationOpts] = useState({
@@ -81,7 +82,9 @@ export default function ProductsPage() {
                       </Badge>
                     </div>
                     <p className="text-xs text-muted-foreground line-clamp-2">
-                      {product.description}
+                      {product.descriptionFormat === "markdown"
+                        ? stripMarkdown(product.description)
+                        : product.description}
                     </p>
                     <div className="flex items-center justify-between pt-1">
                       <span className="font-bold text-primary">
