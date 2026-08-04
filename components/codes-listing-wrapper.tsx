@@ -41,6 +41,7 @@ export function CodesListingWrapper() {
     version: p.version,
     sourceFileUrl: p.sourceFileUrl,
     demoUrl: p.demoUrl,
+    descriptionFormat: p.descriptionFormat,
   }));
 
   return <CodesListing codes={codes} />;

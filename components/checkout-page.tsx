@@ -93,61 +93,65 @@ export function CheckoutPage() {
                 {items.map((item) => (
                   <div
                     key={item.id}
-                    className="flex items-center gap-4 p-4 bg-card rounded-lg border"
+                    className="flex flex-col sm:flex-row sm:items-center gap-3 p-4 bg-card rounded-lg border"
                   >
-                    <div className="w-16 h-12 overflow-hidden rounded border border-border shrink-0">
-                      <img
-                        src={item.preview || "/placeholder.svg"}
-                        alt={item.title}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-medium truncate">{item.title}</h3>
-                      <div className="flex items-center gap-2 mt-1">
-                        <Badge variant="outline" className="text-xs">
-                          {item.language}
-                        </Badge>
-                        <span className="text-sm text-muted-foreground">
-                          {item.price === 0 ? "Free" : `$${item.price}`}
-                        </span>
+                    <div className="flex items-center gap-4 min-w-0 flex-1">
+                      <div className="w-16 h-12 overflow-hidden rounded border border-border shrink-0">
+                        <img
+                          src={item.preview || "/placeholder.svg"}
+                          alt={item.title}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-medium truncate">{item.title}</h3>
+                        <div className="flex items-center gap-2 mt-1 flex-wrap">
+                          <Badge variant="outline" className="text-xs max-w-[160px] truncate">
+                            {item.language}
+                          </Badge>
+                          <span className="text-sm text-muted-foreground">
+                            {item.price === 0 ? "Free" : `$${item.price}`}
+                          </span>
+                        </div>
                       </div>
                     </div>
 
-                    {item.price === 0 ? (
-                      item.sourceFileUrl ? (
-                        <Button size="sm" variant="secondary" asChild>
-                          <a href={item.sourceFileUrl} download>
-                            <Download className="h-4 w-4" />
-                          </a>
-                        </Button>
-                      ) : (
-                        <span className="text-xs text-muted-foreground shrink-0">
-                          Unavailable
-                        </span>
-                      )
-                    ) : (
-                      <Button
-                        size="sm"
-                        onClick={() => handleBuy(item.id)}
-                        disabled={loadingId === item.id}
-                      >
-                        {loadingId === item.id ? (
-                          <Loader2 className="h-4 w-4 animate-spin" />
+                    <div className="flex items-center justify-end gap-2 shrink-0">
+                      {item.price === 0 ? (
+                        item.sourceFileUrl ? (
+                          <Button size="sm" variant="secondary" asChild>
+                            <a href={item.sourceFileUrl} download>
+                              <Download className="h-4 w-4" />
+                            </a>
+                          </Button>
                         ) : (
-                          `Pay $${item.price}`
-                        )}
-                      </Button>
-                    )}
+                          <span className="text-xs text-muted-foreground shrink-0">
+                            Unavailable
+                          </span>
+                        )
+                      ) : (
+                        <Button
+                          size="sm"
+                          onClick={() => handleBuy(item.id)}
+                          disabled={loadingId === item.id}
+                        >
+                          {loadingId === item.id ? (
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                          ) : (
+                            `Pay $${item.price}`
+                          )}
+                        </Button>
+                      )}
 
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => removeFromCart(item.id)}
-                      className="text-red-400 hover:text-red-300 hover:bg-red-500/10"
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => removeFromCart(item.id)}
+                        className="text-red-400 hover:text-red-300 hover:bg-red-500/10"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    </div>
                   </div>
                 ))}
 

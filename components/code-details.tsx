@@ -114,12 +114,17 @@ export function CodeDetails({ code, relatedCodes }: CodeDetailsProps) {
 
             {/* Source file state */}
             <div className="rounded-lg border p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="font-semibold flex items-center gap-2">
+              <div className="flex items-center justify-between gap-2 mb-4 flex-wrap">
+                <h3 className="font-semibold flex items-center gap-2 shrink-0">
                   <Code className="h-4 w-4" />
                   Source Code
                 </h3>
-                <Badge variant="outline">{code.language}</Badge>
+                <Badge
+                  variant="outline"
+                  className="h-auto max-w-full whitespace-normal wrap-break-word text-left py-1"
+                >
+                  {code.language}
+                </Badge>
               </div>
 
               {isFree && hasFile ? (
@@ -265,9 +270,9 @@ export function CodeDetails({ code, relatedCodes }: CodeDetailsProps) {
               <div className="rounded-lg border p-6">
                 <h3 className="font-semibold mb-4">Details</h3>
                 <div className="space-y-2 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-muted-foreground">Language</span>
-                    <span>{code.language}</span>
+                  <div className="flex justify-between gap-3">
+                    <span className="text-muted-foreground shrink-0">Language</span>
+                    <span className="text-right wrap-break-word">{code.language}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Version</span>

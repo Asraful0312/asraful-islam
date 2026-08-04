@@ -25,6 +25,7 @@ import {
 
 import type { CodeProduct } from "@/lib/types";
 import { useCart } from "@/contexts/use-context";
+import { stripMarkdown } from "@/lib/utils";
 
 interface CodesListingProps {
   codes: CodeProduct[];
@@ -202,7 +203,9 @@ export function CodesListing({ codes }: CodesListingProps) {
                     {code.title}
                   </h3>
                   <p className="text-muted-foreground text-sm line-clamp-2">
-                    {code.description}
+                    {code.descriptionFormat === "markdown"
+                      ? stripMarkdown(code.description)
+                      : code.description}
                   </p>
                   <div className="flex flex-wrap gap-1">
                     {code.tags.slice(0, 3).map((tag) => (
