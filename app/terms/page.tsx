@@ -120,8 +120,8 @@ export default function TermsOfServicePage() {
 
         <h2>9. Intellectual Property</h2>
         <p>
-          All original content on this Site — including blog posts, project
-          write-ups, and site design — is owned by Asraful Islam unless
+          All original content on this Site including blog posts, project
+          write-ups, and site design is owned by Asraful Islam unless
           otherwise stated. Purchased products are licensed to you under
           Section 7, not sold outright.
         </p>
@@ -164,11 +164,6 @@ export default function TermsOfServicePage() {
         <p>
           Questions about these Terms? Email{" "}
           <a href="mailto:rayhan@asrafulislam.uk">rayhan@asrafulislam.uk</a>{" "}
-          or{" "}
-          <a href="mailto:asrafulislam0312@gmail.com">
-            asrafulislam0312@gmail.com
-          </a>
-          .
         </p>
       </LegalPage>
       <Footer />
