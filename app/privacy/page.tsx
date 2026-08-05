@@ -84,19 +84,19 @@ export default function PrivacyPolicyPage() {
         </p>
         <ul>
           <li>
-            <strong>Convex</strong> — application database, authentication,
+            <strong>Convex</strong> application database, authentication,
             and backend hosting
           </li>
           <li>
-            <strong>Cloudflare R2</strong> — storage and delivery of purchased
+            <strong>Cloudflare R2</strong> storage and delivery of purchased
             source code files and site images
           </li>
           <li>
-            <strong>Creem</strong> — payment processing for marketplace
+            <strong>Creem</strong> payment processing for marketplace
             purchases
           </li>
           <li>
-            <strong>Zoho Mail</strong> — delivery of transactional emails
+            <strong>Zoho Mail</strong> delivery of transactional emails
             (receipts, download links, order lookups)
           </li>
         </ul>
@@ -127,7 +127,7 @@ export default function PrivacyPolicyPage() {
           I keep order records (email, product purchased, amount, status)
           for as long as needed for accounting, support, and fraud-prevention
           purposes. You can request deletion of your account data at any
-          time (see Section 8) — order records tied to a completed purchase
+          time (see Section 8) order records tied to a completed purchase
           may be retained where required for financial record-keeping.
         </p>
 
@@ -162,11 +162,6 @@ export default function PrivacyPolicyPage() {
         <p>
           Questions about this policy? Email{" "}
           <a href="mailto:rayhan@asrafulislam.uk">rayhan@asrafulislam.uk</a>{" "}
-          or{" "}
-          <a href="mailto:asrafulislam0312@gmail.com">
-            asrafulislam0312@gmail.com
-          </a>
-          .
         </p>
       </LegalPage>
       <Footer />

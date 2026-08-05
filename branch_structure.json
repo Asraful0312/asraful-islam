@@ -1,0 +1,18 @@
+{
+  "default_branch": "main",
+  "branches": [
+    "claude/admin-function-server-check-f9120d",
+    "main",
+    "vercel/react-server-components-cve-vu-s778lf"
+  ],
+  "parent": {
+    "claude/admin-function-server-check-f9120d": "main",
+    "main": null,
+    "vercel/react-server-components-cve-vu-s778lf": "main"
+  },
+  "order": [
+    "main",
+    "claude/admin-function-server-check-f9120d",
+    "vercel/react-server-components-cve-vu-s778lf"
+  ]
+}
