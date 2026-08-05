@@ -96,10 +96,10 @@ export function ContactSection() {
                     Email
                   </p>
                   <a
-                    href="mailto:asrafulislam0312@gmail.com"
+                    href="mailto:rayhan@asrafulislam.uk"
                     className="text-foreground text-sm font-semibold pr-3 hover:text-primary transition-colors"
                   >
-                    asrafulislam0312@gmail.com
+                    rayhan@asrafulislam.uk
                   </a>
                 </div>
               </div>
