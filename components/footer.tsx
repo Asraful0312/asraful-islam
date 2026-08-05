@@ -15,7 +15,7 @@ const socials = [
   { icon: Github, href: "https://github.com/Asraful0312", label: "GitHub" },
   { icon: Linkedin, href: "https://www.linkedin.com/in/asraful-islam-rayhan-434998335/", label: "LinkedIn" },
   { icon: Twitter, href: "https://x.com/AsrafulIslam031", label: "Twitter" },
-  { icon: Mail, href: "mailto:asrafulislam0312@gmail.com", label: "Email" },
+  { icon: Mail, href: "mailto:rayhan@asrafulislam.uk", label: "Email" },
 ];
 
 export function Footer() {
@@ -69,10 +69,10 @@ export function Footer() {
             <p className="text-xs font-semibold tracking-widest uppercase text-muted-foreground mb-4">Get in touch</p>
             <div className="space-y-2.5">
               <a
-                href="mailto:asrafulislam0312@gmail.com"
+                href="mailto:rayhan@asrafulislam.uk"
                 className="block text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
               >
-                asrafulislam0312@gmail.com
+                rayhan@asrafulislam.uk
               </a>
               <a
                 href="https://wa.me/8801873239795"
