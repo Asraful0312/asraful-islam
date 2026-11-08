@@ -73,6 +73,8 @@ export interface CodeProduct {
   sourceFileUrl?: string | null;
   demoUrl?: string;
   descriptionFormat?: "html" | "markdown";
+  oneTimeSale?: boolean;
+  sold?: boolean;
 }
 
 export interface Game {

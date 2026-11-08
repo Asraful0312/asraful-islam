@@ -177,9 +177,14 @@ export function CodesListing({ codes }: CodesListingProps) {
                     />
                     <div className="absolute top-3 left-3">
                       <Badge variant="secondary">{code.categories[0]}</Badge>
+                      {code.oneTimeSale && !code.sold && (
+                        <Badge className="ml-2">One buyer only</Badge>
+                      )}
                     </div>
                     <div className="absolute top-3 right-3">
-                      {code.price === 0 ? (
+                      {code.sold ? (
+                        <Badge variant="destructive">Sold</Badge>
+                      ) : code.price === 0 ? (
                         <Badge className="bg-green-600 hover:bg-green-700 text-white">
                           FREE
                         </Badge>
@@ -230,7 +235,11 @@ export function CodesListing({ codes }: CodesListingProps) {
                     )}
                   </div>
 
-                  {code.price === 0 && code.sourceFileUrl ? (
+                  {code.sold ? (
+                    <Button size="sm" variant="secondary" disabled>
+                      Sold
+                    </Button>
+                  ) : code.price === 0 && code.sourceFileUrl ? (
                     <Button size="sm" variant="secondary" asChild>
                       <a href={code.sourceFileUrl} download>
                         <Download className="h-4 w-4 mr-1" />
