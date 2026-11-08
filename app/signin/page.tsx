@@ -36,10 +36,14 @@ export default function SignInForm() {
       } else {
         router.push("/");
       }
-    } catch (error: any) {
-      setError("Something went wrong. Please try again.");
+    } catch {
+      // Production hides the server's reason, so these cover the usual causes.
+      setError(
+        flow === "signIn"
+          ? "Wrong email or password. Please try again."
+          : "Could not create your account. Try another email or a longer password."
+      );
     } finally {
-      setError("");
       setSubmitting(false);
     }
   };
