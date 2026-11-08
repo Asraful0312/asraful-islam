@@ -1,5 +1,5 @@
 import { ConvexError, v } from "convex/values";
-import { mutation, query } from "./_generated/server";
+import { mutation, query, type QueryCtx } from "./_generated/server";
 import { paginationOptsValidator } from "convex/server";
 import { assertAdmin } from "./helpers";
 import { getSourceFileUrl } from "./r2";
@@ -26,6 +26,46 @@ function withUrls<T extends { previewImage: string; sourceFileKey?: string }>(
   };
 }
 
+// What anyone can see. A paid product's file stays private until its order is
+// paid, so neither its URL nor the key that builds the URL leaves the server.
+function publicProduct<
+  T extends {
+    previewImage: string;
+    price: number;
+    sourceFileKey?: string;
+    sourceFileName?: string;
+    creemProductId?: string;
+    reservedUntil?: number;
+    reservedFor?: string;
+  },
+>(product: T, previewImageUrl: string | null) {
+  const {
+    sourceFileKey,
+    sourceFileName: _name,
+    creemProductId: _creem,
+    reservedUntil: _until,
+    reservedFor: _for,
+    ...rest
+  } = product;
+  return {
+    ...rest,
+    previewImageUrl,
+    sourceFileUrl:
+      product.price === 0 && sourceFileKey
+        ? getSourceFileUrl(sourceFileKey)
+        : null,
+  };
+}
+
+async function callerIsAdmin(ctx: QueryCtx): Promise<boolean> {
+  try {
+    await assertAdmin(ctx);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 // Public: paginated product listing
 export const getProducts = query({
   args: {
@@ -33,7 +73,8 @@ export const getProducts = query({
     isAdmin: v.optional(v.boolean()),
   },
   handler: async (ctx, args) => {
-    const result = args.isAdmin
+    const admin = args.isAdmin === true && (await callerIsAdmin(ctx));
+    const result = admin
       ? await ctx.db.query("products").order("desc").paginate(args.paginationOpts)
       : await ctx.db
           .query("products")
@@ -44,7 +85,7 @@ export const getProducts = query({
     const page = await Promise.all(
       result.page.map(async (product) => {
         const previewImageUrl = await ctx.storage.getUrl(product.previewImage);
-        return withUrls(product, previewImageUrl);
+        return publicProduct(product, previewImageUrl);
       })
     );
 
@@ -56,7 +97,8 @@ export const getProducts = query({
 export const getAllProducts = query({
   args: { isAdmin: v.optional(v.boolean()) },
   handler: async (ctx, args) => {
-    const products = args.isAdmin
+    const admin = args.isAdmin === true && (await callerIsAdmin(ctx));
+    const products = admin
       ? await ctx.db.query("products").order("desc").collect()
       : await ctx.db
           .query("products")
@@ -67,7 +109,7 @@ export const getAllProducts = query({
     return Promise.all(
       products.map(async (product) => {
         const previewImageUrl = await ctx.storage.getUrl(product.previewImage);
-        return withUrls(product, previewImageUrl);
+        return publicProduct(product, previewImageUrl);
       })
     );
   },
@@ -85,7 +127,7 @@ export const getProductBySlug = query({
     if (!product) return null;
 
     const previewImageUrl = await ctx.storage.getUrl(product.previewImage);
-    return withUrls(product, previewImageUrl);
+    return publicProduct(product, previewImageUrl);
   },
 });
 
@@ -119,6 +161,7 @@ export const createProduct = mutation({
     creemProductId: v.optional(v.string()),
     demoUrl: v.optional(v.string()),
     descriptionFormat: v.optional(v.union(v.literal("html"), v.literal("markdown"))),
+    oneTimeSale: v.optional(v.boolean()),
   },
   handler: async (ctx, args) => {
     await assertAdmin(ctx);
@@ -152,6 +195,7 @@ export const updateProduct = mutation({
     creemProductId: v.optional(v.string()),
     demoUrl: v.optional(v.string()),
     descriptionFormat: v.optional(v.union(v.literal("html"), v.literal("markdown"))),
+    oneTimeSale: v.optional(v.boolean()),
   },
   handler: async (ctx, args) => {
     await assertAdmin(ctx);

@@ -37,6 +37,7 @@ interface ProductFormProps {
     creemProductId?: string;
     demoUrl?: string;
     descriptionFormat?: "html" | "markdown";
+    oneTimeSale?: boolean;
   };
 }
 
@@ -58,6 +59,7 @@ export function ProductForm({ mode, productId, defaultValues }: ProductFormProps
   const [language, setLanguage] = useState(defaultValues?.language ?? "");
   const [version, setVersion] = useState(defaultValues?.version ?? "1.0.0");
   const [published, setPublished] = useState(defaultValues?.published ?? false);
+  const [oneTimeSale, setOneTimeSale] = useState(defaultValues?.oneTimeSale ?? false);
 
   // Preview image (Convex storage)
   const [previewImageId, setPreviewImageId] = useState<Id<"_storage"> | null>(
@@ -167,6 +169,7 @@ export function ProductForm({ mode, productId, defaultValues }: ProductFormProps
         creemProductId: creemProductId.trim() || undefined,
         demoUrl: demoUrl.trim() || undefined,
         descriptionFormat,
+        oneTimeSale: oneTimeSale && Number(price) > 0,
       };
 
       if (mode === "create") {
@@ -448,6 +451,15 @@ export function ProductForm({ mode, productId, defaultValues }: ProductFormProps
           onCheckedChange={setPublished}
         />
         <Label htmlFor="published">Published (visible on public site)</Label>
+      </div>
+
+      <div className="flex items-center gap-3">
+        <Switch
+          id="oneTimeSale"
+          checked={oneTimeSale}
+          onCheckedChange={setOneTimeSale}
+        />
+        <Label htmlFor="oneTimeSale">One-time sale (closes after the first buyer)</Label>
       </div>
 
       <div className="flex gap-3 pt-2">

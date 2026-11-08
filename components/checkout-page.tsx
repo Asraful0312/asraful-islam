@@ -38,7 +38,7 @@ export function CheckoutPage() {
       });
       window.location.href = url;
     } catch (e: any) {
-      toast.error(e.message || "Could not start checkout");
+      toast.error(e.data || e.message || "Could not start checkout");
       setLoadingId(null);
     }
   };

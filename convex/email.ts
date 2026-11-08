@@ -37,7 +37,7 @@ export const sendPurchaseEmail = internalAction({
     products: v.array(
       v.object({
         title: v.string(),
-        sourceFileUrl: v.union(v.string(), v.null()),
+        downloadUrl: v.union(v.string(), v.null()),
       })
     ),
   },
@@ -54,16 +54,16 @@ export const sendPurchaseEmail = internalAction({
 
     const linesHtml = args.products
       .map((p) =>
-        p.sourceFileUrl
-          ? `<li><strong>${p.title}</strong> — <a href="${p.sourceFileUrl}">Download</a></li>`
+        p.downloadUrl
+          ? `<li><strong>${p.title}</strong> — <a href="${p.downloadUrl}">Download</a></li>`
           : `<li><strong>${p.title}</strong> — file pending, check back soon</li>`
       )
       .join("");
 
     const linesText = args.products
       .map((p) =>
-        p.sourceFileUrl
-          ? `${p.title}: ${p.sourceFileUrl}`
+        p.downloadUrl
+          ? `${p.title}: ${p.downloadUrl}`
           : `${p.title}: file pending, check back soon`
       )
       .join("\n");
@@ -79,6 +79,44 @@ export const sendPurchaseEmail = internalAction({
         <p>You can revisit this order anytime here: <a href="${orderUrl}">View my order</a></p>
       `),
     });
+  },
+});
+
+// A one-time product sold to someone else first. Tells the buyer, and tells
+// the store owner which Creem order to refund.
+export const sendSaleConflictEmail = internalAction({
+  args: {
+    buyerEmail: v.string(),
+    productTitle: v.string(),
+    creemOrderId: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    if (!process.env.ZOHO_SMTP_USER || !process.env.ZOHO_SMTP_PASS) {
+      console.error(
+        `Refund needed for ${args.productTitle}, order ${args.creemOrderId}, but email is not configured`
+      );
+      return;
+    }
+
+    await transporter.sendMail({
+      from: FROM_HEADER,
+      to: args.buyerEmail,
+      subject: "Your order will be refunded",
+      text: `${args.productTitle} was a one-time sale and another buyer completed payment first. You will be refunded in full.`,
+      html: emailWrapper(`
+        <p><strong>${args.productTitle}</strong> was a one-time sale and another buyer completed payment first.</p>
+        <p>You will be refunded in full.</p>
+      `),
+    });
+
+    if (FROM_ADDRESS) {
+      await transporter.sendMail({
+        from: FROM_HEADER,
+        to: FROM_ADDRESS,
+        subject: `Refund needed: ${args.productTitle}`,
+        text: `Refund Creem order ${args.creemOrderId ?? "(unknown)"} for ${args.buyerEmail}. The product had already sold.`,
+      });
+    }
   },
 });
 

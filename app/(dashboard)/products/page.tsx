@@ -77,8 +77,8 @@ export default function ProductsPage() {
                       <h2 className="font-semibold text-sm leading-tight">
                         {product.title}
                       </h2>
-                      <Badge variant={product.published ? "default" : "secondary"}>
-                        {product.published ? "Live" : "Draft"}
+                      <Badge variant={product.soldAt ? "destructive" : product.published ? "default" : "secondary"}>
+                        {product.soldAt ? "Sold" : product.published ? "Live" : "Draft"}
                       </Badge>
                     </div>
                     <p className="text-xs text-muted-foreground line-clamp-2">

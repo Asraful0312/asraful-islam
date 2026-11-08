@@ -67,6 +67,21 @@ export function CheckoutSuccess({ token }: { token: string }) {
     );
   }
 
+  if (order.status === "refund_required") {
+    return (
+      <div className="section-container pt-32 pb-20 text-center space-y-4">
+        <XCircle className="h-14 w-14 text-red-500 mx-auto" />
+        <h1 className="text-2xl font-bold">This product just sold</h1>
+        <p className="text-muted-foreground text-sm max-w-sm mx-auto">
+          Another buyer paid first. You will be refunded in full. Check {order.buyerEmail} for details.
+        </p>
+        <Button asChild>
+          <Link href="/codes">Back to Marketplace</Link>
+        </Button>
+      </div>
+    );
+  }
+
   if (order.status === "failed") {
     return (
       <div className="section-container pt-32 pb-20 text-center space-y-4">

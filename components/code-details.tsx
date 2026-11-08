@@ -127,7 +127,11 @@ export function CodeDetails({ code, relatedCodes }: CodeDetailsProps) {
                 </Badge>
               </div>
 
-              {isFree && hasFile ? (
+              {code.sold ? (
+                <p className="text-sm text-muted-foreground">
+                  This was a one-time sale and it has been sold.
+                </p>
+              ) : isFree && hasFile ? (
                 <div className="space-y-3">
                   <p className="text-sm text-muted-foreground">
                     This product is free. Click below to download the source code directly.
@@ -189,7 +193,13 @@ export function CodeDetails({ code, relatedCodes }: CodeDetailsProps) {
                       {code.price}
                     </div>
                   )}
-                  <p className="text-sm text-muted-foreground">One-time purchase</p>
+                  <p className="text-sm text-muted-foreground">
+                    {code.sold
+                      ? "Sold"
+                      : code.oneTimeSale
+                      ? "One buyer only. Closes after this sale."
+                      : "One-time purchase"}
+                  </p>
                 </div>
 
                 {code.demoUrl && (
@@ -201,7 +211,11 @@ export function CodeDetails({ code, relatedCodes }: CodeDetailsProps) {
                   </Button>
                 )}
 
-                {isFree && hasFile ? (
+                {code.sold ? (
+                  <Button className="w-full" variant="secondary" disabled>
+                    Sold
+                  </Button>
+                ) : isFree && hasFile ? (
                   <Button className="w-full" asChild>
                     <a href={code.sourceFileUrl!} download>
                       <Download className="h-4 w-4 mr-2" />
@@ -224,7 +238,7 @@ export function CodeDetails({ code, relatedCodes }: CodeDetailsProps) {
                   </Button>
                 )}
 
-                {!isFree && isInCart(code.id) && (
+                {!isFree && !code.sold && isInCart(code.id) && (
                   <Button className="w-full" variant="secondary" asChild>
                     <Link href="/checkout">Go to Checkout</Link>
                   </Button>
@@ -252,8 +266,14 @@ export function CodeDetails({ code, relatedCodes }: CodeDetailsProps) {
                   <div className="flex items-start gap-3">
                     <Shield className="h-4 w-4 text-green-500 mt-0.5 shrink-0" />
                     <div>
-                      <p className="font-medium">License Included</p>
-                      <p className="text-muted-foreground text-xs">Commercial use allowed</p>
+                      <p className="font-medium">
+                        {code.oneTimeSale ? "Exclusive Sale" : "License Included"}
+                      </p>
+                      <p className="text-muted-foreground text-xs">
+                        {code.oneTimeSale
+                          ? "Sold once, never resold"
+                          : "Commercial use allowed"}
+                      </p>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">

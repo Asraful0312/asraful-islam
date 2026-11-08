@@ -35,13 +35,15 @@ export function CodesListingWrapper() {
     language: p.language,
     categories: p.categories,
     tags: p.tags,
-    downloads: p.downloads ?? 0,
+    downloads: p.oneTimeSale ? 0 : p.downloads ?? 0,
     createdAt: new Date(p._creationTime).toISOString(),
     updatedAt: new Date(p._creationTime).toISOString(),
     version: p.version,
     sourceFileUrl: p.sourceFileUrl,
     demoUrl: p.demoUrl,
     descriptionFormat: p.descriptionFormat,
+    oneTimeSale: p.oneTimeSale,
+    sold: !!p.soldAt,
   }));
 
   return <CodesListing codes={codes} />;

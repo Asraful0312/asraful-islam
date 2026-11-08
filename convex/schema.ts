@@ -134,6 +134,12 @@ export default defineSchema({
     creemProductId: v.optional(v.string()),
     demoUrl: v.optional(v.string()),
     descriptionFormat: v.optional(v.union(v.literal("html"), v.literal("markdown"))),
+    // A one-time sale closes after its first paid order.
+    oneTimeSale: v.optional(v.boolean()),
+    soldAt: v.optional(v.number()),
+    // Held while a buyer is on the Creem checkout page.
+    reservedUntil: v.optional(v.number()),
+    reservedFor: v.optional(v.string()),
   })
     .index("by_slug", ["slug"])
     .index("by_published", ["published"])
@@ -150,7 +156,9 @@ export default defineSchema({
     status: v.union(
       v.literal("pending"),
       v.literal("paid"),
-      v.literal("failed")
+      v.literal("failed"),
+      // Paid after a one-time product had already sold; needs a manual refund.
+      v.literal("refund_required")
     ),
     creemOrderId: v.optional(v.string()),
   })

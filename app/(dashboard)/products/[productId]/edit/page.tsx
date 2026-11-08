@@ -59,6 +59,7 @@ export default function EditProductPage({
             creemProductId: product.creemProductId,
             demoUrl: product.demoUrl,
             descriptionFormat: product.descriptionFormat,
+            oneTimeSale: product.oneTimeSale,
           }}
         />
       </div>
