@@ -195,7 +195,7 @@ const EditProject = ({ params }: EditProjectProps) => {
 
       // Prepare project data
       const projectData = {
-        projectId: params.projectId as Id<"projects">,
+        projectId: projectId as Id<"projects">,
         name: formData.get("name") as string,
         slug: formData.get("slug") as string,
         description: formData.get("description") as string,
@@ -220,7 +220,7 @@ const EditProject = ({ params }: EditProjectProps) => {
       // Call Convex mutation
       await updateProject(projectData);
       toast.success("Project updated successfully!");
-      router.push(`/projects/${params.projectId}`);
+      router.push(`/projects/${projectId}`);
       setThumbnailFile(null);
       setGalleryFiles([]);
       setDeletedImageIds([]);

@@ -152,7 +152,7 @@ const EditBlog = ({ params }: EditBlogProps) => {
 
       // Prepare blog data
       const blogData = {
-        blogId: params.blogId,
+        blogId,
         title,
         content: description,
         contentFormat,
