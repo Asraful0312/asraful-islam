@@ -144,7 +144,6 @@ export function ContactSection() {
                 {[
                   { icon: Github, link: "https://github.com/Asraful0312", label: "GitHub" },
                   { icon: Linkedin, link: "#", label: "LinkedIn" },
-                  { icon: Twitter, link: "#", label: "Twitter" },
                   { icon: Instagram, link: "#", label: "Instagram" },
                 ].map((social) => (
                   <a

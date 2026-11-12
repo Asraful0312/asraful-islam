@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C /Volumes/RAKIB_SSD/rayhan/projects/asraful-islam stash)",
+      "Bash(git -C /Volumes/RAKIB_SSD/rayhan/projects/asraful-islam stash pop)",
+      "Bash(curl -s \"http://localhost:3000/blog/opennext-cloudflare-nextjs-setup\" -o /tmp/x)",
+      "Read(//tmp/**)",
+      "Bash(curl -s http://localhost:3000/blogs)",
+      "Bash(curl -s \"http://localhost:3000/blog/k578ke04efbgdkyzkgze8n30qd8bgqsh\")",
+      "Bash(curl -s \"http://localhost:3000/sitemap.xml\")",
+      "Bash(curl -s \"http://localhost:3000/robots.txt\")"
+    ]
+  }
+}
